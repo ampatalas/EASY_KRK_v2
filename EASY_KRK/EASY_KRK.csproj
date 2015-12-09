@@ -154,6 +154,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\resources.en.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>resources.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\resources.pl.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>resources.pl.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -163,8 +178,41 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512091704444_initial.cs" />
+    <Compile Include="Migrations\201512091704444_initial.Designer.cs">
+      <DependentUpon>201512091704444_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512091718515_bigger_name_length.cs" />
+    <Compile Include="Migrations\201512091718515_bigger_name_length.Designer.cs">
+      <DependentUpon>201512091718515_bigger_name_length.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EASYKRKContext.cs" />
+    <Compile Include="Models\FormaPrzedmiotu.cs" />
+    <Compile Include="Models\FormaStudiow.cs" />
+    <Compile Include="Models\FormaZajec.cs" />
+    <Compile Include="Models\FormaZal.cs" />
+    <Compile Include="Models\GrupaKursow.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\JezykStudiow.cs" />
+    <Compile Include="Models\Kategoria.cs" />
+    <Compile Include="Models\KEK.cs" />
+    <Compile Include="Models\KEKPrzedmiotu.cs" />
+    <Compile Include="Models\Kierunek.cs" />
+    <Compile Include="Models\Kurs.cs" />
+    <Compile Include="Models\MEK.cs" />
+    <Compile Include="Models\Obszar.cs" />
+    <Compile Include="Models\Poziom.cs" />
+    <Compile Include="Models\Profil.cs" />
+    <Compile Include="Models\ProgramKsztalcenia.cs" />
+    <Compile Include="Models\ProgramStudiow.cs" />
+    <Compile Include="Models\Przedmiot.cs" />
+    <Compile Include="Models\RodzajPrzedmiotu.cs" />
+    <Compile Include="Models\RodzajStudiow.cs" />
+    <Compile Include="Models\Sladowanie.cs" />
+    <Compile Include="Models\TypPrzedmiotu.cs" />
+    <Compile Include="Models\UdzialProcentowy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -224,6 +272,26 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\resources.en.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>resources.en.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\resources.pl.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>resources.pl.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\resources.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>resources.Designer.cs</LastGenOutput>
+    </Content>
+    <EmbeddedResource Include="Migrations\201512091704444_initial.resx">
+      <DependentUpon>201512091704444_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512091718515_bigger_name_length.resx">
+      <DependentUpon>201512091718515_bigger_name_length.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

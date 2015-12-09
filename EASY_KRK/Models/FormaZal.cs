@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
+
+namespace PSI2015.Models
+{
+    [Table("FormyZal")]
+    public class FormaZal
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int IdFormyZal { get; set; }
+
+        [MaxLength(40)]
+        public string NazwaFormyZal { get; set; }
+    }
+}
