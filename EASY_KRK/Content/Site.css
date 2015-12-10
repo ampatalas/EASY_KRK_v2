@@ -40,3 +40,31 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+.float-left {
+    float: left
+}
+
+.float-right {
+    float: right
+}
+
+    .main-content {
+    padding: 10px 10px 10px 30px;
+    min-height:350px;
+    }
+
+    .clear-fix:after {
+    content: ".";
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+    .program-li {
+        color: #0000ff;
+    }
+    .program-li-selected{
+        color: #000000;
+    }
+

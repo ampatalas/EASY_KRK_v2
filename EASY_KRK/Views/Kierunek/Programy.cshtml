@@ -1,0 +1,30 @@
+﻿@model EASY_KRK.Models.ProgramyViewModel
+
+<br /><br />
+<h4>Programy kształcenia</h4>
+
+<hr />
+<ul>
+    @foreach (var kierunek in Model.Kierunki)
+    {
+    <li>@kierunek
+        <ul>
+    
+        @foreach (var program in Model.Programy)
+        {
+            if (program.Kierunek.NazwaKierunku == kierunek)
+            {
+                if (Model.IdProgramu == program.IdProgramuKsztalcenia)
+                { 
+                    <li>@Html.ActionLink("Studia " + program.Kierunek.Poziom.NazwaPoziomu + " " + program.Kierunek.RodzajStudiow.NazwaRodzajuStudiow + " " + program.FormaStudiow.NazwaFormyStudiow, "WybierzProgram", new { id = program.IdProgramuKsztalcenia }, new { @style = "color:#000000;" })</li>
+                }
+                else
+                { 
+                    <li>@Html.ActionLink("Studia " + program.Kierunek.Poziom.NazwaPoziomu + " " + program.Kierunek.RodzajStudiow.NazwaRodzajuStudiow + " " + program.FormaStudiow.NazwaFormyStudiow, "WybierzProgram", new { id = program.IdProgramuKsztalcenia }, new { @style = "color:#0000ff;" })</li>
+                }
+            }
+        }
+        </ul>
+    </li>
+    }
+</ul>

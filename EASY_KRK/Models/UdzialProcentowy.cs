@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace PSI2015.Models
+namespace EASY_KRK.Models
 {
     [Table("UdzialyProcentowe")]
     public class UdzialProcentowy

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace PSI2015.Models
+namespace EASY_KRK.Models
 {
     [Table("Kierunki")]
     public class Kierunek
@@ -21,5 +21,15 @@ namespace PSI2015.Models
 
         [ForeignKey("IdRodzajuStudiow")]
         public virtual RodzajStudiow RodzajStudiow { get; set; }
+
+        public int IdPoziomu { get; set; }
+
+        [ForeignKey("IdPoziomu")]
+        public virtual Poziom Poziom { get; set; }
+
+        public int IdProfilu { get; set; }
+
+        [ForeignKey("IdProfilu")]
+        public virtual Profil Profil { get; set; }
     }
 }

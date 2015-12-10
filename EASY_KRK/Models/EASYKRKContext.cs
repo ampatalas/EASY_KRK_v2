@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace PSI2015.Models
+namespace EASY_KRK.Models
 {
     public class EASYKRKContext: DbContext
     {

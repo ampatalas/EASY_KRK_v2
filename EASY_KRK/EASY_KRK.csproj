@@ -172,9 +172,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Settings.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KategoriaController.cs" />
+    <Compile Include="Controllers\KierunekController.cs" />
+    <Compile Include="Controllers\PrzedmiotController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -185,6 +189,14 @@
     <Compile Include="Migrations\201512091718515_bigger_name_length.cs" />
     <Compile Include="Migrations\201512091718515_bigger_name_length.Designer.cs">
       <DependentUpon>201512091718515_bigger_name_length.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512102005525_dodanie_profilu_i_poziomu_do_kierunku.cs" />
+    <Compile Include="Migrations\201512102005525_dodanie_profilu_i_poziomu_do_kierunku.Designer.cs">
+      <DependentUpon>201512102005525_dodanie_profilu_i_poziomu_do_kierunku.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512102008467_poziom_profil_wymagane.cs" />
+    <Compile Include="Migrations\201512102008467_poziom_profil_wymagane.Designer.cs">
+      <DependentUpon>201512102008467_poziom_profil_wymagane.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -207,6 +219,7 @@
     <Compile Include="Models\Profil.cs" />
     <Compile Include="Models\ProgramKsztalcenia.cs" />
     <Compile Include="Models\ProgramStudiow.cs" />
+    <Compile Include="Models\ProgramyViewModel.cs" />
     <Compile Include="Models\Przedmiot.cs" />
     <Compile Include="Models\RodzajPrzedmiotu.cs" />
     <Compile Include="Models\RodzajStudiow.cs" />
@@ -262,9 +275,13 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Kierunek\MacierzSladowania.cshtml" />
+    <Content Include="Views\Kierunek\Programy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Kategoria\" />
+    <Folder Include="Views\Przedmiot\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -291,6 +308,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512091718515_bigger_name_length.resx">
       <DependentUpon>201512091718515_bigger_name_length.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512102005525_dodanie_profilu_i_poziomu_do_kierunku.resx">
+      <DependentUpon>201512102005525_dodanie_profilu_i_poziomu_do_kierunku.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512102008467_poziom_profil_wymagane.resx">
+      <DependentUpon>201512102008467_poziom_profil_wymagane.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

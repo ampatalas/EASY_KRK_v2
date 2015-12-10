@@ -5,14 +5,14 @@ namespace EASY_KRK.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<PSI2015.Models.EASYKRKContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<EASY_KRK.Models.EASYKRKContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(PSI2015.Models.EASYKRKContext context)
+        protected override void Seed(EASY_KRK.Models.EASYKRKContext context)
         {
             //  This method will be called after migrating to the latest version.
 
