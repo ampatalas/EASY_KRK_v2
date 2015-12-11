@@ -8,5 +8,6 @@ namespace EASY_KRK.App_Start
     public static class Settings
     {
         public static int IdProgramu { get; set; }
+        public static int IdKierunku { get; set; }
     }
 }

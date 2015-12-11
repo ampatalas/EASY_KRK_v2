@@ -1,8 +1,60 @@
-﻿
+﻿@model EASY_KRK.Models.MacierzSladowaniaViewModel
+
 @{
     ViewBag.Title = "Macierz śladowania";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Macierz powiązania obszarowych efektów kształcenia z kierunkowymi efektami kształcenia</h2>
+
+@if (Model.KEKI == null)
+{
+     <p>
+       Nie wybrano programu kształcenia.
+    </p>
+}
+else
+{
+   <table>
+        <tr>
+
+            <th>
+                KEK
+            </th>
+            <th>
+                Efekt kształcenia
+            </th>
+            <th>
+               MEKI
+            </th>
+            <th>
+                Przedmioty
+            </th>
+        </tr>
+
+    @foreach (var kek in Model.KEKI) {
+        <tr>
+            <td>
+                @kek.Kod
+            </td>
+            <td>
+                @kek.Opis
+            </td>
+            <td>
+                @foreach(var slad in Model.Sladowania.ToList().FindAll(s => s.KEK == kek))
+                {
+                    <p>slad.MEK.kod</p>
+                }
+            </td>
+            <td>
+               @foreach(var kekp in Model.KEKIPrzedmiotow.ToList().FindAll(k => k.KEK == kek))
+               {
+                   <p>kekp.Przedmiot.KodPrzedmiotu</p>
+               }
+            </td>
+        </tr>
+    }
+
+    </table>
+}
 

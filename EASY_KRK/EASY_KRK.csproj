@@ -198,6 +198,10 @@
     <Compile Include="Migrations\201512102008467_poziom_profil_wymagane.Designer.cs">
       <DependentUpon>201512102008467_poziom_profil_wymagane.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512102259483_longer_KEKMEK_description.cs" />
+    <Compile Include="Migrations\201512102259483_longer_KEKMEK_description.Designer.cs">
+      <DependentUpon>201512102259483_longer_KEKMEK_description.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EASYKRKContext.cs" />
@@ -213,6 +217,7 @@
     <Compile Include="Models\KEKPrzedmiotu.cs" />
     <Compile Include="Models\Kierunek.cs" />
     <Compile Include="Models\Kurs.cs" />
+    <Compile Include="Models\MacierzSladowaniaViewModel.cs" />
     <Compile Include="Models\MEK.cs" />
     <Compile Include="Models\Obszar.cs" />
     <Compile Include="Models\Poziom.cs" />
@@ -277,11 +282,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Kierunek\MacierzSladowania.cshtml" />
     <Content Include="Views\Kierunek\Programy.cshtml" />
+    <Content Include="Views\Kategoria\Index.cshtml" />
+    <Content Include="Views\Przedmiot\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Kategoria\" />
-    <Folder Include="Views\Przedmiot\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -314,6 +319,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512102008467_poziom_profil_wymagane.resx">
       <DependentUpon>201512102008467_poziom_profil_wymagane.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512102259483_longer_KEKMEK_description.resx">
+      <DependentUpon>201512102259483_longer_KEKMEK_description.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

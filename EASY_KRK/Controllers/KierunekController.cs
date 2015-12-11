@@ -20,7 +20,21 @@ namespace EASY_KRK.Controllers
 
         public ActionResult MacierzSladowania()
         {
-            return View();
+            MacierzSladowaniaViewModel model = new MacierzSladowaniaViewModel();
+            if (Settings.IdProgramu != 0 && Settings.IdKierunku != 0)
+            {
+                Kierunek k = db.Kierunki.ToList().Find(kierunek => kierunek.IdKierunku == Settings.IdKierunku);
+                model.Udzialy = db.UdzialyProcentowe.ToList().FindAll(u => u.IdKierunku == k.IdKierunku);
+                model.KEKI = db.KEKI.ToList().FindAll(kek => kek.Kierunek.IdKierunku == Settings.IdKierunku);
+                model.MEKI = db.MEKI.ToList().FindAll(m => (m.IdPoziomu == k.IdPoziomu && m.IdProfilu == k.IdProfilu &&
+                                                                model.Udzialy.ToList().Find(u => u.IdObszaru == m.IdObszaru) != null));
+                model.Sladowania = db.Sladowania;
+                model.Przedmioty = db.Przedmioty.ToList().FindAll(p => p.Kategoria.ProgramStudiow.ProgramKsztalcenia.IdProgramuKsztalcenia == Settings.IdProgramu);
+                model.KEKIPrzedmiotow = db.KEKIPrzedmiotow.ToList().FindAll(kp => model.Przedmioty.Contains(kp.Przedmiot));
+            }
+
+
+            return View(model);
         }
 
         public ActionResult Programy()
@@ -38,7 +52,8 @@ namespace EASY_KRK.Controllers
         public ActionResult WybierzProgram(int id)
         {
             Settings.IdProgramu = id;
-            return RedirectToAction("Programy");
+            Settings.IdKierunku = db.ProgramyKsztalcenia.ToList().Find(p => p.IdProgramuKsztalcenia == id).IdKierunku;
+            return RedirectToAction("Index", "Kategoria");
         }
 	}
 }

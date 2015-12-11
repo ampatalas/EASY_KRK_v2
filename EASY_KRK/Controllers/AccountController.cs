@@ -53,7 +53,7 @@ namespace EASY_KRK.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    ModelState.AddModelError("", "Nieprawidłowy login i/lub hasło.");
                 }
             }
 
