@@ -55,5 +55,25 @@ namespace EASY_KRK.Controllers
             Settings.IdKierunku = db.ProgramyKsztalcenia.ToList().Find(p => p.IdProgramuKsztalcenia == id).IdKierunku;
             return RedirectToAction("Index", "Kategoria");
         }
+
+        public ActionResult DodajMek(int idKek)
+        {
+            return RedirectToAction("MacierzSladowania");
+        }
+
+        public ActionResult UsunMek(int idKek, int idMek)
+        {
+            return RedirectToAction("MacierzSladowania");
+        }
+
+        public ActionResult UsunPrzedmiot(int idKek, int idPrzedm)
+        {
+            return RedirectToAction("MacierzSladowania");
+        }
+
+        public ActionResult DodajPrzedmiot(int idKek)
+        {
+            return RedirectToAction("MacierzSladowania");
+        }
 	}
 }
