@@ -1,0 +1,25 @@
+﻿@model EASY_KRK.Models.DodajKEKPrzedmiotuViewModel
+
+
+<h3> Przedmioty</h3>
+
+@using (Ajax.BeginForm("FiltrujPrzedmioty", "Kierunek", new AjaxOptions
+ {
+     HttpMethod = "Post",
+     UpdateTargetId = "ListaPrzedmiotow",
+ }))
+{
+
+    <div style="display:inline">
+        @Html.EditorFor(model => model.Filtr)
+        @Html.HiddenFor(model => model.IdKEK)
+        <input type="submit" value="Filtruj" class="btn btn-default" />
+    </div>
+}
+
+
+
+<div id="ListaPrzedmiotow"> @Html.Partial("ListaPrzedmiotow", Model)</div>
+
+
+<br /><br />

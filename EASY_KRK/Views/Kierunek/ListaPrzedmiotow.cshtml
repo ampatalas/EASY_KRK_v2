@@ -1,0 +1,17 @@
+﻿@model EASY_KRK.Models.DodajKEKPrzedmiotuViewModel
+
+<br />
+
+@using (Html.BeginForm("DodajKEKPrzedmiotuForm", "Kierunek"))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.IdKEK)
+    <p>@Html.DropDownListFor(m => m.IdPrzedmiotu, Model.Przedmioty, new { style = "width:400px" })</p>
+    <br />
+
+    <input type="submit" value="Dodaj" name="Dodaj" class="btn btn-default" />
+
+
+
+}

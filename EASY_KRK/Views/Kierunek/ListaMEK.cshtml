@@ -1,0 +1,17 @@
+﻿@model EASY_KRK.Models.DodajMEKViewModel
+
+<br />
+
+@using (Html.BeginForm("DodajMEKForm", "Kierunek"))
+{
+    @Html.AntiForgeryToken()
+    
+        @Html.HiddenFor(model => model.IdKEK)
+        <p>@Html.DropDownListFor(m => m.SelectedMEK, Model.MEKI, new { style = "width:400px" })</p>
+        <br />
+        
+        <input type="submit" value="Dodaj" name="Dodaj" class="btn btn-default" />
+
+       
+
+}

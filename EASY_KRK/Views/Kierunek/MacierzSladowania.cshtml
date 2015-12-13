@@ -15,55 +15,168 @@
 }
 else
 {
-    <table class="table-bordered">
-        <tr>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
 
-            <th>
-                KEK
-            </th>
-            <th>
-                Efekt kształcenia
-            </th>
-            <th>
-                MEKI
-            </th>
-            <th>
-                Przedmioty
-            </th>
-        </tr>
+        <link href="content/themes/base/all.css" rel="stylesheet" />
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = "";
 
-        @foreach (var kek in Model.KEKI)
-        {
+
+            $(".linkDodajMEK").click(function (e) {
+                e.preventDefault();
+                url = $(this).attr('href');
+                $("#dialog-dodaj-mek").dialog('open');
+            });
+
+            $(".linkDodajPrzedmiot").click(function (e) {
+                e.preventDefault();
+                url = $(this).attr('href');
+                $("#dialog-dodaj-przedmiot").dialog('open');
+            });
+
+            $("#dialog-dodaj-mek").dialog({
+                autoOpen: false,
+                resizable: false,
+                height: 350,
+                width: 400,
+                title: 'Dodaj MEK',
+                modal: true,
+                show: { effect: 'drop', direction: "up" },
+                draggable: true,
+                open: function (event, ui) {
+                    $(".ui-dialog-titlebar-close").hide();
+                    $(this).load(url);
+                },
+                buttons: {
+                    "Anuluj": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+
+            $("#dialog-dodaj-przedmiot").dialog({
+                autoOpen: false,
+                resizable: false,
+                height: 350,
+                width: 400,
+                title: 'Dodaj Przedmiot',
+                modal: true,
+                show: { effect: 'drop', direction: "up" },
+                draggable: true,
+                open: function (event, ui) {
+                    $(".ui-dialog-titlebar-close").hide();
+                    $(this).load(url);
+                },
+                buttons: {
+                    "Anuluj": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+    </script>
+
+    <div id="dialog-dodaj-mek" style="display:none">
+
+    </div>
+    
+   <div id="dialog-dodaj-przedmiot" style="display:none">
+
+    </div>
+
+
+        <table class="table-bordered">
             <tr>
-                <td>
-                    @kek.Kod
-                </td>
-                <td>
-                    @kek.Opis
-                </td>
-                <td style="width:130px">
 
-                    @foreach (var slad in Model.Sladowania.ToList().FindAll(s => s.KEK == kek))
-                    {
-                        @Html.Raw(slad.MEK.Kod+ " |");
-                        @Html.ActionLink("Usuń", "UsunMek", new { idKek = kek.IdKEK, idMek = slad.MEK.IdMEK});
-                        @Html.Raw("<br />");
-                    }
-
-                    @Html.ActionLink(" ", "DodajMek", new { idKek = kek.IdKEK }, new {title = "Dodaj", style = "background: url('" + Url.Content("~/images/add_btn.png") + "') no-repeat center right; display:block; height:20px; width:20px;" })
-                </td>
-                <td style="width:130px">
-                    @foreach (var kekp in Model.KEKIPrzedmiotow.ToList().FindAll(k => k.KEK == kek))
-                    {
-                        @Html.Raw(kekp.Przedmiot.KodPrzedmiotu);
-                        @Html.ActionLink("Usuń", "UsunPrzedmiot", new { idKek = kek.IdKEK, idPrzedm = kekp.Przedmiot.IdPrzedmiotu });
-                        @Html.Raw("<br />");
-                    }
-                    @Html.ActionLink(" ", "DodajPrzedmiot", new { idKek = kek.IdKEK }, new { title = "Dodaj", style = "background: url('" + Url.Content("~/images/add_btn.png") + "') no-repeat center right;  display:block; height:20px; width:20px;" })
-                </td>
+                <th>
+                    KEK
+                </th>
+                <th>
+                    Efekt kształcenia
+                </th>
+                <th>
+                    MEKI
+                </th>
+                <th>
+                    Przedmioty
+                </th>
             </tr>
-        }
 
-    </table>
+
+
+            @foreach (var kek in Model.KEKI)
+            {
+                <tr>
+                    <td>
+                        @kek.Kod
+                    </td>
+                    <td>
+                        @kek.Opis
+                    </td>
+
+                    <td style="width:130px; text-align:center">
+
+                        @foreach (var slad in Model.Sladowania.ToList().FindAll(s => s.KEK == kek))
+                        {
+                            @Html.Label(slad.MEK.Kod+" | ", new { title = slad.MEK.Opis });
+                            @Html.ActionLink("Usuń", "UsunMEK", new { IdKEK = kek.IdKEK, IdMEK = slad.MEK.IdMEK });
+                            @Html.Raw("<br />");
+                        }
+
+                        @Html.ActionLink("Dodaj", "DodajMEK", new { IdKEK = kek.IdKEK }, new {@class = "linkDodajMEK"})
+                    </td>
+                    <td style="width: 130px; text-align: center">
+                        @foreach (var kekp in Model.KEKIPrzedmiotow.ToList().FindAll(k => k.KEK == kek))
+                        {
+                            @Html.Raw(kekp.Przedmiot.KodPrzedmiotu);
+                            @Html.ActionLink("Usuń", "UsunPrzedmiot", new { IdKEK = kek.IdKEK, IdPrzedm = kekp.Przedmiot.IdPrzedmiotu });
+                            @Html.Raw("<br />");
+                        }
+                        @Html.ActionLink("Dodaj", "DodajKEKPrzedmiotu", new { IdKEK = kek.IdKEK }, new {@class="linkDodajPrzedmiot"})
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+  
+    <br />
+
+    foreach(var udzial in Model.Udzialy)
+    {
+        var color ="";
+        if (Model.Pokrycia[udzial.IdObszaru] < udzial.Wartosc)
+        {
+            color = "color:red";
+        }
+        else
+        {
+            color = "color:green";
+        }
+        
+        <h4 style=@color>Pokrycie macierzy dla obszaru @udzial.Obszar.NazwaObszaru wynosi @Model.Pokrycia[udzial.IdObszaru]% (Oczekiwane: @udzial.Wartosc%)</h4>
+    
+        if (Model.Pokrycia[udzial.IdObszaru] < udzial.Wartosc)
+        {
+            <p>Nieprzypisane efekty z obszaru @udzial.Obszar.NazwaObszaru</p>
+            <ul>
+                @foreach (var mek in Model.Nieprzypisane[udzial.IdObszaru])
+                {
+                <li>@mek.Kod @mek.Opis</li>
+                }
+            </ul>
+        }
+    }
+    
+
+    
+
 }
+
+    
 

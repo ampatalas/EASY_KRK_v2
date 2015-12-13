@@ -7,12 +7,12 @@ namespace EASY_KRK.Models
 {
     public class MacierzSladowaniaViewModel
     {
-        public IEnumerable<KEK> KEKI;
-        public IEnumerable<MEK> MEKI;
-        public IEnumerable<Przedmiot> Przedmioty;
-        public IEnumerable<Sladowanie> Sladowania;
-        public IEnumerable<UdzialProcentowy> Udzialy;
-        public IEnumerable<KEKPrzedmiotu> KEKIPrzedmiotow;
+        public IEnumerable<KEK> KEKI { get; set; }
+        public IEnumerable<Sladowanie> Sladowania { get; set; }
+        public IEnumerable<UdzialProcentowy> Udzialy { get; set; }
+        public IEnumerable<KEKPrzedmiotu> KEKIPrzedmiotow { get; set; }
+        public Dictionary<int, int> Pokrycia { get; set; }
+        public Dictionary<int, IEnumerable<MEK>> Nieprzypisane { get; set; }
 
     }
 }

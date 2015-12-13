@@ -1,0 +1,25 @@
+﻿@model EASY_KRK.Models.DodajMEKViewModel
+
+
+<h3>Efekty obszarowe</h3>
+
+@using (Ajax.BeginForm("FiltrujMEK", "Kierunek", new AjaxOptions
+ {
+     HttpMethod = "Post",
+     UpdateTargetId = "ListaMEK",
+ }))
+{
+
+    <div style="display:inline">
+        @Html.EditorFor(model => model.Filtr)
+        @Html.HiddenFor(model => model.IdKEK)
+        <input type="submit" value="Filtruj" class="btn btn-default" />
+    </div>
+}
+
+
+
+<div id="ListaMEK"> @Html.Partial("ListaMEK", Model)</div>
+
+
+<br /><br />
