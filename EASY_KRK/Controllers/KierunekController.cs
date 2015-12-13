@@ -43,7 +43,10 @@ namespace EASY_KRK.Controllers
 
                 foreach(UdzialProcentowy u in model.Udzialy)
                 {
-                    model.Nieprzypisane[u.IdObszaru] = db.MEKI.ToList().FindAll(m => m.IdObszaru == u.IdObszaru && model.Sladowania.ToList().Find(s => s.IdMEK == m.IdMEK) == null);
+                    if (model.Pokrycia[u.IdObszaru] < u.Wartosc)
+                    {
+                        model.Nieprzypisane[u.IdObszaru] = db.MEKI.ToList().FindAll(m => m.IdObszaru == u.IdObszaru && model.Sladowania.ToList().Find(s => s.IdMEK == m.IdMEK) == null);
+                    }
                 }
             }
 

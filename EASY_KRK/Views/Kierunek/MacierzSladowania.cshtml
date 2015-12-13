@@ -133,7 +133,7 @@ else
                     <td style="width: 130px; text-align: center">
                         @foreach (var kekp in Model.KEKIPrzedmiotow.ToList().FindAll(k => k.KEK == kek))
                         {
-                            @Html.Raw(kekp.Przedmiot.KodPrzedmiotu);
+                            @Html.Label(kekp.Przedmiot.KodPrzedmiotu+" | ", new { title = kekp.Przedmiot.NazwaPrzedmiotu });
                             @Html.ActionLink("Usuń", "UsunPrzedmiot", new { IdKEK = kek.IdKEK, IdPrzedm = kekp.Przedmiot.IdPrzedmiotu });
                             @Html.Raw("<br />");
                         }
