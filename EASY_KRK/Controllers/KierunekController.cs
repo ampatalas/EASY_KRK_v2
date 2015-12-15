@@ -8,16 +8,19 @@ using System.Web.Mvc;
 
 namespace EASY_KRK.Controllers
 {
+    
     public class KierunekController : Controller
     {
         EASYKRKContext db = new EASYKRKContext();
         //
         // GET: /Kierunek/
+        [Authorize]
         public ActionResult Index()
         {
             return View();
         }
 
+        [Authorize]
         public ActionResult MacierzSladowania()
         {
             MacierzSladowaniaViewModel model = new MacierzSladowaniaViewModel();
@@ -56,16 +59,20 @@ namespace EASY_KRK.Controllers
 
         public ActionResult Programy()
         {
-            ProgramyViewModel model = new ProgramyViewModel();
+            if (User.Identity.IsAuthenticated) {
 
-            model.Kierunki = db.Kierunki.Select(k => k.NazwaKierunku).Distinct().ToList();
-            model.Programy = db.ProgramyKsztalcenia.ToList().FindAll(p => p.JezykStudiow.NazwaJezyka == "polski");
-            model.IdProgramu = Settings.IdProgramu;
+                ProgramyViewModel model = new ProgramyViewModel();
+                model.Programy = db.ProgramyKsztalcenia.ToList().FindAll(p => p.JezykStudiow.NazwaJezyka == "polski");
+                model.IdProgramu = Settings.IdProgramu;
+                
+                return PartialView(model);
+            }
 
-            return PartialView(model);
+            return new EmptyResult();
 
         }
 
+        [Authorize]
         public ActionResult WybierzProgram(int id)
         {
             Settings.IdProgramu = id;

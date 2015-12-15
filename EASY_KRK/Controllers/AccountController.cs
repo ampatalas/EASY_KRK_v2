@@ -12,7 +12,6 @@ using EASY_KRK.Models;
 
 namespace EASY_KRK.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         public AccountController()
