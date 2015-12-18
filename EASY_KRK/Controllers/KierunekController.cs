@@ -62,6 +62,7 @@ namespace EASY_KRK.Controllers
             if (User.Identity.IsAuthenticated) {
 
                 ProgramyViewModel model = new ProgramyViewModel();
+                model.Kierunki = db.Kierunki.Select(k => k.NazwaKierunku).Distinct().ToList();
                 model.Programy = db.ProgramyKsztalcenia.ToList().FindAll(p => p.JezykStudiow.NazwaJezyka == "polski");
                 model.IdProgramu = Settings.IdProgramu;
                 
