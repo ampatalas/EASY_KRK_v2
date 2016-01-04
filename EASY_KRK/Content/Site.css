@@ -49,6 +49,21 @@ input[type="checkbox"].input-validation-error {
     float: right
 }
 
+.dodaj-przedmiot label {
+    display: inline-block;
+    width: 200px
+}
+
+.kurs-textbox{
+    width:100px;
+    height:24px;
+}
+
+.kurs-checkbox{
+    width:15px;
+    height:15px;
+}
+
     .main-content {
     padding: 10px 10px 10px 30px;
     min-height:350px;

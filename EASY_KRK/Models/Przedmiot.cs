@@ -15,21 +15,26 @@ namespace EASY_KRK.Models
         public int IdPrzedmiotu { get; set; }
 
         [MaxLength(15)]
+        [Display(Name = "Kod przedmiotu: ")]
         public string KodPrzedmiotu { get; set; }
 
+        [Display(Name = "Nazwa przedmiotu: ")]
         [MaxLength(100)]
         public string NazwaPrzedmiotu { get; set; }
 
+        [Display(Name = "Rodzaj: ")]
         public int IdRodzajuPrzedmiotu { get; set; }
 
         [ForeignKey("IdRodzajuPrzedmiotu")]
         public virtual RodzajPrzedmiotu RodzajPrzedmiotu { get; set; }
 
+        [Display(Name = "Forma: ")]
         public int IdFormyPrzedmiotu { get; set; }
 
         [ForeignKey("IdFormyPrzedmiotu")]
         public virtual FormaPrzedmiotu FormaPrzedmiotu { get; set; }
 
+        [Display(Name = "Typ: ")]
         public int IdTypuPrzedmiotu { get; set; }
 
         [ForeignKey("IdTypuPrzedmiotu")]
@@ -40,6 +45,7 @@ namespace EASY_KRK.Models
         [ForeignKey("IdKategorii")]
         public virtual Kategoria Kategoria { get; set; }
 
+        [Display(Name = "Ogólnouczelniany? ")]
         public bool Ogolnouczelniany { get; set; }
 
     }

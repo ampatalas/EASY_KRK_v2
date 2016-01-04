@@ -14,6 +14,7 @@ namespace EASY_KRK.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int IdKategorii { get; set; }
 
+        [Display(Name = "Kategoria: ")]
         [MaxLength(100)]
         public string NazwaKategorii { get; set; }
 
@@ -28,5 +29,8 @@ namespace EASY_KRK.Models
 
         [ForeignKey("IdKategoriiNadrzednej")]
         public virtual Kategoria KategoriaNadrzedna { get; set; }
+
+        public virtual ICollection<Przedmiot> Przedmioty { get; set; }
+        public virtual ICollection<Kategoria> Kategorie { get; set; }
     }
 }

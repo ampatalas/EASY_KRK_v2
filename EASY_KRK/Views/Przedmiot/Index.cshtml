@@ -1,8 +1,50 @@
-﻿
+﻿@model EASY_KRK.Models.PrzedmiotyViewModel
 @{
     ViewBag.Title = "Przedmioty";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Przedmioty</h2>
+
+
+<ul>
+@foreach (var k in Model.Kategorie)
+{
+    <li>@k.NazwaKategorii</li>
+    @PokazDrzewo(k.Kategorie)
+}
+</ul>
+
+
+
+@helper PokazDrzewo(IEnumerable<EASY_KRK.Models.Kategoria> kategorie)
+{
+    <ul>
+        @foreach(var kat in kategorie)
+        {
+            <li>
+                @kat.NazwaKategorii
+                @if(kat.Kategorie.Any())
+                {
+                    @PokazDrzewo(kat.Kategorie)
+                }
+                else
+                {
+                    @Html.Raw("<br />")
+                    @Html.ActionLink("Dodaj przedmiot", "DodajPrzedmiot", new { IdKategorii = kat.IdKategorii });
+                    foreach (var przedmiot in kat.Przedmioty)
+                    {
+                        @Html.RadioButtonFor(m => m.IdPrzedmiotu, przedmiot)
+                        @Html.Label(przedmiot.NazwaPrzedmiotu)
+                        @Html.Raw("<br />");
+                     }
+                }
+            </li>
+        }
+    </ul> 
+}
+
+
+
+
 

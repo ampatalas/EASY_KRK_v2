@@ -206,6 +206,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DodajKEKPrzedmiotuViewModel.cs" />
     <Compile Include="Models\DodajMEKViewModel.cs" />
+    <Compile Include="Models\DodajPrzedmiotViewModel.cs" />
     <Compile Include="Models\EASYKRKContext.cs" />
     <Compile Include="Models\FormaPrzedmiotu.cs" />
     <Compile Include="Models\FormaStudiow.cs" />
@@ -228,6 +229,7 @@
     <Compile Include="Models\ProgramStudiow.cs" />
     <Compile Include="Models\ProgramyViewModel.cs" />
     <Compile Include="Models\Przedmiot.cs" />
+    <Compile Include="Models\PrzedmiotyViewModel.cs" />
     <Compile Include="Models\RodzajPrzedmiotu.cs" />
     <Compile Include="Models\RodzajStudiow.cs" />
     <Compile Include="Models\Sladowanie.cs" />
@@ -329,6 +331,7 @@
     <Content Include="Views\Kierunek\ListaMEK.cshtml" />
     <Content Include="Views\Kierunek\DodajKEKPrzedmiotu.cshtml" />
     <Content Include="Views\Kierunek\ListaPrzedmiotow.cshtml" />
+    <Content Include="Views\Przedmiot\DodajPrzedmiot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

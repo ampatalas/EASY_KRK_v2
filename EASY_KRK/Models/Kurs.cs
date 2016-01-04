@@ -15,20 +15,28 @@ namespace EASY_KRK.Models
         public int IdKursu { get; set; }
 
         [MaxLength(16)]
+        [Display(Name = "Kod kursu:")]
         public string KodKursu { get; set; }
 
+        [Display(Name = "Punkty ECTS:")]
         public int PunktyECTS { get; set; }
 
+        [Display(Name = "ZZU: ")]
         public int ZZU { get; set; }
 
+        [Display(Name = "CNPS: ")]
         public int CNPS { get; set; }
 
+        [Display(Name = "Punkty ECTS (P): ")]
         public int ECTS_P { get; set; }
 
+        [Display(Name = "Punkty ECTS (BK): ")]
         public int ECTS_BK { get; set; }
 
+        [Display(Name = "Praktyczny? ")]
         public bool Praktyczny { get; set; }
 
+        [Display(Name = "Forma zajęć: ")]
         public int IdFormyZajec { get; set; }
 
         [ForeignKey("IdFormyZajec")]
