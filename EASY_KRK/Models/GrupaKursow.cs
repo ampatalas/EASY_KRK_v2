@@ -23,9 +23,9 @@ namespace EASY_KRK.Models
 
         public int CNPS { get; set; }
 
-        public int ECTS_P { get; set; }
+        public float ECTS_P { get; set; }
 
-        public int ECTS_BK { get; set; }
+        public float ECTS_BK { get; set; }
 
         public bool Praktyczny { get; set; }
 

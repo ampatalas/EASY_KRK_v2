@@ -44,116 +44,51 @@
     <h4>Kursy i grupy kursów przedmiotu</h4>
 </div>
 <div class="row">
-    <div class="dodaj-przedmiot col-sm-2">
+
+@if (Model.Kursy.Count() > 0)
+{
+
+     <div class="dodaj-przedmiot col-sm-2">
         <label></label>
-        @Html.LabelFor(m => m.KursWyklad.ZZU)
-        @Html.LabelFor(m => m.KursWyklad.CNPS)
-        @Html.LabelFor(m => m.KursWyklad.PunktyECTS)
-        @Html.LabelFor(m => m.KursWyklad.ECTS_P)
-        @Html.LabelFor(m => m.KursWyklad.ECTS_BK)
-        @Html.LabelFor(m => m.KursWyklad.FormaZal.NazwaFormyZal)
-        @Html.LabelFor(m => m.KursWyklad.Praktyczny)
+       
+        @Html.LabelFor(m => m.Kursy[0].ZZU)
+        @Html.LabelFor(m => m.Kursy[0].CNPS)
+        @Html.LabelFor(m => m.Kursy[0].PunktyECTS)
+        @Html.LabelFor(m => m.Kursy[0].ECTS_P)
+        @Html.LabelFor(m => m.Kursy[0].ECTS_BK)
+        @Html.LabelFor(m => m.Kursy[0].FormaZal.NazwaFormyZal)
+        @Html.LabelFor(m => m.Kursy[0].Praktyczny)
         @Html.Label("Grupa kursów?*")
     </div>
-    <div class="dodaj-przedmiot col-sm-2">
-        <label>Wykład</label>
-        @Html.TextBoxFor(m => m.KursWyklad.ZZU, new { @class = "kurs-textbox" })
+    
+    for (var i = 0; i < Model.Kursy.Count(); i++ )
+    {
+         <div class="dodaj-przedmiot col-sm-2">
+        <label>@Model.Kursy[i].FormaZajec.NazwaFormy</label>
+        
+        @Html.HiddenFor(m => m.Kursy[i].IdFormyZajec)   
+        @Html.TextBoxFor(m => m.Kursy[i].ZZU, new { @class = "kurs-textbox" })
         @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursWyklad.CNPS, new { @class = "kurs-textbox" })
+        @Html.TextBoxFor(m => m.Kursy[i].CNPS, new { @class = "kurs-textbox" })
         @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursWyklad.PunktyECTS, new { @class = "kurs-textbox" })
+        @Html.TextBoxFor(m => m.Kursy[i].PunktyECTS, new { @class = "kurs-textbox" })
         @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursWyklad.ECTS_P, new { @class = "kurs-textbox" })
+        @Html.TextBoxFor(m => m.Kursy[i].ECTS_P, new { @class = "kurs-textbox" })
         @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursWyklad.ECTS_BK, new { @class = "kurs-textbox" })
+        @Html.TextBoxFor(m => m.Kursy[i].ECTS_BK, new { @class = "kurs-textbox" })
         @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursWyklad.FormaZal.NazwaFormyZal, new { @class = "kurs-textbox" })
+        @Html.DropDownListFor(m => m.Kursy[i].IdFormyZal, Model.FormyZaliczenia)
         @Html.Raw("<br />")
-        @Html.CheckBoxFor(m => m.KursWyklad.Praktyczny, new { @class = "kurs-checkbox" })
+        @Html.CheckBoxFor(m => m.Kursy[i].Praktyczny, new { @class = "kurs-checkbox" })
         @Html.Raw("<br />")
-        @Html.CheckBoxFor(m => m.GrupaWyklad, new { @class = "kurs-checkbox" })
+        @Html.CheckBoxFor(m => m.Grupa[i], new { @class = "kurs-checkbox" })
         @Html.Raw("<br />")
     </div>
+    }
+}
 
-    <div class="dodaj-przedmiot col-sm-2">
-        <label>Ćwiczenia</label>
-        @Html.TextBoxFor(m => m.KursCwiczenia.ZZU, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursCwiczenia.CNPS, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursCwiczenia.PunktyECTS, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursCwiczenia.ECTS_P, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursCwiczenia.ECTS_BK, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursCwiczenia.FormaZal.NazwaFormyZal, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.CheckBoxFor(m => m.KursCwiczenia.Praktyczny, new { @class = "kurs-checkbox" })
-        @Html.Raw("<br />")
-        @Html.CheckBoxFor(m => m.GrupaCwiczenia, new { @class = "kurs-checkbox" })
-        @Html.Raw("<br />")
-    </div>
 
-    <div class="dodaj-przedmiot col-sm-2">
-        <label>Laboratorium</label>
-        @Html.TextBoxFor(m => m.KursLaboratorium.ZZU, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursLaboratorium.CNPS, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursLaboratorium.PunktyECTS, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursLaboratorium.ECTS_P, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursLaboratorium.ECTS_BK, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursLaboratorium.FormaZal.NazwaFormyZal, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.CheckBoxFor(m => m.KursLaboratorium.Praktyczny, new { @class = "kurs-checkbox" })
-        @Html.Raw("<br />")
-        @Html.CheckBoxFor(m => m.GrupaLaboratorium, new { @class = "kurs-checkbox" })
-        @Html.Raw("<br />")
-    </div>
-
-    <div class="dodaj-przedmiot col-sm-2">
-        <label>Projekt</label>
-        @Html.TextBoxFor(m => m.KursProjekt.ZZU, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursProjekt.CNPS, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursProjekt.PunktyECTS, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursProjekt.ECTS_P, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursProjekt.ECTS_BK, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursProjekt.FormaZal.NazwaFormyZal, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.CheckBoxFor(m => m.KursProjekt.Praktyczny, new { @class = "kurs-checkbox" })
-        @Html.Raw("<br />")
-        @Html.CheckBoxFor(m => m.GrupaProjekt, new { @class = "kurs-checkbox" })
-        @Html.Raw("<br />")
-    </div>
-
-    <div class="dodaj-przedmiot col-sm-2">
-        <label>Seminarium</label>
-        @Html.TextBoxFor(m => m.KursSeminarium.ZZU, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursSeminarium.CNPS, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursSeminarium.PunktyECTS, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursSeminarium.ECTS_P, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursSeminarium.ECTS_BK, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.KursSeminarium.FormaZal.NazwaFormyZal, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.CheckBoxFor(m => m.KursSeminarium.Praktyczny, new { @class = "kurs-checkbox" })
-        @Html.Raw("<br />")
-        @Html.CheckBoxFor(m => m.GrupaSeminarium, new { @class = "kurs-checkbox" })
-        @Html.Raw("<br />")
-    </div>
+  
 
     </div>
     <div class="row">

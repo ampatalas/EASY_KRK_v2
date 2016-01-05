@@ -28,10 +28,10 @@ namespace EASY_KRK.Models
         public int CNPS { get; set; }
 
         [Display(Name = "Punkty ECTS (P): ")]
-        public int ECTS_P { get; set; }
+        public float ECTS_P { get; set; }
 
         [Display(Name = "Punkty ECTS (BK): ")]
-        public int ECTS_BK { get; set; }
+        public float ECTS_BK { get; set; }
 
         [Display(Name = "Praktyczny? ")]
         public bool Praktyczny { get; set; }

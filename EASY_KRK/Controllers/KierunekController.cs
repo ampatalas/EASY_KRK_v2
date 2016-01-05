@@ -1,4 +1,4 @@
-﻿using EASY_KRK.App_Start;
+﻿
 using EASY_KRK.Models;
 using System;
 using System.Collections.Generic;
@@ -24,15 +24,15 @@ namespace EASY_KRK.Controllers
         public ActionResult MacierzSladowania()
         {
             MacierzSladowaniaViewModel model = new MacierzSladowaniaViewModel();
-            if (Settings.IdProgramu != 0 && Settings.IdKierunku != 0)
+            if (this.HttpContext.Session["IdProgramu"] != null && this.HttpContext.Session["IdKierunku"] != null)
             {
-                Kierunek k = db.Kierunki.ToList().Find(kierunek => kierunek.IdKierunku == Settings.IdKierunku);
+                Kierunek k = db.Kierunki.ToList().Find(kierunek => kierunek.IdKierunku == Convert.ToInt32(this.HttpContext.Session["IdKierunku"]));
                 model.Udzialy = db.UdzialyProcentowe.ToList().FindAll(u => u.IdKierunku == k.IdKierunku);
-                model.KEKI = db.KEKI.ToList().FindAll(kek => kek.Kierunek.IdKierunku == Settings.IdKierunku);
+                model.KEKI = db.KEKI.ToList().FindAll(kek => kek.Kierunek.IdKierunku == Convert.ToInt32(this.HttpContext.Session["IdKierunku"]));
                 model.Sladowania = db.Sladowania.ToList().FindAll(s =>s.KEK.IdKierunku == k.IdKierunku);
                 model.KEKIPrzedmiotow = db.KEKIPrzedmiotow.ToList().FindAll(kp => (db.Przedmioty.ToList().FindAll(
                                         p => p.Kategoria.ProgramStudiow.ProgramKsztalcenia.IdProgramuKsztalcenia
-                                        == Settings.IdProgramu)).Contains(kp.Przedmiot));
+                                        == Convert.ToInt32(this.HttpContext.Session["IdProgramu"]))).Contains(kp.Przedmiot));
                 model.Pokrycia = new Dictionary<int,int>();
 
                 foreach(UdzialProcentowy u in model.Udzialy)
@@ -64,7 +64,7 @@ namespace EASY_KRK.Controllers
                 ProgramyViewModel model = new ProgramyViewModel();
                 model.Kierunki = db.Kierunki.Select(k => k.NazwaKierunku).Distinct().ToList();
                 model.Programy = db.ProgramyKsztalcenia.ToList().FindAll(p => p.JezykStudiow.NazwaJezyka == "polski");
-                model.IdProgramu = Settings.IdProgramu;
+                model.IdProgramu = Convert.ToInt32(this.HttpContext.Session["IdProgramu"]);
                 
                 return PartialView(model);
             }
@@ -76,14 +76,14 @@ namespace EASY_KRK.Controllers
         [Authorize]
         public ActionResult WybierzProgram(int id)
         {
-            Settings.IdProgramu = id;
-            Settings.IdKierunku = db.ProgramyKsztalcenia.ToList().Find(p => p.IdProgramuKsztalcenia == id).IdKierunku;
+            this.HttpContext.Session["IdProgramu"] = id;
+            this.HttpContext.Session["IdKierunku"] = db.ProgramyKsztalcenia.ToList().Find(p => p.IdProgramuKsztalcenia == id).IdKierunku;
             return RedirectToAction("Index", "Kategoria");
         }
 
         public ActionResult DodajMEK(int IdKEK)
         {
-                Kierunek k = db.Kierunki.ToList().Find(kierunek => kierunek.IdKierunku == Settings.IdKierunku);
+            Kierunek k = db.Kierunki.ToList().Find(kierunek => kierunek.IdKierunku == Convert.ToInt32(this.HttpContext.Session["IdKierunku"]));
                 DodajMEKViewModel model = new DodajMEKViewModel();
                 model.IdKEK = IdKEK;
                 model.Filtr = "";
@@ -125,7 +125,7 @@ namespace EASY_KRK.Controllers
         [HttpPost]
         public ActionResult FiltrujMEK(DodajMEKViewModel model)
         {
-            Kierunek k = db.Kierunki.ToList().Find(kierunek => kierunek.IdKierunku == Settings.IdKierunku);
+            Kierunek k = db.Kierunki.ToList().Find(kierunek => kierunek.IdKierunku == Convert.ToInt32(this.HttpContext.Session["IdKierunku"]));
             IEnumerable<MEK> MEKI = db.MEKI.ToList().FindAll(m => ((m.IdPoziomu == k.IdPoziomu && m.IdProfilu == k.IdProfilu &&
                                                 (db.UdzialyProcentowe.ToList().FindAll(u => u.IdKierunku == k.IdKierunku).Find(
                                                 u => u.IdObszaru == m.IdObszaru) != null)) && (m.Kod.Contains(model.Filtr)
@@ -161,7 +161,7 @@ namespace EASY_KRK.Controllers
 
         public ActionResult DodajKEKPrzedmiotu(int IdKEK)
         {
-            Kierunek k = db.Kierunki.ToList().Find(kierunek => kierunek.IdKierunku == Settings.IdKierunku);
+            Kierunek k = db.Kierunki.ToList().Find(kierunek => kierunek.IdKierunku == Convert.ToInt32(this.HttpContext.Session["IdKierunku"]));
             DodajKEKPrzedmiotuViewModel model = new DodajKEKPrzedmiotuViewModel();
             model.IdKEK = IdKEK;
             model.Filtr = "";
@@ -200,7 +200,7 @@ namespace EASY_KRK.Controllers
         [HttpPost]
         public ActionResult FiltrujPrzedmioty(DodajKEKPrzedmiotuViewModel model)
         {
-            Kierunek k = db.Kierunki.ToList().Find(kierunek => kierunek.IdKierunku == Settings.IdKierunku);
+            Kierunek k = db.Kierunki.ToList().Find(kierunek => kierunek.IdKierunku == Convert.ToInt32(this.HttpContext.Session["IdKierunku"]));
             IEnumerable<Przedmiot> Przedmioty = db.Przedmioty.ToList().FindAll(p => (p.Kategoria.ProgramStudiow.ProgramKsztalcenia.Kierunek.IdKierunku == k.IdKierunku
                                                                                      && (p.KodPrzedmiotu.Contains(model.Filtr) || p.NazwaPrzedmiotu.Contains(model.Filtr))));
             List<object> PrzedmiotyLista = new List<Object>();

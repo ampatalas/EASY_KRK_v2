@@ -48,5 +48,8 @@ namespace EASY_KRK.Models
         [Display(Name = "Ogólnouczelniany? ")]
         public bool Ogolnouczelniany { get; set; }
 
+        public virtual ICollection<Kurs> Kursy { get; set; }
+        public virtual ICollection<GrupaKursow> GrupyKursow { get; set; }
+
     }
 }

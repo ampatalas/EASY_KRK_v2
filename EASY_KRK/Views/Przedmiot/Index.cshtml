@@ -6,14 +6,21 @@
 
 <h2>Przedmioty</h2>
 
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
 
-<ul>
-@foreach (var k in Model.Kategorie)
-{
-    <li>@k.NazwaKategorii</li>
-    @PokazDrzewo(k.Kategorie)
+    <ul>
+    @foreach (var k in Model.Kategorie)
+    {
+        <li>@k.NazwaKategorii</li>
+        @PokazDrzewo(k.Kategorie)
+    }
+    </ul>
+    
+    <input type="submit" value="Przypisz KEK" name="Przypisz" class="btn btn-default" />
+    <input type="submit" value="Edytuj" name="Edytuj" class="btn btn-default" />
+    <input type="submit" value="Usuń" name="Usun" class="btn btn-default" />
 }
-</ul>
 
 
 
@@ -32,6 +39,7 @@
                 {
                     @Html.Raw("<br />")
                     @Html.ActionLink("Dodaj przedmiot", "DodajPrzedmiot", new { IdKategorii = kat.IdKategorii });
+                    @Html.Raw("<br />")
                     foreach (var przedmiot in kat.Przedmioty)
                     {
                         @Html.RadioButtonFor(m => m.IdPrzedmiotu, przedmiot)
