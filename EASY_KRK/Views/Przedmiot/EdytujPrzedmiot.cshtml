@@ -7,7 +7,48 @@
 
 <div class="row">
     <h2>Dodaj przedmiot</h2>
+    <div id="dialog-dodaj-kek" style="display:none">
+    </div>
 </div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jqueryui")
+
+<link href="content/themes/base/all.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        var url = "";
+
+        $("#linkDodajKEK").click(function (e) {
+            e.preventDefault();
+            url = $(this).attr("href");
+            $("#dialog-dodaj-kek").dialog('open');
+        });
+
+        $("#dialog-dodaj-kek").dialog({
+            autoOpen: false,
+            resizable: false,
+            height: 400,
+            width: 450,
+            title: 'Przypisz KEK',
+            modal: true,
+            show: { effect: 'drop', direction: "up" },
+            draggable: true,
+            open: function (event, ui) {
+                $(".ui-dialog-titlebar-close").hide();
+                $(this).load(url);
+            },
+            buttons: {
+                "Anuluj": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+    });
+</script>
+
 
 @using (Html.BeginForm())
 {
@@ -38,9 +79,13 @@
             @Html.Raw("<br />")
         </div>
         <div class="dodaj-przedmiot col-sm-4">
-            <h4>Kierunkowe efeky kształcenia</h4> @Html.ActionLink("Dodaj", "DodajKEK")
-            <h4>Grupy kursow @Model.Przedmiot.GrupyKursow.Count()</h4>
-            <h4>Kursy @Model.Przedmiot.Kursy.Count()</h4>
+            <h4>Kierunkowe efeky kształcenia</h4> @Html.ActionLink("Dodaj", "PrzypiszKEK", new { IdPrzedmiotu = Model.Przedmiot.IdPrzedmiotu
+                                                                                            , Edycja = true }, new { @id = "linkDodajKEK" }) <br />
+
+            @foreach(var kek in Model.KEKI)
+            {
+                @Html.Label(kek.Kod, new { title = kek.Opis }) @Html.ActionLink("Usuń", "UsunKEK", new { IdPrzedmiotu = Model.Przedmiot.IdPrzedmiotu, IdKEK = kek.IdKEK})
+            }
         </div>
 
     </div>

@@ -247,6 +247,7 @@
     <Compile Include="Models\ProgramyViewModel.cs" />
     <Compile Include="Models\Przedmiot.cs" />
     <Compile Include="Models\PrzedmiotyViewModel.cs" />
+    <Compile Include="Models\PrzypiszKEKViewModel.cs" />
     <Compile Include="Models\RodzajPrzedmiotu.cs" />
     <Compile Include="Models\RodzajStudiow.cs" />
     <Compile Include="Models\Sladowanie.cs" />
@@ -350,6 +351,8 @@
     <Content Include="Views\Kierunek\ListaPrzedmiotow.cshtml" />
     <Content Include="Views\Przedmiot\DodajPrzedmiot.cshtml" />
     <Content Include="Views\Przedmiot\EdytujPrzedmiot.cshtml" />
+    <Content Include="Views\Przedmiot\PrzypiszKEK.cshtml" />
+    <Content Include="Views\Przedmiot\ListaKEK.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -50,6 +50,7 @@ namespace EASY_KRK.Models
 
         public virtual ICollection<Kurs> Kursy { get; set; }
         public virtual ICollection<GrupaKursow> GrupyKursow { get; set; }
+        public virtual ICollection<KEKPrzedmiotu> KEKI { get; set; }
 
     }
 }

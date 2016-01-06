@@ -6,6 +6,54 @@
 
 <h2>Przedmioty</h2>
 
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jqueryui")
+
+<link href="content/themes/base/all.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        var url = "";
+
+        $("#linkDodajKEK").click(function (e) {
+            e.preventDefault();
+            var selectedVal = "";
+            var selected = $("input[type='radio'][name='IdPrzedmiotu']:checked");
+            if (selected.length > 0) {
+                selectedVal = selected.val();
+            }
+            url = "/Przedmiot/PrzypiszKEK?IdPrzedmiotu="+selectedVal+"&Edycja=False";
+            $("#dialog-dodaj-kek").dialog('open');
+        });
+
+        $("#dialog-dodaj-kek").dialog({
+            autoOpen: false,
+            resizable: false,
+            height: 400,
+            width: 450,
+            title: 'Przypisz KEK',
+            modal: true,
+            show: { effect: 'drop', direction: "up" },
+            draggable: true,
+            open: function (event, ui) {
+                $(".ui-dialog-titlebar-close").hide();
+                $(this).load(url);
+            },
+            buttons: {
+                "Anuluj": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+    });
+</script>
+
+<div id="dialog-dodaj-kek" style="display:none">
+
+</div>
+
+
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
 
@@ -16,8 +64,8 @@
         @PokazDrzewo(k.Kategorie)
     }
     </ul>
-    
-    <input type="submit" value="Przypisz KEK" name="Przypisz" class="btn btn-default" />
+
+    <input type="submit" value="Przypisz KEK" name="Przypisz" class="btn btn-default" id="linkDodajKEK" />
     <input type="submit" value="Edytuj" name="Edytuj" class="btn btn-default" />
     <input type="submit" value="Usuń" name="Usun" class="btn btn-default" onclick="return confirm('Czy na pewno chcesz usunąć przedmiot i wszystkie powiązane z nim kursy/grupy kursów?');" />
 }

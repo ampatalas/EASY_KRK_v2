@@ -16,6 +16,7 @@ namespace EASY_KRK.Models
         public Przedmiot Przedmiot { get; set; }
         public List<Kurs> Kursy { get; set; }
         public List<Boolean> Grupa { get; set; }
+        public List<KEK> KEKI { get; set; }
 
     }
 }

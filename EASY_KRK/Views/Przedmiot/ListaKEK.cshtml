@@ -1,0 +1,19 @@
+﻿@model EASY_KRK.Models.PrzypiszKEKViewModel
+
+<br />
+
+@using (Html.BeginForm("PrzypiszKEKForm", "Przedmiot"))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.IdPrzedmiotu)
+    @Html.HiddenFor(model => model.Edycja)
+    <p>@Html.DropDownListFor(m => m.SelectedKEK, Model.KEKI, new { style = "width:400px" })</p>
+    <br />
+
+    <input type="submit" value="Dodaj" name="Dodaj" class="btn btn-default" />
+
+
+
+}
+

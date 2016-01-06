@@ -18,8 +18,9 @@ namespace EASY_KRK.Controllers
         public ActionResult Index()
         {
             PrzedmiotyViewModel Model = new PrzedmiotyViewModel();
-            Model.Kategorie = db.Kategorie.ToList().FindAll(k => k.ProgramStudiow.IdProgramuKsztalcenia == Convert.ToInt32(this.HttpContext.Session["IdProgramu"])
-                                                                 && k.KategoriaNadrzedna == null);
+            var IdProgramu =  Convert.ToInt32(this.HttpContext.Session["IdProgramu"]);
+            Model.Kategorie = db.Kategorie.Where(k => k.ProgramStudiow.IdProgramuKsztalcenia == IdProgramu
+                                                        && k.KategoriaNadrzedna == null);
             Model.IdPrzedmiotu = 0;
             return View(Model);
         }
@@ -37,16 +38,96 @@ namespace EASY_KRK.Controllers
             }
             else if (Przypisz != null)
             {
-                return RedirectToAction("PrzypiszPrzedmiot", new { IdPrzedmiotu = Model.IdPrzedmiotu });
+                return RedirectToAction("PrzypiszKEK", new { IdPrzedmiotu = Model.IdPrzedmiotu });
             }
 
             return View(Model);
         }
 
+        public ActionResult PrzypiszKEK(int IdPrzedmiotu, bool Edycja)
+        {
+            var IdKierunku = Convert.ToInt32(this.HttpContext.Session["IdKierunku"]);
+            Kierunek k = db.Kierunki.Where(kierunek => kierunek.IdKierunku == IdKierunku).First();
+            PrzypiszKEKViewModel model = new PrzypiszKEKViewModel();
+            model.IdPrzedmiotu = IdPrzedmiotu;
+            model.NazwaPrzedmiotu = db.Przedmioty.Find(IdPrzedmiotu).NazwaPrzedmiotu;
+            model.Filtr = "";
+            model.Edycja = Edycja;
+            IEnumerable<KEK> KEKI = db.KEKI.Where(kierunek => (kierunek.IdKierunku == k.IdKierunku));
+            List<object> newKEKI = new List<Object>();
+            foreach (KEK m in KEKI)
+            {
+                newKEKI.Add(new
+                {
+                    Id = m.IdKEK,
+                    Nazwa = m.Kod + " " + m.Opis
+                });
+            }
+            model.KEKI = new SelectList(newKEKI, "Id", "Nazwa");
+
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        public ActionResult FiltrujKEK(PrzypiszKEKViewModel model)
+        {
+            var IdKierunku = Convert.ToInt32(this.HttpContext.Session["IdKierunku"]);
+            Kierunek k = db.Kierunki.Where(kierunek => kierunek.IdKierunku == IdKierunku).First();
+            IEnumerable<KEK> KEKI = db.KEKI.Where(kek => (kek.IdKierunku == k.IdKierunku) && (kek.Kod.Contains(model.Filtr)
+                                                || kek.Opis.Contains(model.Filtr)));
+            List<object> KEKILista = new List<Object>();
+            foreach (KEK m in KEKI)
+            {
+                KEKILista.Add(new
+                {
+                    Id = m.IdKEK,
+                    Nazwa = m.Kod + " " + m.Opis
+                });
+            }
+            model.KEKI = new SelectList(KEKILista, "Id", "Nazwa");
+            model.Filtr = "";
+
+            return PartialView("ListaKEK", model);
+        }
+
+        public ActionResult PrzypiszKEKForm(PrzypiszKEKViewModel Model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                KEKPrzedmiotu kekp = new KEKPrzedmiotu();
+                kekp.IdKEK = Model.SelectedKEK;
+                kekp.IdPrzedmiotu = Model.IdPrzedmiotu;
+                db.KEKIPrzedmiotow.Add(kekp);
+                db.SaveChanges();
+            }
+
+            if (Model.Edycja)
+            {
+                return RedirectToAction("EdytujPrzedmiot", new { IdPrzedmiotu = Model.IdPrzedmiotu });
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult UsunKEK(int IdPrzedmiotu, int IdKEK)
+        {
+
+            if (ModelState.IsValid)
+            {
+                KEKPrzedmiotu kekp = db.KEKIPrzedmiotow.Where(k => k.IdPrzedmiotu == IdPrzedmiotu
+                                                              && k.IdKEK == IdKEK).First();
+                db.KEKIPrzedmiotow.Remove(kekp);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("EdytujPrzedmiot", new { IdPrzedmiotu = IdPrzedmiotu });
+        }
+
         public ActionResult DodajPrzedmiot(int IdKategorii)
         {
+            var IdProgramu = Convert.ToInt32(this.HttpContext.Session["IdProgramu"]);
             DodajPrzedmiotViewModel Model = new DodajPrzedmiotViewModel();
-            Model.Kategorie = new SelectList(db.Kategorie.ToList().FindAll(k => k.ProgramStudiow.IdProgramuKsztalcenia == Convert.ToInt32(this.HttpContext.Session["IdProgramu"])
+            Model.Kategorie = new SelectList(db.Kategorie.Where(k => k.ProgramStudiow.IdProgramuKsztalcenia == IdProgramu
                                                                  && k.Kategorie.Count() == 0), "IdKategorii", "NazwaKategorii", IdKategorii);
             Model.FormyPrzedmiotu = new SelectList(db.FormyPrzedmiotu, "IdFormyPrzedmiotu", "NazwaFormy");
             Model.FormyZaliczenia = new SelectList(db.FormyZal, "IdFormyZal", "NazwaFormyZal");
@@ -55,7 +136,8 @@ namespace EASY_KRK.Controllers
             Model.Kursy = new List<Kurs>();
             Model.Grupa = new List<Boolean>();
             
-            foreach(FormaZajec f in db.FormyZajec.ToList().FindAll(forma => forma.NazwaFormy != "Praktyka"))
+            
+            foreach(FormaZajec f in db.FormyZajec.Where(forma => forma.NazwaFormy != "Praktyka"))
             {
                 Kurs k = new Kurs();
                 k.IdFormyZajec = f.IdFormyZajec;
@@ -115,14 +197,12 @@ namespace EASY_KRK.Controllers
                             Model.Kursy[i].IdPrzedmiotu = Model.Przedmiot.IdPrzedmiotu;                           
                         }
 
-
                     }
                     if (Grupa != null)
                     {
                         db.GrupyKursow.Add(Grupa);
                         db.SaveChanges();
                     }
-
 
                         for (var i = 0; i < Model.Kursy.Count() && Model.Kursy[i].ZZU > 0; i++)
                         {
@@ -133,7 +213,6 @@ namespace EASY_KRK.Controllers
 
                             db.Kursy.Add(Model.Kursy[i]);
                         }
-                    
 
                     db.SaveChanges();
                     
@@ -143,19 +222,17 @@ namespace EASY_KRK.Controllers
                 {
                     return View(Model);
                 }
-
-                
             }
-
-            
+           
         }
 
         public ActionResult EdytujPrzedmiot(int IdPrzedmiotu)
         {
+            var IdProgramu = Convert.ToInt32(this.HttpContext.Session["IdProgramu"]);
             DodajPrzedmiotViewModel Model = new DodajPrzedmiotViewModel();
             Kurs Kurs = null;
             Model.Przedmiot = db.Przedmioty.Find(IdPrzedmiotu);
-            Model.Kategorie = new SelectList(db.Kategorie.ToList().FindAll(k => k.ProgramStudiow.IdProgramuKsztalcenia == Convert.ToInt32(this.HttpContext.Session["IdProgramu"])
+            Model.Kategorie = new SelectList(db.Kategorie.Where(k => k.ProgramStudiow.IdProgramuKsztalcenia == IdProgramu
                                                                  && k.Kategorie.Count() == 0), "IdKategorii", "NazwaKategorii", Model.Przedmiot.IdKategorii);
             Model.FormyPrzedmiotu = new SelectList(db.FormyPrzedmiotu, "IdFormyPrzedmiotu", "NazwaFormy", Model.Przedmiot.IdFormyPrzedmiotu);
             Model.FormyZaliczenia = new SelectList(db.FormyZal, "IdFormyZal", "NazwaFormyZal");
@@ -163,10 +240,11 @@ namespace EASY_KRK.Controllers
             Model.Typy = new SelectList(db.TypyPrzedmiotu, "IdTypu", "NazwaTypu", Model.Przedmiot.IdTypuPrzedmiotu);
             Model.Kursy = new List<Kurs>();
             Model.Grupa = new List<Boolean>();
+            Model.KEKI = db.KEKIPrzedmiotow.Where(k => k.IdPrzedmiotu == IdPrzedmiotu).Select(k => k.KEK).ToList();
 
-            foreach (FormaZajec f in db.FormyZajec.ToList().FindAll(forma => forma.NazwaFormy != "Praktyka"))
+            foreach (FormaZajec f in db.FormyZajec.Where(forma => forma.NazwaFormy != "Praktyka"))
             {
-                Kurs = db.Kursy.ToList().Find(k => k.IdPrzedmiotu == IdPrzedmiotu && k.IdFormyZajec == f.IdFormyZajec);
+                Kurs = db.Kursy.Where(k => k.IdPrzedmiotu == IdPrzedmiotu && k.IdFormyZajec == f.IdFormyZajec).FirstOrDefault();
                 if (Kurs != null)
                 {
                     Model.Grupa.Add(Kurs.IdGrupyKursow != null);
@@ -198,7 +276,7 @@ namespace EASY_KRK.Controllers
                 GrupaKursow Grupa = null;
                 if (ModelState.IsValid)
                 {
-                    Grupa = db.GrupyKursow.ToList().Find(g => g.IdPrzedmiotu == Model.Przedmiot.IdPrzedmiotu);
+                    Grupa = db.GrupyKursow.Where(g => g.IdPrzedmiotu == Model.Przedmiot.IdPrzedmiotu).FirstOrDefault();
 
                     if (Model.Grupa.Contains(true))
                     {
@@ -250,14 +328,12 @@ namespace EASY_KRK.Controllers
                             }
                         }
                         
-
                     }
                     if (Grupa != null && Grupa.IdGrupyKursow == 0)
                     {
                         db.GrupyKursow.Add(Grupa);
                         db.SaveChanges();   
                     }
-
 
                     for (var i = 0; i < Model.Kursy.Count() && Model.Kursy[i].ZZU > 0; i++)
                     {
@@ -310,15 +386,21 @@ namespace EASY_KRK.Controllers
             Przedmiot p = db.Przedmioty.Find(IdPrzedmiotu);
             List<Kurs> Kursy = p.Kursy.ToList();
             List<GrupaKursow> Grupy = p.GrupyKursow.ToList();
+            List<KEKPrzedmiotu> KEKI = p.KEKI.ToList();
 
             for (var i = 0; i < Kursy.Count - 1; i++ )
             {
                 db.Kursy.Remove(Kursy[i]);
             }
 
-            for (var j = 0; j < Kursy.Count - 1; j++)
+            for (var j = 0; j < Grupy.Count - 1; j++)
             {
                 db.GrupyKursow.Remove(Grupy[j]);
+            }
+
+            for (var k = 0; k < KEKI.Count - 1; k++)
+            {
+                db.KEKIPrzedmiotow.Remove(KEKI[k]);
             }
 
             db.Przedmioty.Remove(db.Przedmioty.Find(IdPrzedmiotu));

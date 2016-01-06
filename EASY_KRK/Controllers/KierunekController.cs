@@ -23,23 +23,25 @@ namespace EASY_KRK.Controllers
         [Authorize]
         public ActionResult MacierzSladowania()
         {
+            var IdKierunku = Convert.ToInt32(this.HttpContext.Session["IdKierunku"]);
+            var IdProgramu = Convert.ToInt32(this.HttpContext.Session["IdProgramu"]);
             MacierzSladowaniaViewModel model = new MacierzSladowaniaViewModel();
             if (this.HttpContext.Session["IdProgramu"] != null && this.HttpContext.Session["IdKierunku"] != null)
             {
-                Kierunek k = db.Kierunki.ToList().Find(kierunek => kierunek.IdKierunku == Convert.ToInt32(this.HttpContext.Session["IdKierunku"]));
-                model.Udzialy = db.UdzialyProcentowe.ToList().FindAll(u => u.IdKierunku == k.IdKierunku);
-                model.KEKI = db.KEKI.ToList().FindAll(kek => kek.Kierunek.IdKierunku == Convert.ToInt32(this.HttpContext.Session["IdKierunku"]));
-                model.Sladowania = db.Sladowania.ToList().FindAll(s =>s.KEK.IdKierunku == k.IdKierunku);
-                model.KEKIPrzedmiotow = db.KEKIPrzedmiotow.ToList().FindAll(kp => (db.Przedmioty.ToList().FindAll(
+                Kierunek k = db.Kierunki.Where(kierunek => kierunek.IdKierunku == IdKierunku).FirstOrDefault();
+                model.Udzialy = db.UdzialyProcentowe.Where(u => u.IdKierunku == k.IdKierunku);
+                model.KEKI = db.KEKI.Where(kek => kek.Kierunek.IdKierunku == IdKierunku);
+                model.Sladowania = db.Sladowania.Where(s =>s.KEK.IdKierunku == k.IdKierunku);
+                model.KEKIPrzedmiotow = db.KEKIPrzedmiotow.Where(kp => (db.Przedmioty.Where(
                                         p => p.Kategoria.ProgramStudiow.ProgramKsztalcenia.IdProgramuKsztalcenia
-                                        == Convert.ToInt32(this.HttpContext.Session["IdProgramu"]))).Contains(kp.Przedmiot));
+                                        == IdProgramu)).Contains(kp.Przedmiot));
                 model.Pokrycia = new Dictionary<int,int>();
 
                 foreach(UdzialProcentowy u in model.Udzialy)
                 {
-                    model.Pokrycia[u.IdObszaru] = (model.Sladowania.ToList().FindAll(
+                    model.Pokrycia[u.IdObszaru] = (model.Sladowania.Where(
                                                  s => s.MEK.IdObszaru == u.IdObszaru).Select(s => s.MEK.IdMEK).Distinct().Count()*100)/
-                                                 (db.MEKI.ToList().FindAll(m => m.IdObszaru == u.IdObszaru).Count());
+                                                 (db.MEKI.Where(m => m.IdObszaru == u.IdObszaru).Count());
                 }
 
                 model.Nieprzypisane = new Dictionary<int, IEnumerable<MEK>>();
@@ -48,7 +50,7 @@ namespace EASY_KRK.Controllers
                 {
                     if (model.Pokrycia[u.IdObszaru] < u.Wartosc)
                     {
-                        model.Nieprzypisane[u.IdObszaru] = db.MEKI.ToList().FindAll(m => m.IdObszaru == u.IdObszaru && model.Sladowania.ToList().Find(s => s.IdMEK == m.IdMEK) == null);
+                        model.Nieprzypisane[u.IdObszaru] = db.MEKI.Where(m => m.IdObszaru == u.IdObszaru && model.Sladowania.Where(s => s.IdMEK == m.IdMEK).FirstOrDefault() == null);
                     }
                 }
             }
@@ -63,7 +65,7 @@ namespace EASY_KRK.Controllers
 
                 ProgramyViewModel model = new ProgramyViewModel();
                 model.Kierunki = db.Kierunki.Select(k => k.NazwaKierunku).Distinct().ToList();
-                model.Programy = db.ProgramyKsztalcenia.ToList().FindAll(p => p.JezykStudiow.NazwaJezyka == "polski");
+                model.Programy = db.ProgramyKsztalcenia.Where(p => p.JezykStudiow.NazwaJezyka == "polski");
                 model.IdProgramu = Convert.ToInt32(this.HttpContext.Session["IdProgramu"]);
                 
                 return PartialView(model);
@@ -77,20 +79,20 @@ namespace EASY_KRK.Controllers
         public ActionResult WybierzProgram(int id)
         {
             this.HttpContext.Session["IdProgramu"] = id;
-            this.HttpContext.Session["IdKierunku"] = db.ProgramyKsztalcenia.ToList().Find(p => p.IdProgramuKsztalcenia == id).IdKierunku;
+            this.HttpContext.Session["IdKierunku"] = db.ProgramyKsztalcenia.Where(p => p.IdProgramuKsztalcenia == id).First().IdKierunku;
             return RedirectToAction("Index", "Kategoria");
         }
 
         public ActionResult DodajMEK(int IdKEK)
         {
-            Kierunek k = db.Kierunki.ToList().Find(kierunek => kierunek.IdKierunku == Convert.ToInt32(this.HttpContext.Session["IdKierunku"]));
+                var IdKierunku = Convert.ToInt32(this.HttpContext.Session["IdKierunku"]);
+                Kierunek k = db.Kierunki.Where(kierunek => kierunek.IdKierunku == IdKierunku).FirstOrDefault();
                 DodajMEKViewModel model = new DodajMEKViewModel();
                 model.IdKEK = IdKEK;
                 model.Filtr = "";
-                IEnumerable<MEK> MEKI = db.MEKI.ToList().FindAll(m => (m.IdPoziomu == k.IdPoziomu && m.IdProfilu == k.IdProfilu &&
-                                        db.UdzialyProcentowe.ToList().FindAll(u => u.IdKierunku == k.IdKierunku).Find(
-                                        u => u.IdObszaru == m.IdObszaru) != null)).FindAll((m => m.Kod.Contains(model.Filtr)
-                                    || m.Opis.Contains(model.Filtr)));
+                IEnumerable<MEK> MEKI = db.MEKI.Where(m => (m.IdPoziomu == k.IdPoziomu && m.IdProfilu == k.IdProfilu &&
+                                        db.UdzialyProcentowe.Where(u => u.IdKierunku == k.IdKierunku &&
+                                            u.IdObszaru == m.IdObszaru).FirstOrDefault() != null)).ToList();
                 List<object> newMEKI = new List<Object>();
                 foreach (MEK m in MEKI)
                 {
@@ -125,11 +127,11 @@ namespace EASY_KRK.Controllers
         [HttpPost]
         public ActionResult FiltrujMEK(DodajMEKViewModel model)
         {
-            Kierunek k = db.Kierunki.ToList().Find(kierunek => kierunek.IdKierunku == Convert.ToInt32(this.HttpContext.Session["IdKierunku"]));
-            IEnumerable<MEK> MEKI = db.MEKI.ToList().FindAll(m => ((m.IdPoziomu == k.IdPoziomu && m.IdProfilu == k.IdProfilu &&
-                                                (db.UdzialyProcentowe.ToList().FindAll(u => u.IdKierunku == k.IdKierunku).Find(
-                                                u => u.IdObszaru == m.IdObszaru) != null)) && (m.Kod.Contains(model.Filtr)
-                                                || m.Opis.Contains(model.Filtr)))); 
+            var IdKierunku = Convert.ToInt32(this.HttpContext.Session["IdKierunku"]);
+            Kierunek k = db.Kierunki.Where(kierunek => kierunek.IdKierunku == IdKierunku).FirstOrDefault();
+            IEnumerable<MEK> MEKI = db.MEKI.Where(m => ((m.IdPoziomu == k.IdPoziomu && m.IdProfilu == k.IdProfilu &&
+                                                (db.UdzialyProcentowe.Where(u => u.IdKierunku == k.IdKierunku && u.IdObszaru == m.IdObszaru).FirstOrDefault() != null)) && (m.Kod.Contains(model.Filtr)
+                                                || m.Opis.Contains(model.Filtr)))).ToList(); 
             List<object> MEKILista = new List<Object>();
             foreach( MEK m in MEKI)
             {
@@ -147,7 +149,7 @@ namespace EASY_KRK.Controllers
 
         public ActionResult UsunMEK(int IdKEK, int IdMEK)
         {
-            Sladowanie slad = db.Sladowania.ToList().Find(s => (s.IdMEK == IdMEK && s.IdKEK == IdKEK));
+            Sladowanie slad = db.Sladowania.Where(s => (s.IdMEK == IdMEK && s.IdKEK == IdKEK)).FirstOrDefault();
 
             if (slad != null)
             {
@@ -161,11 +163,12 @@ namespace EASY_KRK.Controllers
 
         public ActionResult DodajKEKPrzedmiotu(int IdKEK)
         {
-            Kierunek k = db.Kierunki.ToList().Find(kierunek => kierunek.IdKierunku == Convert.ToInt32(this.HttpContext.Session["IdKierunku"]));
+            var IdKierunku = Convert.ToInt32(this.HttpContext.Session["IdKierunku"]);
+            Kierunek k = db.Kierunki.Where(kierunek => kierunek.IdKierunku == IdKierunku).FirstOrDefault();
             DodajKEKPrzedmiotuViewModel model = new DodajKEKPrzedmiotuViewModel();
             model.IdKEK = IdKEK;
             model.Filtr = "";
-            IEnumerable<Przedmiot> Przedmioty = db.Przedmioty.ToList().FindAll(p => (p.Kategoria.ProgramStudiow.ProgramKsztalcenia.Kierunek.IdKierunku == k.IdKierunku));
+            IEnumerable<Przedmiot> Przedmioty = db.Przedmioty.Where(p => (p.Kategoria.ProgramStudiow.ProgramKsztalcenia.Kierunek.IdKierunku == k.IdKierunku));
             List<object> PrzedmiotyLista = new List<Object>();
             foreach (Przedmiot p in Przedmioty)
             {
@@ -200,8 +203,9 @@ namespace EASY_KRK.Controllers
         [HttpPost]
         public ActionResult FiltrujPrzedmioty(DodajKEKPrzedmiotuViewModel model)
         {
-            Kierunek k = db.Kierunki.ToList().Find(kierunek => kierunek.IdKierunku == Convert.ToInt32(this.HttpContext.Session["IdKierunku"]));
-            IEnumerable<Przedmiot> Przedmioty = db.Przedmioty.ToList().FindAll(p => (p.Kategoria.ProgramStudiow.ProgramKsztalcenia.Kierunek.IdKierunku == k.IdKierunku
+            var IdKierunku = Convert.ToInt32(this.HttpContext.Session["IdKierunku"]);
+            Kierunek k = db.Kierunki.Where(kierunek => kierunek.IdKierunku == IdKierunku).FirstOrDefault();
+            IEnumerable<Przedmiot> Przedmioty = db.Przedmioty.Where(p => (p.Kategoria.ProgramStudiow.ProgramKsztalcenia.Kierunek.IdKierunku == k.IdKierunku
                                                                                      && (p.KodPrzedmiotu.Contains(model.Filtr) || p.NazwaPrzedmiotu.Contains(model.Filtr))));
             List<object> PrzedmiotyLista = new List<Object>();
             foreach (Przedmiot p in Przedmioty)
@@ -220,7 +224,7 @@ namespace EASY_KRK.Controllers
 
         public ActionResult UsunPrzedmiot(int IdKEK, int IdPrzedmiotu)
         {
-            KEKPrzedmiotu kp = db.KEKIPrzedmiotow.ToList().Find(k => (k.IdPrzedmiotu == IdPrzedmiotu && k.IdKEK == IdKEK));
+            KEKPrzedmiotu kp = db.KEKIPrzedmiotow.Where(k => (k.IdPrzedmiotu == IdPrzedmiotu && k.IdKEK == IdKEK)).FirstOrDefault();
 
             if (kp != null)
             {
