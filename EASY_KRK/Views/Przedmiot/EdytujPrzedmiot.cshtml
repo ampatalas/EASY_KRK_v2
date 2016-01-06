@@ -39,6 +39,8 @@
         </div>
         <div class="dodaj-przedmiot col-sm-4">
             <h4>Kierunkowe efeky kształcenia</h4> @Html.ActionLink("Dodaj", "DodajKEK")
+            <h4>Grupy kursow @Model.Przedmiot.GrupyKursow.Count()</h4>
+            <h4>Kursy @Model.Przedmiot.Kursy.Count()</h4>
         </div>
 
     </div>
@@ -85,7 +87,7 @@
                     @Html.Raw("<br />")
                     @Html.CheckBoxFor(m => m.Kursy[i].Praktyczny, new { @class = "kurs-checkbox" })
                     @Html.Raw("<br />")
-                    @Html.CheckBoxFor(m => m.GrupaWyklad, new { @class = "kurs-checkbox" })
+                    @Html.CheckBoxFor(m => m.Grupa[i], new { @class = "kurs-checkbox" })
                     @Html.Raw("<br />")
                 </div>
             }

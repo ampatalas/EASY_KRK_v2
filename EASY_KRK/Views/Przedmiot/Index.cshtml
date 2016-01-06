@@ -19,7 +19,7 @@
     
     <input type="submit" value="Przypisz KEK" name="Przypisz" class="btn btn-default" />
     <input type="submit" value="Edytuj" name="Edytuj" class="btn btn-default" />
-    <input type="submit" value="Usuń" name="Usun" class="btn btn-default" />
+    <input type="submit" value="Usuń" name="Usun" class="btn btn-default" onclick="return confirm('Czy na pewno chcesz usunąć przedmiot i wszystkie powiązane z nim kursy/grupy kursów?');" />
 }
 
 
@@ -40,9 +40,10 @@
                     @Html.Raw("<br />")
                     @Html.ActionLink("Dodaj przedmiot", "DodajPrzedmiot", new { IdKategorii = kat.IdKategorii });
                     @Html.Raw("<br />")
+                    
                     foreach (var przedmiot in kat.Przedmioty)
                     {
-                        @Html.RadioButtonFor(m => m.IdPrzedmiotu, przedmiot)
+                        @Html.RadioButtonFor(m => m.IdPrzedmiotu, przedmiot.IdPrzedmiotu)
                         @Html.Label(przedmiot.NazwaPrzedmiotu)
                         @Html.Raw("<br />");
                      }

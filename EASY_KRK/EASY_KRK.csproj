@@ -173,6 +173,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\Util.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KategoriaController.cs" />
@@ -209,6 +210,14 @@
     <Compile Include="Migrations\201601052128511_grupa_kursow_ECTS_BK_P.cs" />
     <Compile Include="Migrations\201601052128511_grupa_kursow_ECTS_BK_P.Designer.cs">
       <DependentUpon>201601052128511_grupa_kursow_ECTS_BK_P.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601061452265_float_to_decimal.cs" />
+    <Compile Include="Migrations\201601061452265_float_to_decimal.Designer.cs">
+      <DependentUpon>201601061452265_float_to_decimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601061501099_float_to_double.cs" />
+    <Compile Include="Migrations\201601061501099_float_to_double.Designer.cs">
+      <DependentUpon>201601061501099_float_to_double.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -385,6 +394,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601052128511_grupa_kursow_ECTS_BK_P.resx">
       <DependentUpon>201601052128511_grupa_kursow_ECTS_BK_P.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601061452265_float_to_decimal.resx">
+      <DependentUpon>201601061452265_float_to_decimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601061501099_float_to_double.resx">
+      <DependentUpon>201601061501099_float_to_double.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
