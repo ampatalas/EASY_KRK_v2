@@ -154,21 +154,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_GlobalResources\resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="App_GlobalResources\resources.en.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>resources.en.resx</DependentUpon>
-    </Compile>
-    <Compile Include="App_GlobalResources\resources.pl.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>resources.pl.resx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -254,6 +239,11 @@
     <Compile Include="Models\TypPrzedmiotu.cs" />
     <Compile Include="Models\UdzialProcentowy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Res\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -298,6 +288,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\add_btn.png" />
     <Content Include="Images\delete_btn.png" />
+    <Content Include="Images\en.png" />
+    <Content Include="Images\pl.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -356,6 +348,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="App_GlobalResources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -365,18 +358,6 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\resources.en.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>resources.en.designer.cs</LastGenOutput>
-    </Content>
-    <Content Include="App_GlobalResources\resources.pl.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>resources.pl.designer.cs</LastGenOutput>
-    </Content>
-    <Content Include="App_GlobalResources\resources.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>resources.Designer.cs</LastGenOutput>
-    </Content>
     <EmbeddedResource Include="Migrations\201512091704444_initial.resx">
       <DependentUpon>201512091704444_initial.cs</DependentUpon>
     </EmbeddedResource>
@@ -403,6 +384,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601061501099_float_to_double.resx">
       <DependentUpon>201601061501099_float_to_double.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Res\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using EASY_KRK.Models;
+using System.Globalization;
 
 namespace EASY_KRK.Controllers
 {
@@ -25,6 +26,13 @@ namespace EASY_KRK.Controllers
         }
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
+
+        [AllowAnonymous]
+        public ActionResult ChangeCulture(string lang, string returnUrl)
+        {
+            Session["Culture"] = new CultureInfo(lang);
+            return Redirect(returnUrl);
+        }
 
         //
         // GET: /Account/Login
