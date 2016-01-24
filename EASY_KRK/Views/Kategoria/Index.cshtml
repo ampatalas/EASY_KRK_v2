@@ -12,12 +12,19 @@
 @Scripts.Render("~/bundles/jqueryui")
 
 <link href="content/themes/base/all.css" rel="stylesheet" />
+<script src="/Scripts/CollapsibleLists.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        CollapsibleLists.apply();
+    });
+</script>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <ul>
+    <ul class="treeView">
         @foreach (var k in Model.Kategorie)
         {
             <li>@k.NazwaKategorii</li>
@@ -28,18 +35,21 @@
 
 @helper PokazDrzewo(IEnumerable<EASY_KRK.Models.Kategoria> kategorie)
 {
-    <ul>
+    <ul class="collapsibleList">
         @foreach (var kat in kategorie)
         {
             <li>
-                @kat.NazwaKategorii
+                @kat.NazwaKategorii <a href="">Usuń</a> <a href="">Edytuj</a>
                 @if (kat.Kategorie.Any())
                 {
                     @PokazDrzewo(kat.Kategorie)
                 }
                 else
                 {
-                    
+                    if (kat.Przedmioty.Any())
+                    {
+                        <a href=""><br />Zarządzaj przedmiotami</a>
+                    }
                 }
             </li>
         }
