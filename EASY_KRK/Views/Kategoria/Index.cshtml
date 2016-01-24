@@ -6,3 +6,43 @@
 
 <h2>Kategorie</h2>
 
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jqueryui")
+
+<link href="content/themes/base/all.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <ul>
+        @foreach (var k in Model.Kategorie)
+        {
+            <li>@k.NazwaKategorii</li>
+            @PokazDrzewo(k.Kategorie)
+        }
+    </ul>
+}
+
+@helper PokazDrzewo(IEnumerable<EASY_KRK.Models.Kategoria> kategorie)
+{
+    <ul>
+        @foreach (var kat in kategorie)
+        {
+            <li>
+                @kat.NazwaKategorii
+                @if (kat.Kategorie.Any())
+                {
+                    @PokazDrzewo(kat.Kategorie)
+                }
+                else
+                {
+                    
+                }
+            </li>
+        }
+    </ul>
+}
+

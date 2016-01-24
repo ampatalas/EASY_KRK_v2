@@ -228,6 +228,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\JezykStudiow.cs" />
     <Compile Include="Models\Kategoria.cs" />
+    <Compile Include="Models\KategorieViewModel.cs" />
     <Compile Include="Models\KEK.cs" />
     <Compile Include="Models\KEKPrzedmiotu.cs" />
     <Compile Include="Models\Kierunek.cs" />
