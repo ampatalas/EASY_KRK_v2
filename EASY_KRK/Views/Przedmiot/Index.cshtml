@@ -12,8 +12,12 @@
 @Scripts.Render("~/bundles/jqueryui")
 
 <link href="content/themes/base/all.css" rel="stylesheet" />
+<script src="/Scripts/CollapsibleLists.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
+
+        CollapsibleLists.apply();
         var url = "";
 
         $("#linkDodajKEK").click(function (e) {
@@ -57,12 +61,12 @@
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
 
-    <ul>
-    @foreach (var k in Model.Kategorie)
-    {
-        <li>@k.NazwaKategorii</li>
-        @PokazDrzewo(k.Kategorie)
-    }
+    <ul class="collapsibleList">
+        @foreach (var k in Model.Kategorie)
+        {
+            <li>@k.NazwaKategorii</li>
+            @PokazDrzewo(k.Kategorie)
+        }
     </ul>
 
     <input type="submit" value="Przypisz KEK" name="Przypisz" class="btn btn-default" id="linkDodajKEK" />

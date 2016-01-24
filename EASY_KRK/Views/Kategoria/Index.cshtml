@@ -1,4 +1,4 @@
-﻿
+﻿@model EASY_KRK.Models.KategorieViewModel
 @{
     ViewBag.Title = "Kategorie";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,10 +27,18 @@
     <ul class="treeView">
         @foreach (var k in Model.Kategorie)
         {
-            <li>@k.NazwaKategorii</li>
+            <li>
+                @Html.RadioButtonFor(m => m.IdKategorii, k.IdKategorii)
+                @Html.Label(k.NazwaKategorii)
+            </li>
             @PokazDrzewo(k.Kategorie)
         }
     </ul>
+    
+    <input type="submit" value="Dodaj kategorię" name="Add" class="btn btn-default" id="linkDodajKEK" />
+    <input type="submit" value="Edytuj kategorię" name="Edit" class="btn btn-default" />
+    <input type="submit" value="Usuń kategorię" name="Delete" class="btn btn-default" onclick="return confirm('Czy na pewno chcesz usunąć przedmiot i wszystkie powiązane z nim kursy/grupy kursów?');" />
+
 }
 
 @helper PokazDrzewo(IEnumerable<EASY_KRK.Models.Kategoria> kategorie)
@@ -39,7 +47,12 @@
         @foreach (var kat in kategorie)
         {
             <li>
-                @kat.NazwaKategorii <a href="">Usuń</a> <a href="">Edytuj</a>
+                @Html.RadioButtonFor(m => m.IdKategorii, kat.IdKategorii)
+                @Html.Label(kat.NazwaKategorii)
+                @if (kat.MinECTS.HasValue)
+                {
+                    @Html.Label("(min " + kat.MinECTS + " ECTS)")
+                }
                 @if (kat.Kategorie.Any())
                 {
                     @PokazDrzewo(kat.Kategorie)

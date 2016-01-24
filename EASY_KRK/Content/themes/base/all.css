@@ -25,3 +25,7 @@ li.collapsibleListClosed {
     list-style-image: url('images/button-closed.png');
     cursor: pointer;
 }
+
+ul.treeView {
+    list-style-type: none;
+}

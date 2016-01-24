@@ -28,20 +28,20 @@ namespace EASY_KRK.Controllers
         [HttpPost]
         public ActionResult Index(PrzedmiotyViewModel Model, string Edytuj, string Przypisz, string Usun)
         {
-            if (Edytuj != null)
+            if (Edytuj != null && Model.IdPrzedmiotu != 0)
             {
                 return RedirectToAction("EdytujPrzedmiot", new { IdPrzedmiotu = Model.IdPrzedmiotu });
             }
-            else if (Usun != null)
+            else if (Usun != null && Model.IdPrzedmiotu != 0)
             {
                 return RedirectToAction("UsunPrzedmiot", new { IdPrzedmiotu = Model.IdPrzedmiotu });
             }
-            else if (Przypisz != null)
+            else if (Przypisz != null && Model.IdPrzedmiotu != 0)
             {
                 return RedirectToAction("PrzypiszKEK", new { IdPrzedmiotu = Model.IdPrzedmiotu });
             }
 
-            return View(Model);
+            return Index();
         }
 
         public ActionResult PrzypiszKEK(int IdPrzedmiotu, bool Edycja)
