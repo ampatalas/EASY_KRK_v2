@@ -21,11 +21,14 @@
                 @Html.ActionLink("EASY_KRK", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink(@Resources.Resources.Categories , "Index", "Kategoria")</li>
-                    <li>@Html.ActionLink("Przedmioty", "Index", "Przedmiot")</li>
-                    <li>@Html.ActionLink("Macierz śladowania", "MacierzSladowania", "Kierunek")</li>
-                </ul>
+                @if (Session["IdProgramu"] != null && Session["IdProgramu"] != "0")
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink(@Resources.Resources.Categories , "Index", "Kategoria")</li>
+                        <li>@Html.ActionLink("Przedmioty", "Index", "Przedmiot")</li>
+                        <li>@Html.ActionLink("Macierz śladowania", "MacierzSladowania", "Kierunek")</li>
+                    </ul>
+                }
                 @Html.Partial("_LoginPartial")
                 <ul class="nav navbar-nav navbar-right">
                 <li>@Html.ActionLink(" ", "ChangeCulture", "Account", new { lang = "pl", returnUrl = this.Request.RawUrl }, new
