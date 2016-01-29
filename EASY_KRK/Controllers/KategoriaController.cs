@@ -1,4 +1,5 @@
-﻿using EASY_KRK.Models;
+﻿using EASY_KRK.Controllers.Utils;
+using EASY_KRK.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,29 +93,8 @@ namespace EASY_KRK.Controllers
 
         public ActionResult UsunKategorie(int IdKategorii)
         {
-            UsunKategorieDb(IdKategorii);
+            DeleteUtils.UsunKategorieDb(db, IdKategorii);
             return RedirectToAction("Index");
-        }
-
-        public void UsunKategorieDb(int IdKategorii)
-        {
-            Kategoria Kategoria = db.Kategorie.Find(IdKategorii);
-            List<Kategoria> Kategorie = Kategoria.Kategorie.ToList();
-            List<Przedmiot> Przedmioty = Kategoria.Przedmioty.ToList();
-
-            for (var i = 0; i < Przedmioty.Count; i++)
-            {
-                PrzedmiotController przedmiotController = DependencyResolver.Current.GetService<PrzedmiotController>();
-                przedmiotController.UsunPrzedmiotDb(Przedmioty[i].IdPrzedmiotu);
-            }
-
-            for (var i = 0; i < Kategorie.Count; i++)
-            {
-                UsunKategorieDb(Kategorie[i].IdKategorii);
-            }
-
-            db.Kategorie.Remove(db.Kategorie.Find(IdKategorii));
-            db.SaveChanges();
         }
 	}
 }

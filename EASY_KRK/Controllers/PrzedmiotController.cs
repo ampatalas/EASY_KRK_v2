@@ -1,4 +1,5 @@
 ﻿using EASY_KRK.App_Start;
+using EASY_KRK.Controllers.Utils;
 using EASY_KRK.Models;
 using System;
 using System.Collections.Generic;
@@ -383,35 +384,8 @@ namespace EASY_KRK.Controllers
 
         public ActionResult UsunPrzedmiot(int IdPrzedmiotu)
         {
-            UsunPrzedmiotDb(IdPrzedmiotu);
+            DeleteUtils.UsunPrzedmiotDb(db, IdPrzedmiotu);
             return RedirectToAction("Index");
-        }
-
-        public void UsunPrzedmiotDb(int IdPrzedmiotu)
-        {
-            Przedmiot p = db.Przedmioty.Find(IdPrzedmiotu);
-            List<Kurs> Kursy = p.Kursy.ToList();
-            List<GrupaKursow> Grupy = p.GrupyKursow.ToList();
-            List<KEKPrzedmiotu> KEKI = p.KEKI.ToList();
-
-            for (var i = 0; i < Kursy.Count - 1; i++)
-            {
-                db.Kursy.Remove(Kursy[i]);
-            }
-
-            for (var j = 0; j < Grupy.Count - 1; j++)
-            {
-                db.GrupyKursow.Remove(Grupy[j]);
-            }
-
-            for (var k = 0; k < KEKI.Count - 1; k++)
-            {
-                db.KEKIPrzedmiotow.Remove(KEKI[k]);
-            }
-
-            db.Przedmioty.Remove(db.Przedmioty.Find(IdPrzedmiotu));
-
-            db.SaveChanges();
         }
 	}
 }
