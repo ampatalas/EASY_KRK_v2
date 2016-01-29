@@ -383,12 +383,18 @@ namespace EASY_KRK.Controllers
 
         public ActionResult UsunPrzedmiot(int IdPrzedmiotu)
         {
+            UsunPrzedmiotDb(IdPrzedmiotu);
+            return RedirectToAction("Index");
+        }
+
+        public void UsunPrzedmiotDb(int IdPrzedmiotu)
+        {
             Przedmiot p = db.Przedmioty.Find(IdPrzedmiotu);
             List<Kurs> Kursy = p.Kursy.ToList();
             List<GrupaKursow> Grupy = p.GrupyKursow.ToList();
             List<KEKPrzedmiotu> KEKI = p.KEKI.ToList();
 
-            for (var i = 0; i < Kursy.Count - 1; i++ )
+            for (var i = 0; i < Kursy.Count - 1; i++)
             {
                 db.Kursy.Remove(Kursy[i]);
             }
@@ -406,8 +412,6 @@ namespace EASY_KRK.Controllers
             db.Przedmioty.Remove(db.Przedmioty.Find(IdPrzedmiotu));
 
             db.SaveChanges();
-
-            return RedirectToAction("Index");
         }
 	}
 }
