@@ -1,0 +1,41 @@
+﻿@model EASY_KRK.Models.DodajKategorieViewModel
+@{
+    ViewBag.Title = "Dodaj przedmiot";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <h2>Dodaj kategorie</h2>
+</div>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    
+    <ol class="breadcrumb">
+        @PokazDrzewo(Model.KategoriaNadrzedna)
+    </ol>
+
+    <div class="row">
+        <div class="col-sm-7">
+            @Html.LabelFor(m => m.Kategoria.NazwaKategorii)
+            @Html.EditorFor(m => m.Kategoria.NazwaKategorii)
+            @Html.Raw("<br />")
+            @Html.LabelFor(m => m.Kategoria.MinECTS)
+            @Html.EditorFor(m => m.Kategoria.MinECTS)
+            @Html.Raw("<br />")
+            @Html.LabelFor(m => m.Kategoria.zawieraPrzedmioty)
+            @Html.CheckBoxFor(m => m.Kategoria.zawieraPrzedmioty, new { @class = "kurs-checkbox" })
+        </div>
+     </div>
+
+    <input type="submit" value="Anuluj" name="Anuluj" class="btn btn-default" />
+    <input type="submit" value="Dodaj" name="Dodaj" class="btn btn-default" />
+}
+
+@helper PokazDrzewo(EASY_KRK.Models.Kategoria kategoria)
+{
+        if (kategoria.KategoriaNadrzedna != null)
+        {
+            @PokazDrzewo(kategoria.KategoriaNadrzedna)
+        }
+        <li>@Html.Label(kategoria.NazwaKategorii)</li>
+}

@@ -216,6 +216,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DodajKategorieViewModel.cs" />
     <Compile Include="Models\DodajKEKPrzedmiotuViewModel.cs" />
     <Compile Include="Models\DodajMEKViewModel.cs" />
     <Compile Include="Models\DodajPrzedmiotViewModel.cs" />
@@ -355,6 +356,7 @@
     <Content Include="Views\Przedmiot\EdytujPrzedmiot.cshtml" />
     <Content Include="Views\Przedmiot\PrzypiszKEK.cshtml" />
     <Content Include="Views\Przedmiot\ListaKEK.cshtml" />
+    <Content Include="Views\Kategoria\DodajKategorie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

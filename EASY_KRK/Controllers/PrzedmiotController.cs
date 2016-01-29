@@ -128,7 +128,7 @@ namespace EASY_KRK.Controllers
             var IdProgramu = Convert.ToInt32(this.HttpContext.Session["IdProgramu"]);
             DodajPrzedmiotViewModel Model = new DodajPrzedmiotViewModel();
             Model.Kategorie = new SelectList(db.Kategorie.Where(k => k.ProgramStudiow.IdProgramuKsztalcenia == IdProgramu
-                                                                 && k.Kategorie.Count() == 0), "IdKategorii", "NazwaKategorii", IdKategorii);
+                                                                 && k.MinECTS.HasValue), "IdKategorii", "NazwaKategorii", IdKategorii);
             Model.FormyPrzedmiotu = new SelectList(db.FormyPrzedmiotu, "IdFormyPrzedmiotu", "NazwaFormy");
             Model.FormyZaliczenia = new SelectList(db.FormyZal, "IdFormyZal", "NazwaFormyZal");
             Model.Rodzaje = new SelectList(db.RodzajePrzedmioty, "IdRodzaju", "NazwaRodzaju");

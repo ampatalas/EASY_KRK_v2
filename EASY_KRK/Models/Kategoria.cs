@@ -18,6 +18,7 @@ namespace EASY_KRK.Models
         [MaxLength(100)]
         public string NazwaKategorii { get; set; }
 
+        [Display(Name = "Minimalna ilość ECTS: ")]
         public int? MinECTS { get; set; }
 
         public int IdProgramuStudiow { get; set; }
@@ -26,6 +27,10 @@ namespace EASY_KRK.Models
         public virtual ProgramStudiow ProgramStudiow { get; set; }
 
         public int? IdKategoriiNadrzednej { get; set; }
+
+        [Display(Name = "Zawiera przedmioty")]
+        [NotMapped]
+        public bool zawieraPrzedmioty { get; set; }
 
         [ForeignKey("IdKategoriiNadrzednej")]
         public virtual Kategoria KategoriaNadrzedna { get; set; }
