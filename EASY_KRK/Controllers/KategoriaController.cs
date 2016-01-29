@@ -21,5 +21,13 @@ namespace EASY_KRK.Controllers
                                                         && k.KategoriaNadrzedna == null);
             return View(Model);
         }
+
+        public ActionResult StatusKategorii(int IdKategorii)
+        {
+            Kategoria kategoria = db.Kategorie.SingleOrDefault(k => k.IdKategorii == IdKategorii);
+            return Json(new { success = true, hasValue = kategoria.MinECTS.HasValue },
+                JsonRequestBehavior.AllowGet);
+        }
+
 	}
 }
