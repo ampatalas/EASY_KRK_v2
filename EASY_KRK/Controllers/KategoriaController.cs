@@ -72,13 +72,13 @@ namespace EASY_KRK.Controllers
             List<Kategoria> Kategorie = Kategoria.Kategorie.ToList();
             List<Przedmiot> Przedmioty = Kategoria.Przedmioty.ToList();
 
-            for (var i = 0; i < Przedmioty.Count - 1; i++)
+            for (var i = 0; i < Przedmioty.Count; i++)
             {
                 PrzedmiotController przedmiotController = DependencyResolver.Current.GetService<PrzedmiotController>();
                 przedmiotController.UsunPrzedmiotDb(Przedmioty[i].IdPrzedmiotu);
             }
 
-            for (var i = 0; i < Kategorie.Count - 1; i++)
+            for (var i = 0; i < Kategorie.Count; i++)
             {
                 UsunKategorieDb(Kategorie[i].IdKategorii);
             }
