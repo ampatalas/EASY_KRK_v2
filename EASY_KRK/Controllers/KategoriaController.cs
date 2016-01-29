@@ -23,7 +23,32 @@ namespace EASY_KRK.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(PrzedmiotyViewModel Model, string Dodaj, string Edytuj, string Usun)
+        public ActionResult Index(KategorieViewModel Model, string Dodaj, string Edytuj, string Usun)
+        {
+            if (Edytuj != null && Model.IdKategorii != 0)
+            {
+                return RedirectToAction("EdytujKategorie", new { IdKategorii = Model.IdKategorii });
+            }
+            else if (Usun != null && Model.IdKategorii != 0)
+            {
+                return RedirectToAction("UsunKategorie", new { IdKategorii = Model.IdKategorii });
+            }
+            else if (Dodaj != null && Model.IdKategorii != 0)
+            {
+                return RedirectToAction("DodajKategorie", new { IdKategorii = Model.IdKategorii });
+            }
+
+            return Index();
+        }
+
+        [HttpPost]
+        public ActionResult EdytujKategorie(int IdKategorii)
+        {
+            return Index();
+        }
+
+        [HttpPost]
+        public ActionResult DodajKategorie(int IdKategorii)
         {
             return Index();
         }
