@@ -89,16 +89,19 @@
                 }
                 else
                 {
-                    @Html.Raw("<br />")
-                    @Html.ActionLink("Dodaj przedmiot", "DodajPrzedmiot", new { IdKategorii = kat.IdKategorii });
-                    @Html.Raw("<br />")
-                    
-                    foreach (var przedmiot in kat.Przedmioty)
+                    if(kat.MinECTS.HasValue)
                     {
-                        @Html.RadioButtonFor(m => m.IdPrzedmiotu, przedmiot.IdPrzedmiotu)
-                        @Html.Label(przedmiot.NazwaPrzedmiotu)
                         @Html.Raw("<br />");
-                     }
+                        @Html.ActionLink("Dodaj przedmiot", "DodajPrzedmiot", new { IdKategorii = kat.IdKategorii });
+                        @Html.Raw("<br />");
+                        
+                        foreach (var przedmiot in kat.Przedmioty)
+                        {
+                            @Html.RadioButtonFor(m => m.IdPrzedmiotu, przedmiot.IdPrzedmiotu);
+                            @Html.Label(przedmiot.NazwaPrzedmiotu);
+                            @Html.Raw("<br />");
+                        }
+                    }
                 }
             </li>
         }
