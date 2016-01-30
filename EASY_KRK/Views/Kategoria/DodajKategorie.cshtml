@@ -1,6 +1,6 @@
 ﻿@model EASY_KRK.Models.DodajKategorieViewModel
 @{
-    ViewBag.Title = "Dodaj przedmiot";
+    ViewBag.Title = "Dodaj kategorię";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
@@ -33,7 +33,7 @@
 
 @helper PokazDrzewo(EASY_KRK.Models.Kategoria kategoria)
 {
-        if (kategoria.KategoriaNadrzedna != null)
+        if (kategoria != null  && kategoria.KategoriaNadrzedna != null)
         {
             @PokazDrzewo(kategoria.KategoriaNadrzedna)
         }

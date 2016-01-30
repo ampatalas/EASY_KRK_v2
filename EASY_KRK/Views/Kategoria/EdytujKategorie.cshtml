@@ -1,0 +1,47 @@
+﻿@model EASY_KRK.Models.DodajKategorieViewModel
+@{
+    ViewBag.Title = "Edytuj kategorię";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <ol class="breadcrumb">
+        @PokazDrzewo(Model.KategoriaNadrzedna)
+    </ol>
+
+    <div class="row">
+        <h2>Edycja kategorii</h2>
+        <div class="col-sm-7">
+            @Html.HiddenFor(m => m.Kategoria.IdKategorii)
+            @Html.HiddenFor(m => m.Kategoria.IdKategoriiNadrzednej)
+            @Html.HiddenFor(m => m.Kategoria.IdProgramuStudiow)
+            @Html.LabelFor(m => m.Kategoria.NazwaKategorii)
+            @Html.EditorFor(m => m.Kategoria.NazwaKategorii)
+            @Html.Raw("<br />")
+            @if (Model.Kategoria.MinECTS.HasValue)
+            {
+                @Html.LabelFor(m => m.Kategoria.MinECTS)
+                @Html.EditorFor(m => m.Kategoria.MinECTS)
+                @Html.Raw("<br />")
+            }
+        </div>
+    </div>
+
+    <input type="submit" value="Anuluj" name="Anuluj" class="btn btn-default" />
+    <input type="submit" value="Zapisz" name="Zapisz" class="btn btn-default" />
+}
+
+@helper PokazDrzewo(EASY_KRK.Models.Kategoria kategoria)
+{
+    if (kategoria != null)
+    {
+        if (kategoria.KategoriaNadrzedna != null)
+        {
+            @PokazDrzewo(kategoria.KategoriaNadrzedna)
+        }
+        <li>@Html.Label(kategoria.NazwaKategorii)</li>
+    }
+}

@@ -358,6 +358,7 @@
     <Content Include="Views\Przedmiot\PrzypiszKEK.cshtml" />
     <Content Include="Views\Przedmiot\ListaKEK.cshtml" />
     <Content Include="Views\Kategoria\DodajKategorie.cshtml" />
+    <Content Include="Views\Kategoria\EdytujKategorie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

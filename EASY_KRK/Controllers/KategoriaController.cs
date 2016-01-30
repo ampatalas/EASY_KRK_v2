@@ -2,6 +2,7 @@
 using EASY_KRK.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -42,10 +43,39 @@ namespace EASY_KRK.Controllers
             return Index();
         }
 
-        [HttpPost]
         public ActionResult EdytujKategorie(int IdKategorii)
         {
-            return Index();
+            DodajKategorieViewModel Model = new DodajKategorieViewModel();
+            Model.Kategoria = db.Kategorie.Find(IdKategorii);
+            Model.KategoriaNadrzedna = db.Kategorie.Find(Model.Kategoria.IdKategoriiNadrzednej);
+            this.HttpContext.Session["IdKategorii"] = Model.Kategoria.IdKategorii;
+            return View(Model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EdytujKategorie(DodajKategorieViewModel Model, string Edytuj, string Anuluj)
+        {
+            if (Anuluj != null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                if (Model.Kategoria.NazwaKategorii == null ||
+                    (Model.Kategoria.MinECTS.HasValue && Model.Kategoria.MinECTS < 1))
+                {
+                    return EdytujKategorie(Convert.ToInt32(this.HttpContext.Session["IdKategorii"]));
+                }
+                else
+                {
+                    Model.Kategoria.IdProgramuStudiow = Convert.ToInt32(this.HttpContext.Session["IdProgramu"]);
+                    db.Entry(Model.Kategoria).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+
         }
 
         public ActionResult DodajKategorie(int IdKategorii)
