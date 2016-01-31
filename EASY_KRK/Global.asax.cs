@@ -36,7 +36,6 @@ namespace EASY_KRK
                     this.Session["Culture"] = cultureInfo;
                 }
                 Thread.CurrentThread.CurrentUICulture = cultureInfo;
-                Thread.CurrentThread.CurrentCulture = cultureInfo;
             }
         }
     }
