@@ -72,7 +72,7 @@
             <li>
                 @Html.RadioButtonFor(m => m.IdKategorii, kat.IdKategorii)
                 @Html.Label(kat.NazwaKategorii)
-                @if (kat.MinECTS.HasValue)
+                @if (kat.MinECTS.HasValue && kat.MinECTS > 0)
                 {
                     @Html.Label("(min " + kat.MinECTS + " ECTS)")
                 }

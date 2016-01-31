@@ -62,13 +62,16 @@ namespace EASY_KRK.Controllers
             }
             else
             {
-                if (Model.Kategoria.NazwaKategorii == null ||
-                    (Model.Kategoria.MinECTS.HasValue && Model.Kategoria.MinECTS < 1))
+                if (Model.Kategoria.NazwaKategorii == null)
                 {
                     return EdytujKategorie(Convert.ToInt32(this.HttpContext.Session["IdKategorii"]));
                 }
                 else
                 {
+                    if (Model.Kategoria.MinECTS.HasValue && Model.Kategoria.MinECTS < 0)
+                    {
+                        Model.Kategoria.MinECTS = 0; 
+                    }
                     Model.Kategoria.IdProgramuStudiow = Convert.ToInt32(this.HttpContext.Session["IdProgramu"]);
                     db.Entry(Model.Kategoria).State = EntityState.Modified;
                     db.SaveChanges();
@@ -97,13 +100,18 @@ namespace EASY_KRK.Controllers
             else
             {
                 if (Model.Kategoria.NazwaKategorii == null ||
-                    (Model.Kategoria.MinECTS.HasValue && Model.Kategoria.MinECTS < 1) ||
-                    (Model.Kategoria.MinECTS.HasValue ^ Model.Kategoria.zawieraPrzedmioty))
+                    (Model.Kategoria.MinECTS.HasValue && Model.Kategoria.MinECTS < 0) )
                 {
                     return DodajKategorie(Convert.ToInt32(this.HttpContext.Session["IdKategorii"]));
                 }
                 else
                 {
+
+                    if (Model.Kategoria.zawieraPrzedmioty &&
+                        (!Model.Kategoria.MinECTS.HasValue || Model.Kategoria.MinECTS.Value < 0))
+                    {
+                        Model.Kategoria.MinECTS = 0;
+                    }
                     Model.Kategoria.IdKategoriiNadrzednej = Convert.ToInt32(this.HttpContext.Session["IdKategorii"]);
                     Model.Kategoria.IdProgramuStudiow = Convert.ToInt32(this.HttpContext.Session["IdProgramu"]);
                     db.Kategorie.Add(Model.Kategoria);
