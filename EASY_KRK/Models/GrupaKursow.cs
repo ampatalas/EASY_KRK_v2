@@ -15,6 +15,7 @@ namespace EASY_KRK.Models
         public int IdGrupyKursow { get; set; }
 
         [MaxLength(20)]
+        [Required]
         public string KodGrupyKursow { get; set; }
 
         public int PunktyECTS { get; set; }

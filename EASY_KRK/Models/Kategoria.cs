@@ -16,6 +16,7 @@ namespace EASY_KRK.Models
 
         [Display(Name = "Kategoria: ")]
         [MaxLength(100)]
+        [Required]
         public string NazwaKategorii { get; set; }
 
         [Display(Name = "Minimalna ilość ECTS: ")]

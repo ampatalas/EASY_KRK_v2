@@ -15,6 +15,7 @@ namespace EASY_KRK.Models
         public int IdTypu { get; set; }
 
         [MaxLength(40)]
+        [Required]
         public string NazwaTypu { get; set; }
     }
 }

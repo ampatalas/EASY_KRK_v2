@@ -15,6 +15,7 @@ namespace EASY_KRK.Models
         public int IdFormyStudiow { get; set; }
 
         [MaxLength(40)]
+        [Required]
         public string NazwaFormyStudiow { get; set; }
     }
 }

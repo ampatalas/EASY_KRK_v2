@@ -15,6 +15,7 @@ namespace EASY_KRK.Models
         public int IdObszaru { get; set; }
 
         [MaxLength(100)]
+        [Required]
         public string NazwaObszaru { get; set; }
     }
 }

@@ -15,9 +15,11 @@ namespace EASY_KRK.Models
         public int IdMEK { get; set; }
 
         [MaxLength(40)]
+        [Required]
         public string Kod { get; set; }
 
         [MaxLength(400)]
+        [Required]
         public string Opis { get; set; }
 
         public int IdObszaru { get; set; }

@@ -15,6 +15,7 @@ namespace EASY_KRK.Models
         public int IdJezyka { get; set; }
 
         [MaxLength(40)]
+        [Required]
         public string NazwaJezyka { get; set; }
     }
 }

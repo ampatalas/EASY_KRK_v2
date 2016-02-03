@@ -15,6 +15,7 @@ namespace EASY_KRK.Models
         public int IdPoziomu { get; set; }
 
         [MaxLength(40)]
+        [Required]
         public string NazwaPoziomu { get; set; }
     }
 }

@@ -15,6 +15,7 @@ namespace EASY_KRK.Models
         public int IdProfilu { get; set; }
 
         [MaxLength(40)]
+        [Required]
         public string NazwaProfilu { get; set; }
     }
 }

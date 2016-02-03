@@ -15,6 +15,7 @@ namespace EASY_KRK.Models
         public int IdFormyZal { get; set; }
 
         [MaxLength(40)]
+        [Required]
         [Display(Name = "Forma zaliczenia: ")]
         public string NazwaFormyZal { get; set; }
     }

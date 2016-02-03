@@ -8,6 +8,44 @@
     <h2>Dodaj przedmiot</h2>
 </div>
 
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jqueryui")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var checkboxes = document.getElementsByClassName('czy-nalezy');
+        var i;
+        for (i = 0; i < checkboxes.length; i++)
+        {
+            var id = checkboxes[i].attributes.getNamedItem('name').value;
+            id = id.substring(id.length - 2, id.length - 1);
+            if (checkboxes[i].checked) {
+                $("#kurs-".concat(id)).show();
+            }
+            else {
+                $("#kurs-".concat(id)).hide();
+            }
+        }
+
+        var url = "";
+        $(".czy-nalezy").change(function (e) {
+            var id = $(this).attr('name');
+            id = id.substring(id.length - 2, id.length - 1);
+            if (this.checked)
+            {
+                $("#kurs-".concat(id)).show();
+            }
+            else
+            {
+                $("#kurs-".concat(id)).hide();
+            }
+        });
+    });
+</script>
+
 @using (Html.BeginForm()) {
 @Html.AntiForgeryToken()
 <div class="row">
@@ -36,9 +74,7 @@
         @Html.DropDownListFor(m => m.Przedmiot.IdTypuPrzedmiotu, Model.Typy)
         @Html.Raw("<br />")
     </div>
-    <div class="dodaj-przedmiot col-sm-4">
-        <h4>Kierunkowe efeky kształcenia</h4> @Html.ActionLink("Dodaj", "DodajKEK")
-    </div>
+
 
 </div>
 
@@ -53,6 +89,7 @@
      <div class="dodaj-przedmiot col-sm-2">
         <label></label>
        
+        @Html.Label("Kurs przedmiotu?")
         @Html.LabelFor(m => m.Kursy[0].ZZU)
         @Html.LabelFor(m => m.Kursy[0].CNPS)
         @Html.LabelFor(m => m.Kursy[0].PunktyECTS)
@@ -62,30 +99,33 @@
         @Html.LabelFor(m => m.Kursy[0].Praktyczny)
         @Html.Label("Grupa kursów?*")
     </div>
-    
-    for (var i = 0; i < Model.Kursy.Count(); i++ )
+
+    for (var i = 0; i < Model.Kursy.Count(); i++)
     {
-         <div class="dodaj-przedmiot col-sm-2">
-        <label>@Model.Kursy[i].FormaZajec.NazwaFormy</label>
-        
-        @Html.HiddenFor(m => m.Kursy[i].IdFormyZajec)   
-        @Html.TextBoxFor(m => m.Kursy[i].ZZU, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.Kursy[i].CNPS, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.Kursy[i].PunktyECTS, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.Kursy[i].ECTS_P, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.TextBoxFor(m => m.Kursy[i].ECTS_BK, new { @class = "kurs-textbox" })
-        @Html.Raw("<br />")
-        @Html.DropDownListFor(m => m.Kursy[i].IdFormyZal, Model.FormyZaliczenia)
-        @Html.Raw("<br />")
-        @Html.CheckBoxFor(m => m.Kursy[i].Praktyczny, new { @class = "kurs-checkbox" })
-        @Html.Raw("<br />")
-        @Html.CheckBoxFor(m => m.CzyGrupa[i], new { @class = "kurs-checkbox" })
-        @Html.Raw("<br />")
-    </div>
+        <div class="dodaj-przedmiot col-sm-2">
+            <label>@Model.Kursy[i].FormaZajec.NazwaFormy</label>
+            @Html.CheckBoxFor(m => m.CzyKursNalezy[i], new {@class = "kurs-checkbox czy-nalezy" })
+            @Html.Raw("<br />")
+            @Html.HiddenFor(m => m.Kursy[i].IdFormyZajec)
+            <div id="kurs-@i">
+                @Html.TextBoxFor(m => m.Kursy[i].ZZU, new { @class = "kurs-textbox" })
+                @Html.Raw("<br />")
+                @Html.TextBoxFor(m => m.Kursy[i].CNPS, new { @class = "kurs-textbox" })
+                @Html.Raw("<br />")
+                @Html.TextBoxFor(m => m.Kursy[i].PunktyECTS, new { @class = "kurs-textbox" })
+                @Html.Raw("<br />")
+                @Html.TextBoxFor(m => m.Kursy[i].ECTS_P, new { @class = "kurs-textbox" })
+                @Html.Raw("<br />")
+                @Html.TextBoxFor(m => m.Kursy[i].ECTS_BK, new { @class = "kurs-textbox" })
+                @Html.Raw("<br />")
+                @Html.DropDownListFor(m => m.Kursy[i].IdFormyZal, Model.FormyZaliczenia)
+                @Html.Raw("<br />")
+                @Html.CheckBoxFor(m => m.Kursy[i].Praktyczny, new { @class = "kurs-checkbox" })
+                @Html.Raw("<br />")
+                @Html.CheckBoxFor(m => m.CzyGrupa[i], new { @class = "kurs-checkbox" })
+                @Html.Raw("<br />")
+            </div>
+        </div>
     }
 }
 

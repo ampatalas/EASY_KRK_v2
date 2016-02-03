@@ -15,6 +15,7 @@ namespace EASY_KRK.Models
         public int IdRodzaju { get; set; }
 
         [MaxLength(40)]
+        [Required]
         public string NazwaRodzaju { get; set; }
     }
 }
