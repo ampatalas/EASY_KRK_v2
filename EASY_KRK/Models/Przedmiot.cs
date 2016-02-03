@@ -14,12 +14,14 @@ namespace EASY_KRK.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int IdPrzedmiotu { get; set; }
 
-        [MaxLength(15)]
         [Display(Name = "Kod przedmiotu: ")]
+        [StringLength(15, MinimumLength = 3, ErrorMessage = "Kod przedmiotu musi zawierać od 3 do 15 znaków.")]
+        [RegularExpression(@"^[A-Za-z\d]*$", ErrorMessage = "Kod przedmiotu może zawierać tylko znaki alfanumeryczne")]
         public string KodPrzedmiotu { get; set; }
 
         [Display(Name = "Nazwa przedmiotu: ")]
-        [MaxLength(100)]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "Nazwa przedmiotu musi zawierać od 3 do 100 znaków.")]
+        [RegularExpression(@"^[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź]+([ ]{1}[A-Za-zZĄĆĘŁŃÓŚŻŹa-ząćęłńóśżź\d]+)*$", ErrorMessage = "Nazwa przedmiotu może zawierać tylko cyfry lub litery alfabetu polskiego.")]
         public string NazwaPrzedmiotu { get; set; }
 
         [Display(Name = "Rodzaj: ")]

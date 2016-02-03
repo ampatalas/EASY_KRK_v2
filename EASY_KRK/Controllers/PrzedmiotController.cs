@@ -135,7 +135,7 @@ namespace EASY_KRK.Controllers
             Model.Rodzaje = new SelectList(db.RodzajePrzedmioty, "IdRodzaju", "NazwaRodzaju");
             Model.Typy = new SelectList(db.TypyPrzedmiotu, "IdTypu", "NazwaTypu");
             Model.Kursy = new List<Kurs>();
-            Model.Grupa = new List<Boolean>();
+            Model.CzyGrupa = new List<Boolean>();
             
             
             foreach(FormaZajec f in db.FormyZajec.Where(forma => forma.NazwaFormy != "Praktyka"))
@@ -144,7 +144,8 @@ namespace EASY_KRK.Controllers
                 k.IdFormyZajec = f.IdFormyZajec;
                 k.FormaZajec = f;
                 Model.Kursy.Add(k);
-                Model.Grupa.Add(false);
+                Model.CzyGrupa.Add(false);
+                Model.CzyKursNalezy.Add(false);
             }
 
             return View(Model);
@@ -168,7 +169,7 @@ namespace EASY_KRK.Controllers
                     db.Przedmioty.Add(Model.Przedmiot);
                     db.SaveChanges();
 
-                    if (Model.Grupa.Contains(true))
+                    if (Model.CzyGrupa.Contains(true))
                     {
                         Grupa = new GrupaKursow();
                         Grupa.KodGrupyKursow = Model.Przedmiot.KodPrzedmiotu;
@@ -179,7 +180,7 @@ namespace EASY_KRK.Controllers
                     {
                         if (Model.Kursy[i].ZZU > 0)
                         {
-                            if (Model.Grupa[i])
+                            if (Model.CzyGrupa[i])
                             {
                                 Grupa.ZZU += Model.Kursy[i].ZZU;
                                 Grupa.CNPS += Model.Kursy[i].CNPS;
@@ -207,7 +208,7 @@ namespace EASY_KRK.Controllers
 
                         for (var i = 0; i < Model.Kursy.Count() && Model.Kursy[i].ZZU > 0; i++)
                         {
-                            if (Model.Grupa[i])
+                            if (Model.CzyGrupa[i])
                             {
                                 Model.Kursy[i].IdGrupyKursow = Grupa.IdGrupyKursow;
                             }
@@ -240,7 +241,7 @@ namespace EASY_KRK.Controllers
             Model.Rodzaje = new SelectList(db.RodzajePrzedmioty, "IdRodzaju", "NazwaRodzaju", Model.Przedmiot.IdRodzajuPrzedmiotu);
             Model.Typy = new SelectList(db.TypyPrzedmiotu, "IdTypu", "NazwaTypu", Model.Przedmiot.IdTypuPrzedmiotu);
             Model.Kursy = new List<Kurs>();
-            Model.Grupa = new List<Boolean>();
+            Model.CzyGrupa = new List<Boolean>();
             Model.KEKI = db.KEKIPrzedmiotow.Where(k => k.IdPrzedmiotu == IdPrzedmiotu).Select(k => k.KEK).ToList();
 
             foreach (FormaZajec f in db.FormyZajec.Where(forma => forma.NazwaFormy != "Praktyka"))
@@ -248,14 +249,14 @@ namespace EASY_KRK.Controllers
                 Kurs = db.Kursy.Where(k => k.IdPrzedmiotu == IdPrzedmiotu && k.IdFormyZajec == f.IdFormyZajec).FirstOrDefault();
                 if (Kurs != null)
                 {
-                    Model.Grupa.Add(Kurs.IdGrupyKursow != null);
+                    Model.CzyGrupa.Add(Kurs.IdGrupyKursow != null);
                 }
                 else
                 {
                     Kurs = new Kurs();
                     Kurs.IdFormyZajec = f.IdFormyZajec;
                     Kurs.FormaZajec = f;
-                    Model.Grupa.Add(false);
+                    Model.CzyGrupa.Add(false);
                 }
 
                 Model.Kursy.Add(Kurs);
@@ -279,7 +280,7 @@ namespace EASY_KRK.Controllers
                 {
                     Grupa = db.GrupyKursow.Where(g => g.IdPrzedmiotu == Model.Przedmiot.IdPrzedmiotu).FirstOrDefault();
 
-                    if (Model.Grupa.Contains(true))
+                    if (Model.CzyGrupa.Contains(true))
                     {
                         if (Grupa != null)
                         {
@@ -302,7 +303,7 @@ namespace EASY_KRK.Controllers
                     {
                         if (Model.Kursy[i].ZZU > 0)
                         {
-                            if (Model.Grupa[i])
+                            if (Model.CzyGrupa[i])
                             {
                                 Grupa.ZZU += Model.Kursy[i].ZZU;
                                 Grupa.CNPS += Model.Kursy[i].CNPS;
@@ -338,7 +339,7 @@ namespace EASY_KRK.Controllers
 
                     for (var i = 0; i < Model.Kursy.Count() && Model.Kursy[i].ZZU > 0; i++)
                     {
-                        if (Model.Grupa[i])
+                        if (Model.CzyGrupa[i])
                         {
                             Model.Kursy[i].IdGrupyKursow = Grupa.IdGrupyKursow;
                         }
@@ -362,7 +363,7 @@ namespace EASY_KRK.Controllers
 
                     if (Grupa != null && Grupa.IdGrupyKursow != 0)
                     {
-                        if (Model.Grupa.Contains(true))
+                        if (Model.CzyGrupa.Contains(true))
                         {
                             db.Entry(Grupa).State = EntityState.Modified;
                         }

@@ -61,9 +61,11 @@
             @Html.Raw("<br />")
             @Html.LabelFor(m => m.Przedmiot.KodPrzedmiotu)
             @Html.EditorFor(m => m.Przedmiot.KodPrzedmiotu)
+            @Html.ValidationMessageFor(m => m.Przedmiot.KodPrzedmiotu)
             @Html.Raw("<br />")
             @Html.LabelFor(m => m.Przedmiot.NazwaPrzedmiotu)
             @Html.EditorFor(m => m.Przedmiot.NazwaPrzedmiotu)
+            @Html.ValidationMessageFor(m => m.Przedmiot.NazwaPrzedmiotu)
             @Html.Raw("<br />")
             @Html.LabelFor(m => m.Przedmiot.IdFormyPrzedmiotu)
             @Html.DropDownListFor(m => m.Przedmiot.IdFormyPrzedmiotu, Model.FormyPrzedmiotu)
@@ -132,7 +134,7 @@
                     @Html.Raw("<br />")
                     @Html.CheckBoxFor(m => m.Kursy[i].Praktyczny, new { @class = "kurs-checkbox" })
                     @Html.Raw("<br />")
-                    @Html.CheckBoxFor(m => m.Grupa[i], new { @class = "kurs-checkbox" })
+                    @Html.CheckBoxFor(m => m.CzyGrupa[i], new { @class = "kurs-checkbox" })
                     @Html.Raw("<br />")
                 </div>
             }
