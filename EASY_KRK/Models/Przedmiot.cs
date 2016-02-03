@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace EASY_KRK.Models
 {
     [Table("Przedmioty")]
-    public class Przedmiot
+    public class Przedmiot : IValidatableObject
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -55,6 +56,42 @@ namespace EASY_KRK.Models
         public virtual ICollection<Kurs> Kursy { get; set; }
         public virtual ICollection<GrupaKursow> GrupyKursow { get; set; }
         public virtual ICollection<KEKPrzedmiotu> KEKI { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            string KodWzor = @"^[A-Za-z\d]*$";
+            string NazwaWzor = @"^[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź]+([ ]{1}[A-Za-zZĄĆĘŁŃÓŚŻŹa-ząćęłńóśżź\d]+)*$";
+
+            if (KodPrzedmiotu.Length < 3 || KodPrzedmiotu.Length > 15)
+            {
+                yield return new ValidationResult("Kod przedmiotu musi zawierać od 3 do 15 znaków.", new[] { "KodPrzedmiotu" });
+            }
+
+            if (NazwaPrzedmiotu.Length < 3 || NazwaPrzedmiotu.Length > 100)
+            {
+                yield return new ValidationResult("Nazwa przedmiotu musi zawierać od 3 do 100 znaków.", new[] { "NazwaPrzedmiotu" });
+            }
+
+            if (!Regex.IsMatch(KodPrzedmiotu, KodWzor))
+            {
+                yield return new ValidationResult("Kod przedmiotu może zawierać tylko znaki alfanumeryczne.", new[] { "KodPrzedmiotu" });
+            }
+
+            if (!Regex.IsMatch(NazwaPrzedmiotu, NazwaWzor))
+            {
+                yield return new ValidationResult("Nazwa przedmiotu może zawierać tylko cyfry lub litery alfabetu polskiego.", new[] { "NazwaPrzedmiotu" });
+            }
+
+            if (string.IsNullOrEmpty(KodPrzedmiotu))
+            {
+                yield return new ValidationResult("Kod przedmiotu nie może być pusty.", new[] { "KodPrzedmiotu" });
+            }
+
+            if (string.IsNullOrEmpty(NazwaPrzedmiotu))
+            {
+                yield return new ValidationResult("Nazwa przedmiotu nie może być pusta.", new[] { "NazwaPrzedmiotu" });
+            }
+        }
 
     }
 }

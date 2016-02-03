@@ -50,35 +50,36 @@
 <link href="content/themes/base/all.css" rel="stylesheet" />
 <script type="text/javascript">
     $(document).ready(function () {
+
+        var checkboxes = document.getElementsByClassName('czy-nalezy');
+        var i;
+        for (i = 0; i < checkboxes.length; i++) {
+            var id = checkboxes[i].attributes.getNamedItem('name').value;
+            id = id.substring(id.indexOf("[") + 1, id.indexOf("[") + 2);
+            if (checkboxes[i].checked) {
+                $("#kurs-".concat(id)).show();
+            }
+            else {
+                $("#kurs-".concat(id)).hide();
+            }
+        }
+
         var url = "";
-
-        $("#linkDodajKEK").click(function (e) {
-            e.preventDefault();
-            url = $(this).attr("href");
-            $("#dialog-dodaj-kek").dialog('open');
-        });
-
-        $("#dialog-dodaj-kek").dialog({
-            autoOpen: false,
-            resizable: false,
-            height: 400,
-            width: 450,
-            title: 'Przypisz KEK',
-            modal: true,
-            show: { effect: 'drop', direction: "up" },
-            draggable: true,
-            open: function (event, ui) {
-                $(".ui-dialog-titlebar-close").hide();
-                $(this).load(url);
-            },
-            buttons: {
-                "Anuluj": function () {
-                    $(this).dialog("close");
-                }
+        $(".czy-nalezy").change(function (e) {
+            var id = $(this).attr('name');
+            id = id.substring(id.indexOf("[") + 1, id.indexOf("[") + 2);
+            if (this.checked) {
+                $("#kurs-".concat(id)).show();
+            }
+            else {
+                $("#kurs-".concat(id)).hide();
             }
         });
     });
 </script>
+
+
+
 
 
 @using (Html.BeginForm())
@@ -92,11 +93,9 @@
             @Html.Raw("<br />")
             @Html.LabelFor(m => m.Przedmiot.KodPrzedmiotu)
             @Html.EditorFor(m => m.Przedmiot.KodPrzedmiotu)
-            @Html.ValidationMessageFor(m => m.Przedmiot.KodPrzedmiotu)
             @Html.Raw("<br />")
             @Html.LabelFor(m => m.Przedmiot.NazwaPrzedmiotu)
             @Html.EditorFor(m => m.Przedmiot.NazwaPrzedmiotu)
-            @Html.ValidationMessageFor(m => m.Przedmiot.NazwaPrzedmiotu)
             @Html.Raw("<br />")
             @Html.LabelFor(m => m.Przedmiot.IdFormyPrzedmiotu)
             @Html.DropDownListFor(m => m.Przedmiot.IdFormyPrzedmiotu, Model.FormyPrzedmiotu)
@@ -109,6 +108,10 @@
             @Html.Raw("<br />")
             @Html.LabelFor(m => m.Przedmiot.IdTypuPrzedmiotu)
             @Html.DropDownListFor(m => m.Przedmiot.IdTypuPrzedmiotu, Model.Typy)
+            @Html.Raw("<br />")
+            @Html.ValidationMessageFor(m => m.Przedmiot.KodPrzedmiotu)
+            @Html.Raw("<br />")
+            @Html.ValidationMessageFor(m => m.Przedmiot.NazwaPrzedmiotu)
             @Html.Raw("<br />")
         </div>
         <div class="dodaj-przedmiot col-sm-4">
@@ -134,6 +137,7 @@
             <div class="dodaj-przedmiot col-sm-2">
                 <label></label>
 
+                @Html.Label("Kurs przedmiotu?")
                 @Html.LabelFor(m => m.Kursy[0].ZZU)
                 @Html.LabelFor(m => m.Kursy[0].CNPS)
                 @Html.LabelFor(m => m.Kursy[0].PunktyECTS)
@@ -148,7 +152,7 @@
             {
                 <div class="dodaj-przedmiot col-sm-2">
                     <label>@Model.Kursy[i].FormaZajec.NazwaFormy</label>
-                    @Html.CheckBoxFor(m => m.CzyKursNalezy[i], new { @class = "kurs-checkbox czy-nalezy" })
+                    @Html.CheckBoxFor(m => m.Kursy[i].CzyNalezyDoPrzedmiotu, new { @class = "kurs-checkbox czy-nalezy" })
                     @Html.Raw("<br />")
 
                     @Html.HiddenFor(m => m.Kursy[i].IdFormyZajec)
@@ -170,6 +174,11 @@
                         @Html.Raw("<br />")
                         @Html.CheckBoxFor(m => m.CzyGrupa[i], new { @class = "kurs-checkbox" })
                         @Html.Raw("<br />")
+                        @Html.ValidationMessageFor(m => m.Kursy[i].ZZU)
+                        @Html.ValidationMessageFor(m => m.Kursy[i].CNPS)
+                        @Html.ValidationMessageFor(m => m.Kursy[i].PunktyECTS)
+                        @Html.ValidationMessageFor(m => m.Kursy[i].ECTS_P)
+                        @Html.ValidationMessageFor(m => m.Kursy[i].ECTS_BK)
                     </div>
                 </div>
             

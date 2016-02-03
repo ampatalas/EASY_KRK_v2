@@ -8,7 +8,7 @@ using System.Web;
 namespace EASY_KRK.Models
 {
     [Table("Kursy")]
-    public class Kurs
+    public class Kurs : IValidatableObject
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -56,5 +56,49 @@ namespace EASY_KRK.Models
 
         [ForeignKey("IdGrupyKursow")]
         public virtual GrupaKursow GrupaKursow { get; set; }
+
+        [NotMapped]
+        public virtual bool CzyNalezyDoPrzedmiotu { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (CzyNalezyDoPrzedmiotu)
+            {
+                if (ZZU <= 0)
+                {
+                    yield return new ValidationResult("ZZU musi być większe od 0.", new[] { "ZZU" });
+                }
+
+                if (CNPS <= 0)
+                {
+                    yield return new ValidationResult("CNPS musi być większe od 0.", new[] { "CNPS" });
+                }
+
+                if (PunktyECTS <= 0)
+                {
+                    yield return new ValidationResult("Liczba punktów ECTS musi być większa od 0.", new[] { "PunktyECTS" });
+                }
+
+                if (ECTS_P < 0)
+                {
+                    yield return new ValidationResult("Liczba punktów ECTS_P musi być większa lub równa 0.", new[] { "ECTS_P" });
+                }
+
+                if (ECTS_P > PunktyECTS)
+                {
+                    yield return new ValidationResult("Liczba punktów ECTS_P nie może przekraczać całkowitej liczby ECTS.", new[] { "ECTS_P" });
+                }
+
+                if (ECTS_BK < 0)
+                {
+                    yield return new ValidationResult("Liczba punktów ECTS_BK musi być większa lub równa 0.", new[] { "ECTS_BK" });
+                }
+
+                if (ECTS_BK > PunktyECTS)
+                {
+                    yield return new ValidationResult("Liczba punktów ECTS_BK nie może przekraczać całkowitej liczby ECTS.", new[] { "ECTS_BK" });
+                }
+            }
+        }
     }
 }

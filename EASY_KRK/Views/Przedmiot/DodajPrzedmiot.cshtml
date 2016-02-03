@@ -21,7 +21,7 @@
         for (i = 0; i < checkboxes.length; i++)
         {
             var id = checkboxes[i].attributes.getNamedItem('name').value;
-            id = id.substring(id.length - 2, id.length - 1);
+            id = id.substring(id.indexOf("[")+1, id.indexOf("[")+2);
             if (checkboxes[i].checked) {
                 $("#kurs-".concat(id)).show();
             }
@@ -33,7 +33,7 @@
         var url = "";
         $(".czy-nalezy").change(function (e) {
             var id = $(this).attr('name');
-            id = id.substring(id.length - 2, id.length - 1);
+            id = id.substring(id.indexOf("[") + 1, id.indexOf("[") + 2);
             if (this.checked)
             {
                 $("#kurs-".concat(id)).show();
@@ -54,12 +54,10 @@
         @Html.DropDownListFor(m => m.Przedmiot.IdKategorii, Model.Kategorie)
         @Html.Raw("<br />")
         @Html.LabelFor(m => m.Przedmiot.KodPrzedmiotu)
-        @Html.EditorFor(m => m.Przedmiot.KodPrzedmiotu)
-        @Html.ValidationMessageFor(m => m.Przedmiot.KodPrzedmiotu)
+        @Html.EditorFor(m => m.Przedmiot.KodPrzedmiotu)        
         @Html.Raw("<br />")
         @Html.LabelFor(m => m.Przedmiot.NazwaPrzedmiotu)
-        @Html.EditorFor(m => m.Przedmiot.NazwaPrzedmiotu)
-        @Html.ValidationMessageFor(m => m.Przedmiot.NazwaPrzedmiotu)
+        @Html.EditorFor(m => m.Przedmiot.NazwaPrzedmiotu)        
         @Html.Raw("<br />")
         @Html.LabelFor(m => m.Przedmiot.IdFormyPrzedmiotu)
         @Html.DropDownListFor(m => m.Przedmiot.IdFormyPrzedmiotu, Model.FormyPrzedmiotu)
@@ -72,6 +70,10 @@
         @Html.Raw("<br />")
         @Html.LabelFor(m => m.Przedmiot.IdTypuPrzedmiotu)
         @Html.DropDownListFor(m => m.Przedmiot.IdTypuPrzedmiotu, Model.Typy)
+        @Html.Raw("<br />")
+        @Html.ValidationMessageFor(m => m.Przedmiot.KodPrzedmiotu)
+        @Html.Raw("<br />")
+        @Html.ValidationMessageFor(m => m.Przedmiot.NazwaPrzedmiotu)
         @Html.Raw("<br />")
     </div>
 
@@ -104,11 +106,11 @@
     {
         <div class="dodaj-przedmiot col-sm-2">
             <label>@Model.Kursy[i].FormaZajec.NazwaFormy</label>
-            @Html.CheckBoxFor(m => m.CzyKursNalezy[i], new {@class = "kurs-checkbox czy-nalezy" })
+            @Html.CheckBoxFor(m => m.Kursy[i].CzyNalezyDoPrzedmiotu, new {@class = "kurs-checkbox czy-nalezy" })
             @Html.Raw("<br />")
             @Html.HiddenFor(m => m.Kursy[i].IdFormyZajec)
             <div id="kurs-@i">
-                @Html.TextBoxFor(m => m.Kursy[i].ZZU, new { @class = "kurs-textbox" })
+                @Html.TextBoxFor(m => m.Kursy[i].ZZU, new { @class = "kurs-textbox" })               
                 @Html.Raw("<br />")
                 @Html.TextBoxFor(m => m.Kursy[i].CNPS, new { @class = "kurs-textbox" })
                 @Html.Raw("<br />")
@@ -124,6 +126,11 @@
                 @Html.Raw("<br />")
                 @Html.CheckBoxFor(m => m.CzyGrupa[i], new { @class = "kurs-checkbox" })
                 @Html.Raw("<br />")
+                @Html.ValidationMessageFor(m => m.Kursy[i].ZZU)
+                @Html.ValidationMessageFor(m => m.Kursy[i].CNPS)
+                @Html.ValidationMessageFor(m => m.Kursy[i].PunktyECTS)
+                @Html.ValidationMessageFor(m => m.Kursy[i].ECTS_P)
+                @Html.ValidationMessageFor(m => m.Kursy[i].ECTS_BK)
             </div>
         </div>
     }
