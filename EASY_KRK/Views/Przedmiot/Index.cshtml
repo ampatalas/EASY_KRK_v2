@@ -18,8 +18,12 @@
     $(document).ready(function () {
 
         CollapsibleLists.apply();
+        $('.submit').prop('disabled', true);
         var url = "";
 
+        $(".radio-przedmiot").change(function (e) {
+            $('.submit').prop('disabled', false);
+        });
         $("#linkDodajKEK").click(function (e) {
             e.preventDefault();
             var selectedVal = "";
@@ -69,9 +73,9 @@
         }
     </ul>
 
-    <input type="submit" value="Przypisz KEK" name="Przypisz" class="btn btn-default" id="linkDodajKEK" />
-    <input type="submit" value="Edytuj" name="Edytuj" class="btn btn-default" />
-    <input type="submit" value="Usuń" name="Usun" class="btn btn-default" onclick="return confirm('Czy na pewno chcesz usunąć przedmiot i wszystkie powiązane z nim kursy/grupy kursów?');" />
+    <input type="submit" value="Przypisz KEK" name="Przypisz" class="btn btn-default submit" id="linkDodajKEK" />
+    <input type="submit" value="Edytuj" name="Edytuj" class="btn btn-default submit" />
+    <input type="submit" value="Usuń" name="Usun" class="btn btn-default submit" onclick="return confirm('Czy na pewno chcesz usunąć przedmiot i wszystkie powiązane z nim kursy/grupy kursów?');" />
 }
 
 
@@ -97,7 +101,7 @@
                         
                         foreach (var przedmiot in kat.Przedmioty)
                         {
-                            @Html.RadioButtonFor(m => m.IdPrzedmiotu, przedmiot.IdPrzedmiotu);
+                            @Html.RadioButtonFor(m => m.IdPrzedmiotu, przedmiot.IdPrzedmiotu, new {@class = "radio-przedmiot" });
                             @Html.Label(przedmiot.NazwaPrzedmiotu);
                             @Html.Raw("<br />");
                         }
