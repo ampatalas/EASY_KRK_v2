@@ -92,7 +92,7 @@
                     if(kat.MinECTS.HasValue)
                     {
                         @Html.Raw("<br />");
-                        @Html.ActionLink("Dodaj przedmiot", "DodajPrzedmiot", new { IdKategorii = kat.IdKategorii });
+                        @Html.ActionLink("Dodaj przedmiot", "DodajPrzedmiot", new { IdKategorii = kat.IdKategorii }, new { @class = "link" });
                         @Html.Raw("<br />");
                         
                         foreach (var przedmiot in kat.Przedmioty)

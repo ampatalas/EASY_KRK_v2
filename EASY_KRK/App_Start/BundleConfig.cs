@@ -33,6 +33,7 @@ namespace EASY_KRK
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/custom-btn.css",
                       "~/Content/Site.css"));
         }
     }

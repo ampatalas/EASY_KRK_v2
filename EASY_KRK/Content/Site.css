@@ -93,8 +93,80 @@ input[type="checkbox"].input-validation-error {
     visibility: hidden;
 }
     .program-li {
-        color: #0000ff;
+        color: #9f2e1c;
+    }
+    .program-li:hover {
+        color: #b63d29;
     }
     .program-li-selected{
-        color: #000000;
+        color: #701f12;
+        font-weight:bold;
     }
+    .program-li-selected:hover {
+        color: #701f12;
+        font-weight:bold;
+    }
+
+    .link{
+        color: #b63d29;
+    }
+    .link:hover{
+        color: #701f12;
+        font-weight:bold;
+    }
+
+
+.wrapper {
+  padding: 0px;
+  max-width: 800px;
+}
+
+.table {
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: table;
+}
+@media screen and (max-width: 580px) {
+  .table {
+    display: block;
+  }
+}
+
+.row-table {
+  display: table-row;
+  background: #f6f6f6;
+}
+.row-table:nth-of-type(odd) {
+  background: #e9e9e9;
+}
+.row-table.header {
+  font-weight: 900;
+  color: #FDC996;
+  background: #b63d29;
+}
+@media screen and (max-width: 580px) {
+  .row-table {
+    padding: 8px 0;
+    display: block;
+  }
+}
+
+.cell {
+  padding: 6px 12px;
+  display: table-cell;
+}
+@media screen and (max-width: 580px) {
+  .cell {
+    padding: 2px 12px;
+    display: block;
+  }
+}
+
+.cell-add-delete{
+    width:135px; 
+    text-align:center;
+}
+
+.btn-default{
+
+}

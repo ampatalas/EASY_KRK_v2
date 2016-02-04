@@ -89,65 +89,61 @@ else
 
     </div>
 
-
-        <table class="table-bordered">
-            <tr>
-
-                <th>
+    <div class="wrapper">
+        <div class="table">
+            <div class="row-table header">
+                <div class="cell">
                     KEK
-                </th>
-                <th>
+                </div>
+                <div class="cell">
                     Efekt kształcenia
-                </th>
-                <th>
+                </div>
+                <div class="cell">
                     MEKI
-                </th>
-                <th>
+                </div>
+                <div class="cell">
                     Przedmioty
-                </th>
-            </tr>
-
-
+                </div>
+            </div>
 
             @foreach (var kek in Model.KEKI)
             {
-                <tr>
-                    <td>
-                        @kek.Kod
-                    </td>
-                    <td>
-                        @kek.Opis
-                    </td>
+                    <div class="row-table">
+                        <div class="cell">
+                            @kek.Kod
+                        </div>
+                        <div class="cell">
+                            @kek.Opis
+                        </div>
+                        <div class="cell cell-add-delete">
+                            @foreach (var slad in Model.Sladowania.ToList().FindAll(s => s.KEK == kek))
+                            {
+                                @Html.Label(slad.MEK.Kod + " | ", new { title = slad.MEK.Opis });
+                                @Html.ActionLink("Usuń", "UsunMEK", new { IdKEK = kek.IdKEK, IdMEK = slad.MEK.IdMEK }, new { @class = "link" });
+                                @Html.Raw("<br />");
+                            }
 
-                    <td style="width:130px; text-align:center">
+                            @Html.ActionLink("Dodaj", "DodajMEK", new { IdKEK = kek.IdKEK }, new { @class = "linkDodajMEK link" })
+                        </div>
+                        <div class="cell cell-add-delete">
+                            @foreach (var kekp in Model.KEKIPrzedmiotow.ToList().FindAll(k => k.KEK == kek))
+                            {
+                                @Html.Label(kekp.Przedmiot.KodPrzedmiotu + " | ", new { title = kekp.Przedmiot.NazwaPrzedmiotu });
+                                @Html.ActionLink("Usuń", "UsunPrzedmiot", new { IdKEK = kek.IdKEK, IdPrzedm = kekp.Przedmiot.IdPrzedmiotu }, new { @class = "link" });
+                                @Html.Raw("<br />");
+                            }
+                            @Html.ActionLink("Dodaj", "DodajKEKPrzedmiotu", new { IdKEK = kek.IdKEK }, new { @class = "linkDodajPrzedmiot link" })
+                        </div>
 
-                        @foreach (var slad in Model.Sladowania.ToList().FindAll(s => s.KEK == kek))
-                        {
-                            @Html.Label(slad.MEK.Kod+" | ", new { title = slad.MEK.Opis });
-                            @Html.ActionLink("Usuń", "UsunMEK", new { IdKEK = kek.IdKEK, IdMEK = slad.MEK.IdMEK });
-                            @Html.Raw("<br />");
-                        }
-
-                        @Html.ActionLink("Dodaj", "DodajMEK", new { IdKEK = kek.IdKEK }, new {@class = "linkDodajMEK"})
-                    </td>
-                    <td style="width: 130px; text-align: center">
-                        @foreach (var kekp in Model.KEKIPrzedmiotow.ToList().FindAll(k => k.KEK == kek))
-                        {
-                            @Html.Label(kekp.Przedmiot.KodPrzedmiotu+" | ", new { title = kekp.Przedmiot.NazwaPrzedmiotu });
-                            @Html.ActionLink("Usuń", "UsunPrzedmiot", new { IdKEK = kek.IdKEK, IdPrzedm = kekp.Przedmiot.IdPrzedmiotu });
-                            @Html.Raw("<br />");
-                        }
-                        @Html.ActionLink("Dodaj", "DodajKEKPrzedmiotu", new { IdKEK = kek.IdKEK }, new {@class="linkDodajPrzedmiot"})
-                    </td>
-                </tr>
+                    </div>
             }
+        </div>
+    </div>
 
-        </table>
-
-  
     <br />
 
-    foreach(var udzial in Model.Udzialy)
+
+    foreach (var udzial in Model.Udzialy)
     {
         var color ="";
         if (Model.Pokrycia[udzial.IdObszaru] < udzial.Wartosc)

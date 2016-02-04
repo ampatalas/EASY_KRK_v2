@@ -1,13 +1,13 @@
 ﻿@model EASY_KRK.Models.ProgramyViewModel
 
 <br /><br />
-<h4>Programy kształcenia</h4>
+<h4 class="program-li">Programy kształcenia</h4>
 
 <hr />
 <ul>
     @foreach (var kierunek in Model.Kierunki)
     {
-    <li>@kierunek
+    <li class="program-li">@kierunek
         <ul>
     
         @foreach (var program in Model.Programy)
@@ -16,11 +16,11 @@
             {
                 if (Model.IdProgramu == program.IdProgramuKsztalcenia)
                 { 
-                    <li>@Html.ActionLink("Studia " + program.Kierunek.Poziom.NazwaPoziomu + " " + program.Kierunek.RodzajStudiow.NazwaRodzajuStudiow + " " + program.FormaStudiow.NazwaFormyStudiow, "WybierzProgram", new { id = program.IdProgramuKsztalcenia }, new { @style = "color:#000000;" })</li>
+                    <li>@Html.ActionLink("Studia " + program.Kierunek.Poziom.NazwaPoziomu + " " + program.Kierunek.RodzajStudiow.NazwaRodzajuStudiow + " " + program.FormaStudiow.NazwaFormyStudiow, "WybierzProgram", new { id = program.IdProgramuKsztalcenia }, new { @class = "program-li-selected" })</li>
                 }
                 else
                 { 
-                    <li>@Html.ActionLink("Studia " + program.Kierunek.Poziom.NazwaPoziomu + " " + program.Kierunek.RodzajStudiow.NazwaRodzajuStudiow + " " + program.FormaStudiow.NazwaFormyStudiow, "WybierzProgram", new { id = program.IdProgramuKsztalcenia }, new { @style = "color:#0000ff;" })</li>
+                    <li>@Html.ActionLink("Studia " + program.Kierunek.Poziom.NazwaPoziomu + " " + program.Kierunek.RodzajStudiow.NazwaRodzajuStudiow + " " + program.FormaStudiow.NazwaFormyStudiow, "WybierzProgram", new { id = program.IdProgramuKsztalcenia }, new { @class = "program-li" })</li>
                 }
             }
         }
