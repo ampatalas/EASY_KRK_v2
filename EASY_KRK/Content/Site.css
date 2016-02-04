@@ -1,6 +1,22 @@
-﻿body {
+﻿.cbox_hline {
+    clear: both;
+    width: 100%;
+    background-color: #9f2e1c;
+    font-size: 0px;
+    line-height: 0px;
+    height: 6px;
+}
+
+.main_page_title {
+    background: transparent url(http://www.portal.pwr.wroc.pl/24/sys_images/h_bg.gif;waa153a4f28a3b657c) no-repeat 0 0;
+    height: 205px;
+    background-position: right -140px top;
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+    color: #565656;
 }
 
 /* Set padding to keep content from hitting the edges */
