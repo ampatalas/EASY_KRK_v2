@@ -124,7 +124,7 @@
                 @Html.Raw("<br />")
                 @Html.CheckBoxFor(m => m.Kursy[i].Praktyczny, new { @class = "kurs-checkbox" })
                 @Html.Raw("<br />")
-                @Html.CheckBoxFor(m => m.CzyGrupa[i], new { @class = "kurs-checkbox" })
+                @Html.CheckBoxFor(m => m.Kursy[i].CzyGrupa, new { @class = "kurs-checkbox" })
                 @Html.Raw("<br />")
                 @Html.ValidationMessageFor(m => m.Kursy[i].ZZU)
                 @Html.ValidationMessageFor(m => m.Kursy[i].CNPS)

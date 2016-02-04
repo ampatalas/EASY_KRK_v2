@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
+using System.Web.Mvc;
+using System.Linq;
+using EASY_KRK.Controllers.Utils;
 
 namespace EASY_KRK.Models
 {
@@ -59,8 +59,10 @@ namespace EASY_KRK.Models
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            EASYKRKContext db = new EASYKRKContext();
             string KodWzor = @"^[A-Za-z\d]*$";
             string NazwaWzor = @"^[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź]+([ ]{1}[A-Za-zZĄĆĘŁŃÓŚŻŹa-ząćęłńóśżź\d]+)*$";
+            Kategoria Kat = db.Kategorie.Find(this.IdKategorii);
 
             if (KodPrzedmiotu.Length < 3 || KodPrzedmiotu.Length > 15)
             {
@@ -90,6 +92,21 @@ namespace EASY_KRK.Models
             if (string.IsNullOrEmpty(NazwaPrzedmiotu))
             {
                 yield return new ValidationResult("Nazwa przedmiotu nie może być pusta.", new[] { "NazwaPrzedmiotu" });
+            }
+
+            if (db.Przedmioty.Any(p => p.KodPrzedmiotu == this.KodPrzedmiotu
+                && Kat.IdProgramuStudiow == p.Kategoria.IdProgramuStudiow 
+                && p.IdPrzedmiotu != this.IdPrzedmiotu))
+            {
+                
+                yield return new ValidationResult("Przedmiot o podanym kodzie już istnieje.", new[] { "KodPrzedmiotu" });
+            }
+
+            if (db.Przedmioty.Any(p => p.NazwaPrzedmiotu == this.NazwaPrzedmiotu
+                && Kat.IdProgramuStudiow == p.Kategoria.IdProgramuStudiow 
+                && p.IdPrzedmiotu != this.IdPrzedmiotu))
+            {
+                yield return new ValidationResult("Przedmiot o podanej nazwie już istnieje.", new[] { "NazwaPrzedmiotu" });
             }
         }
 

@@ -60,6 +60,9 @@ namespace EASY_KRK.Models
         [NotMapped]
         public virtual bool CzyNalezyDoPrzedmiotu { get; set; }
 
+        [NotMapped]
+        public virtual bool CzyGrupa { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (CzyNalezyDoPrzedmiotu)
