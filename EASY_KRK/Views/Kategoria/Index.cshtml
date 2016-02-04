@@ -18,6 +18,14 @@
     $(document).ready(function() {
         CollapsibleLists.apply();
 
+        if (!$("input[name=IdKategorii]:checked").val()) {
+            $('.submit').prop('disabled', true);
+        }
+
+        $(".radio-kategoria").change(function (e) {
+            $('.submit').prop('disabled', false);
+        });
+
         $('form input').on('change', function() {
             var selected = $('input[name=IdKategorii]:checked', 'form').val();
             var url = "/Kategoria/StatusKategorii?IdKategorii=" + selected;
@@ -51,16 +59,16 @@
         @foreach (var k in Model.Kategorie)
         {
             <li>
-                @Html.RadioButtonFor(m => m.IdKategorii, k.IdKategorii)
+                @Html.RadioButtonFor(m => m.IdKategorii, k.IdKategorii, new { @class = "radio-kategoria" })
                 @Html.Label(k.NazwaKategorii)
             </li>
             @PokazDrzewo(k.Kategorie)
         }
     </ul>
-    
-    <input type="submit" value="Dodaj kategorię" name="Dodaj" class="btn btn-default" id="addCategory" />
-    <input type="submit" value="Edytuj kategorię" name="Edytuj" class="btn btn-default" />
-    <input type="submit" value="Usuń kategorię" name="Usun" class="btn btn-default" onclick="return confirm('Czy na pewno chcesz usunąć kategorię i wszystkie powiązane z nią przedmioty?');" />
+
+    <input type="submit" value="Dodaj kategorię" name="Dodaj" class="btn btn-default submit" id="addCategory" />
+    <input type="submit" value="Edytuj kategorię" name="Edytuj" class="btn btn-default submit" />
+    <input type="submit" value="Usuń kategorię" name="Usun" class="btn btn-default submit" onclick="return confirm('Czy na pewno chcesz usunąć kategorię i wszystkie powiązane z nią przedmioty?');" />
 
 }
 
@@ -70,7 +78,7 @@
         @foreach (var kat in kategorie)
         {
             <li>
-                @Html.RadioButtonFor(m => m.IdKategorii, kat.IdKategorii)
+                @Html.RadioButtonFor(m => m.IdKategorii, kat.IdKategorii, new {@class = "radio-kategoria" })
                 @Html.Label(kat.NazwaKategorii)
                 @if (kat.MinECTS.HasValue && kat.MinECTS > 0)
                 {

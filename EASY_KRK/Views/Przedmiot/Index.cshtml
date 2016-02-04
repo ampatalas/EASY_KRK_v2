@@ -18,7 +18,9 @@
     $(document).ready(function () {
 
         CollapsibleLists.apply();
-        $('.submit').prop('disabled', true);
+        if (!$("input[name=IdPrzedmiotu]:checked").val()) {
+            $('.submit').prop('disabled', true);
+        }
         var url = "";
 
         $(".radio-przedmiot").change(function (e) {
