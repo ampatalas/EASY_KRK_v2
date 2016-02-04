@@ -271,6 +271,7 @@
     <Content Include="Content\themes\base\datepicker.css" />
     <Content Include="Content\themes\base\dialog.css" />
     <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\h_bg.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -305,6 +306,7 @@
     <Content Include="Content\themes\base\images\button.png" />
     <Content Include="Images\delete_btn.png" />
     <Content Include="Images\en.png" />
+    <Content Include="Images\h_bg.gif" />
     <Content Include="Images\pl.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
