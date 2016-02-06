@@ -26,8 +26,8 @@
                 {
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink(@Resources.Resources.Categories , "Index", "Kategoria")</li>
-                        <li>@Html.ActionLink("Przedmioty", "Index", "Przedmiot")</li>
-                        <li>@Html.ActionLink("Macierz śladowania", "MacierzSladowania", "Kierunek")</li>
+                        <li>@Html.ActionLink(@Resources.Resources.Subjects, "Index", "Przedmiot")</li>
+                        <li>@Html.ActionLink(@Resources.Resources.Matrix, "MacierzSladowania", "Kierunek")</li>
                     </ul>
                 }
                 @Html.Partial("_LoginPartial")

@@ -117,10 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Dodaj</value>
+  </data>
+  <data name="AddSubject" xml:space="preserve">
+    <value>Dodaj przedmiot</value>
+  </data>
+  <data name="AssignKRK" xml:space="preserve">
+    <value>Przypisz KEK</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
   <data name="Categories" xml:space="preserve">
     <value>Kategorie</value>
   </data>
-  <data name="SubjectCode" xml:space="preserve">
-    <value>Kod przedmiotu: </value>
+  <data name="CourseGroup" xml:space="preserve">
+    <value>Grupa kursów?*</value>
+  </data>
+  <data name="CoursesAndGroups" xml:space="preserve">
+    <value>Kursy i grupy kursów przedmiotu</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="DeleteSubject" xml:space="preserve">
+    <value>Usuń przedmiot</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edytuj</value>
+  </data>
+  <data name="EditSubject" xml:space="preserve">
+    <value>Edytuj przedmiot</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Witaj </value>
+  </data>
+  <data name="KEK" xml:space="preserve">
+    <value>Kierunkowe efeky kształcenia</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Zaloguj</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Wyloguj</value>
+  </data>
+  <data name="MarkGroup" xml:space="preserve">
+    <value>*Zaznaczyć, jeżeli dany kurs należy do grupy kursów</value>
+  </data>
+  <data name="Matrix" xml:space="preserve">
+    <value>Macierz śladowania</value>
+  </data>
+  <data name="SubjectCourse" xml:space="preserve">
+    <value>Kurs przedmiotu?</value>
+  </data>
+  <data name="Subjects" xml:space="preserve">
+    <value>Przedmioty</value>
+  </data>
+  <data name="Syllabus" xml:space="preserve">
+    <value>Program kształcenia</value>
   </data>
 </root>

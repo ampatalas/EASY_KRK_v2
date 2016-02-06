@@ -1,10 +1,10 @@
 ﻿@model EASY_KRK.Models.PrzedmiotyViewModel
 @{
-    ViewBag.Title = "Przedmioty";
+    ViewBag.Title = @Resources.Resources.Subjects;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Przedmioty</h2>
+<h2>@Resources.Resources.Subjects</h2>
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
@@ -75,9 +75,9 @@
         }
     </ul>
 
-    <input type="submit" value="Przypisz KEK" name="Przypisz" class="btn btn-default submit" id="linkDodajKEK" />
-    <input type="submit" value="Edytuj" name="Edytuj" class="btn btn-default submit" />
-    <input type="submit" value="Usuń" name="Usun" class="btn btn-default submit" onclick="return confirm('Czy na pewno chcesz usunąć przedmiot i wszystkie powiązane z nim kursy/grupy kursów?');" />
+    <input type="submit" value=@Resources.Resources.AssignKRK name="Przypisz" class="btn btn-default submit" id="linkDodajKEK" />
+    <input type="submit" value=@Resources.Resources.Edit name="Edytuj" class="btn btn-default submit" />
+    <input type="submit" value=@Resources.Resources.DeleteSubject name="Usun" class="btn btn-default submit" onclick="return confirm('Czy na pewno chcesz usunąć przedmiot i wszystkie powiązane z nim kursy/grupy kursów?');" />
 }
 
 
@@ -98,7 +98,7 @@
                     if(kat.MinECTS.HasValue)
                     {
                         @Html.Raw("<br />");
-                        @Html.ActionLink("Dodaj przedmiot", "DodajPrzedmiot", new { IdKategorii = kat.IdKategorii }, new { @class = "link" });
+                        @Html.ActionLink(@Resources.Resources.AddSubject, "DodajPrzedmiot", new { IdKategorii = kat.IdKategorii }, new { @class = "link" });
                         @Html.Raw("<br />");
                         
                         foreach (var przedmiot in kat.Przedmioty)

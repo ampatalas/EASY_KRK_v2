@@ -1,11 +1,11 @@
 ﻿@model EASY_KRK.Models.DodajPrzedmiotViewModel
 
 @{
-    ViewBag.Title = "Dodaj przedmiot";
+    ViewBag.Title = @Resources.Resources.AddSubject;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
-    <h2>Dodaj przedmiot</h2>
+    <h2>@Resources.Resources.AddSubject</h2>
 </div>
 
 @Scripts.Render("~/bundles/jquery")
@@ -81,7 +81,7 @@
 </div>
 
 <div class="row">
-    <h4>Kursy i grupy kursów przedmiotu</h4>
+    <h4>@Resources.Resources.CoursesAndGroups</h4>
 </div>
 <div class="row">
 
@@ -91,7 +91,7 @@
      <div class="dodaj-przedmiot col-sm-2">
         <label></label>
        
-        @Html.Label("Kurs przedmiotu?")
+        @Html.Label(@Resources.Resources.SubjectCourse)
         @Html.LabelFor(m => m.Kursy[0].ZZU)
         @Html.LabelFor(m => m.Kursy[0].CNPS)
         @Html.LabelFor(m => m.Kursy[0].PunktyECTS)
@@ -99,7 +99,7 @@
         @Html.LabelFor(m => m.Kursy[0].ECTS_BK)
         @Html.LabelFor(m => m.Kursy[0].FormaZal.NazwaFormyZal)
         @Html.LabelFor(m => m.Kursy[0].Praktyczny)
-        @Html.Label("Grupa kursów?*")
+        @Html.Label(@Resources.Resources.CourseGroup)
     </div>
 
     for (var i = 0; i < Model.Kursy.Count(); i++)
@@ -141,9 +141,9 @@
 
     </div>
     <div class="row">
-        <p>*Zaznaczyć, jeżeli dany kurs należy do grupy kursów</p>
-        <input type="submit" value="Anuluj" name="Anuluj" class="btn btn-default" />
-        <input type="submit" value="Dodaj" name="Dodaj" class="btn btn-default" />
+        <p>@Resources.Resources.MarkGroup</p>
+        <input type="submit" value="Anuluj" name=@Resources.Resources.Cancel class="btn btn-default" />
+        <input type="submit" value="Dodaj" name=@Resources.Resources.Add class="btn btn-default" />
     </div>
 }
 

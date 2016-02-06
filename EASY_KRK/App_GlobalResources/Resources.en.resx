@@ -117,10 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AddSubject" xml:space="preserve">
+    <value>Add Subject</value>
+  </data>
+  <data name="AssignKRK" xml:space="preserve">
+    <value>Assign KEK</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="Categories" xml:space="preserve">
     <value>Categories</value>
   </data>
-  <data name="SubjectCode" xml:space="preserve">
-    <value>Subject Code:</value>
+  <data name="CourseGroup" xml:space="preserve">
+    <value>Course group*</value>
+  </data>
+  <data name="CoursesAndGroups" xml:space="preserve">
+    <value>Courses and groups</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteSubject" xml:space="preserve">
+    <value>Delete Subject</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EditSubject" xml:space="preserve">
+    <value>Edit Subject</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello </value>
+  </data>
+  <data name="KEK" xml:space="preserve">
+    <value>Major-related learning/educational outcomes</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="MarkGroup" xml:space="preserve">
+    <value>*Check if course belongs to course group</value>
+  </data>
+  <data name="Matrix" xml:space="preserve">
+    <value>Tracing Matrix</value>
+  </data>
+  <data name="SubjectCourse" xml:space="preserve">
+    <value>Subject course?</value>
+  </data>
+  <data name="Subjects" xml:space="preserve">
+    <value>Subjects</value>
+  </data>
+  <data name="Syllabus" xml:space="preserve">
+    <value>Syllabus</value>
   </data>
 </root>
