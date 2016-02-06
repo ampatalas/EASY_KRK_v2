@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Linq;
 using EASY_KRK.Controllers.Utils;
 using EASY_KRK;
+using EASY_KRK.App_GlobalResources;
 
 namespace EASY_KRK.Models
 {
@@ -17,7 +18,7 @@ namespace EASY_KRK.Models
         public int IdPrzedmiotu { get; set; }
 
         //[Display(Name = "Kod przedmiotu: ")]
-        [Display(Name = "SubjectCode", ResourceType = typeof(Resources.Labels))]
+        [Display(Name = "SubjectCode", ResourceType = typeof(Labels))]
         [Required(ErrorMessage = "Kod przedmiotu nie może być pusty")]
         [StringLength(15, MinimumLength = 3, ErrorMessage = "Kod przedmiotu musi zawierać od 3 do 15 znaków.")]
         [RegularExpression(@"^[A-Za-z\d]*$", ErrorMessage = "Kod przedmiotu może zawierać tylko znaki alfanumeryczne")]
