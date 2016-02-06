@@ -61,11 +61,128 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kod przedmiotu nie może być pusty..
+        /// </summary>
+        public static string CodeErrorEmpty {
+            get {
+                return ResourceManager.GetString("CodeErrorEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kod przedmiotu może zawierać tylko znaki alfanumeryczne..
+        /// </summary>
+        public static string CodeErrorExpression {
+            get {
+                return ResourceManager.GetString("CodeErrorExpression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kod przedmiotu musi zawierać od 3 do 15 znaków..
+        /// </summary>
+        public static string CodeErrorLength {
+            get {
+                return ResourceManager.GetString("CodeErrorLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nazwa przedmiotu nie może być pusta..
+        /// </summary>
+        public static string NameErrorEmpty {
+            get {
+                return ResourceManager.GetString("NameErrorEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nazwa przedmiotu może zawierać tylko cyfry lub litery alfabetu polskiego..
+        /// </summary>
+        public static string NameErrorExpression {
+            get {
+                return ResourceManager.GetString("NameErrorExpression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nazwa przedmiotu musi zawierać od 3 do 100 znaków..
+        /// </summary>
+        public static string NameErrorLength {
+            get {
+                return ResourceManager.GetString("NameErrorLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kod przedmiotu: .
         /// </summary>
         public static string SubjectCode {
             get {
                 return ResourceManager.GetString("SubjectCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Przedmiot o podanym kodzie już istnieje..
+        /// </summary>
+        public static string SubjectCodeExists {
+            get {
+                return ResourceManager.GetString("SubjectCodeExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forma:.
+        /// </summary>
+        public static string SubjectForm {
+            get {
+                return ResourceManager.GetString("SubjectForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rodzaj:.
+        /// </summary>
+        public static string SubjectKind {
+            get {
+                return ResourceManager.GetString("SubjectKind", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nazwa przedmiotu:.
+        /// </summary>
+        public static string SubjectName {
+            get {
+                return ResourceManager.GetString("SubjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Przedmiot o podanej nazwie już istnieje..
+        /// </summary>
+        public static string SubjectNameExists {
+            get {
+                return ResourceManager.GetString("SubjectNameExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Typ:.
+        /// </summary>
+        public static string SubjectType {
+            get {
+                return ResourceManager.GetString("SubjectType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ogólnouczelniany?.
+        /// </summary>
+        public static string SubjectUni {
+            get {
+                return ResourceManager.GetString("SubjectUni", resourceCulture);
             }
         }
     }

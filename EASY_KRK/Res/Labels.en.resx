@@ -117,7 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CodeErrorEmpty" xml:space="preserve">
+    <value>Subject code cannot be empty.</value>
+  </data>
+  <data name="CodeErrorExpression" xml:space="preserve">
+    <value>Subject code must contain alphanumeric characters only.</value>
+  </data>
+  <data name="CodeErrorLength" xml:space="preserve">
+    <value>Subject code has to have from 3 to 15 characters.</value>
+  </data>
+  <data name="NameErrorEmpty" xml:space="preserve">
+    <value>Subject name cannot be empty.</value>
+  </data>
+  <data name="NameErrorExpression" xml:space="preserve">
+    <value>Subject name may contain numbers and polish letters only.</value>
+  </data>
+  <data name="NameErrorLength" xml:space="preserve">
+    <value>Subject name has to have from 3 to 100 characters.</value>
+  </data>
   <data name="SubjectCode" xml:space="preserve">
     <value>Subject code: </value>
+  </data>
+  <data name="SubjectCodeExists" xml:space="preserve">
+    <value>Subject with this code already exists.</value>
+  </data>
+  <data name="SubjectForm" xml:space="preserve">
+    <value>Form:</value>
+  </data>
+  <data name="SubjectKind" xml:space="preserve">
+    <value>Kind:</value>
+  </data>
+  <data name="SubjectName" xml:space="preserve">
+    <value>Subject name:</value>
+  </data>
+  <data name="SubjectNameExists" xml:space="preserve">
+    <value>Subject with this name already exists.</value>
+  </data>
+  <data name="SubjectType" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="SubjectUni" xml:space="preserve">
+    <value>Wole-university course?</value>
   </data>
 </root>
