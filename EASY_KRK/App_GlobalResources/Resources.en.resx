@@ -120,4 +120,7 @@
   <data name="Categories" xml:space="preserve">
     <value>Categories</value>
   </data>
+  <data name="SubjectCode" xml:space="preserve">
+    <value>Subject Code:</value>
+  </data>
 </root>
