@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CNPS" xml:space="preserve">
+    <value>CNPS:</value>
+  </data>
+  <data name="CNPSAmountError" xml:space="preserve">
+    <value>CNPS musi być większe od 0.</value>
+  </data>
   <data name="CodeErrorEmpty" xml:space="preserve">
     <value>Kod przedmiotu nie może być pusty.</value>
   </data>
@@ -125,6 +131,39 @@
   </data>
   <data name="CodeErrorLength" xml:space="preserve">
     <value>Kod przedmiotu musi zawierać od 3 do 15 znaków.</value>
+  </data>
+  <data name="CourseCode" xml:space="preserve">
+    <value>Kod kursu:</value>
+  </data>
+  <data name="CourseECTS" xml:space="preserve">
+    <value>Punkty ECTS:</value>
+  </data>
+  <data name="CourseForm" xml:space="preserve">
+    <value>Forma zajęć:</value>
+  </data>
+  <data name="CoursePractical" xml:space="preserve">
+    <value>Praktyczny?</value>
+  </data>
+  <data name="ECTSAmountError" xml:space="preserve">
+    <value>Liczba punktów ECTS musi być większa od 0.</value>
+  </data>
+  <data name="ECTSBK" xml:space="preserve">
+    <value>Punkty ECTS (BK):</value>
+  </data>
+  <data name="ECTSBKAmountError" xml:space="preserve">
+    <value>Liczba punktów ECTS_P nie może przekraczać całkowitej liczby ECTS.</value>
+  </data>
+  <data name="ECTSBKECTSAmountError" xml:space="preserve">
+    <value>Liczba punktów ECTS_BK nie może przekraczać całkowitej liczby ECTS.</value>
+  </data>
+  <data name="ECTSP" xml:space="preserve">
+    <value>Punkty ECTS (P):</value>
+  </data>
+  <data name="ECTSPAmountError" xml:space="preserve">
+    <value>Liczba punktów ECTS_P musi być większa lub równa 0.</value>
+  </data>
+  <data name="ECTSPECTSAmountError" xml:space="preserve">
+    <value>Liczba punktów ECTS_BK musi być większa lub równa 0.</value>
   </data>
   <data name="NameErrorEmpty" xml:space="preserve">
     <value>Nazwa przedmiotu nie może być pusta.</value>
@@ -158,5 +197,11 @@
   </data>
   <data name="SubjectUni" xml:space="preserve">
     <value>Ogólnouczelniany?</value>
+  </data>
+  <data name="ZZU" xml:space="preserve">
+    <value>ZZU:</value>
+  </data>
+  <data name="ZZUAmountError" xml:space="preserve">
+    <value>ZZU musi być większe od 0.</value>
   </data>
 </root>

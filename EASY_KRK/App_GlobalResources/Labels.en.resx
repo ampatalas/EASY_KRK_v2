@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CNPS" xml:space="preserve">
+    <value>CNPS:</value>
+  </data>
+  <data name="CNPSAmountError" xml:space="preserve">
+    <value>CNPS must be bigger than zero.</value>
+  </data>
   <data name="CodeErrorEmpty" xml:space="preserve">
     <value>Subject code cannot be empty.</value>
   </data>
@@ -125,6 +131,39 @@
   </data>
   <data name="CodeErrorLength" xml:space="preserve">
     <value>Subject code has to have from 3 to 15 characters.</value>
+  </data>
+  <data name="CourseCode" xml:space="preserve">
+    <value>Course code:</value>
+  </data>
+  <data name="CourseECTS" xml:space="preserve">
+    <value>ECTS points:</value>
+  </data>
+  <data name="CourseForm" xml:space="preserve">
+    <value>Course form:</value>
+  </data>
+  <data name="CoursePractical" xml:space="preserve">
+    <value>Practical?</value>
+  </data>
+  <data name="ECTSAmountError" xml:space="preserve">
+    <value>ECTS must be bigger than 0.</value>
+  </data>
+  <data name="ECTSBK" xml:space="preserve">
+    <value>ECTS (BK):</value>
+  </data>
+  <data name="ECTSBKAmountError" xml:space="preserve">
+    <value>ECTS (P) cannot be bigger than ECTS. </value>
+  </data>
+  <data name="ECTSBKECTSAmountError" xml:space="preserve">
+    <value>ECTS (BK) cannot be bigger than ECTS.</value>
+  </data>
+  <data name="ECTSP" xml:space="preserve">
+    <value>ECTS (P):</value>
+  </data>
+  <data name="ECTSPAmountError" xml:space="preserve">
+    <value>ECTS (P) must be bigger than 0.</value>
+  </data>
+  <data name="ECTSPECTSAmountError" xml:space="preserve">
+    <value>ECTS (BK) must be bigger than 0.</value>
   </data>
   <data name="NameErrorEmpty" xml:space="preserve">
     <value>Subject name cannot be empty.</value>
@@ -158,5 +197,11 @@
   </data>
   <data name="SubjectUni" xml:space="preserve">
     <value>Wole-university course?</value>
+  </data>
+  <data name="ZZU" xml:space="preserve">
+    <value>ZZU:</value>
+  </data>
+  <data name="ZZUAmountError" xml:space="preserve">
+    <value>ZZU must be bigger than 0.</value>
   </data>
 </root>
