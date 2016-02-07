@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EASY_KRK.App_GlobalResources;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,7 +15,7 @@ namespace EASY_KRK.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int IdKategorii { get; set; }
 
-        [Display(Name = "Kategoria: ")]
+        [Display(Name = "Category", ResourceType = typeof(Labels))]
         [MaxLength(100)]
         [Required]
         public string NazwaKategorii { get; set; }

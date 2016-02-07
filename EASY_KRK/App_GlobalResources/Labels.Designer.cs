@@ -61,6 +61,15 @@ namespace EASY_KRK.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kategoria:.
+        /// </summary>
+        public static string Category {
+            get {
+                return ResourceManager.GetString("Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CNPS:.
         /// </summary>
         public static string CNPS {

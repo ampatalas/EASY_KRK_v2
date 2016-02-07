@@ -17,32 +17,31 @@ namespace EASY_KRK.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int IdPrzedmiotu { get; set; }
 
-        //[Display(Name = "Kod przedmiotu: ")]
         [Display(Name = "SubjectCode", ResourceType = typeof(Labels))]
-        [Required(ErrorMessage = "Kod przedmiotu nie może być pusty")]
-        [StringLength(15, MinimumLength = 3, ErrorMessage = "Kod przedmiotu musi zawierać od 3 do 15 znaków.")]
-        [RegularExpression(@"^[A-Za-z\d]*$", ErrorMessage = "Kod przedmiotu może zawierać tylko znaki alfanumeryczne")]
+        [Required(ErrorMessageResourceType = typeof(Labels), ErrorMessageResourceName = "CodeErrorEmpty")]
+        [StringLength(15, MinimumLength = 3, ErrorMessageResourceType = typeof(Labels), ErrorMessageResourceName = "CodeErrorLength")]
+        [RegularExpression(@"^[A-Za-z\d]*$", ErrorMessageResourceType = typeof(Labels), ErrorMessageResourceName = "CodeErrorExpression")]
         public string KodPrzedmiotu { get; set; }
 
-        [Display(Name = "Nazwa przedmiotu: ")]
-        [Required(ErrorMessage = "Nazwa przedmiotu nie może być pusta")]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "Nazwa przedmiotu musi zawierać od 3 do 100 znaków.")]
-        [RegularExpression(@"^[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź]+([ ]{1}[A-Za-zZĄĆĘŁŃÓŚŻŹa-ząćęłńóśżź\d]+)*$", ErrorMessage = "Nazwa przedmiotu może zawierać tylko cyfry lub litery alfabetu polskiego.")]
+        [Display(Name = "SubjectName", ResourceType = typeof(Labels))]
+        [Required(ErrorMessageResourceType = typeof(Labels), ErrorMessageResourceName = "NameErrorEmpty")]
+        [StringLength(100, MinimumLength = 3, ErrorMessageResourceType = typeof(Labels), ErrorMessageResourceName = "NameErrorLength")]
+        [RegularExpression(@"^[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź]+([ ]{1}[A-Za-zZĄĆĘŁŃÓŚŻŹa-ząćęłńóśżź\d]+)*$", ErrorMessageResourceType = typeof(Labels), ErrorMessageResourceName = "NameErrorExpression")]
         public string NazwaPrzedmiotu { get; set; }
 
-        [Display(Name = "Rodzaj: ")]
+        [Display(Name = "SubjectKind", ResourceType = typeof(Labels))]
         public int IdRodzajuPrzedmiotu { get; set; }
 
         [ForeignKey("IdRodzajuPrzedmiotu")]
         public virtual RodzajPrzedmiotu RodzajPrzedmiotu { get; set; }
 
-        [Display(Name = "Forma: ")]
+        [Display(Name = "SubjectForm", ResourceType = typeof(Labels))]
         public int IdFormyPrzedmiotu { get; set; }
 
         [ForeignKey("IdFormyPrzedmiotu")]
         public virtual FormaPrzedmiotu FormaPrzedmiotu { get; set; }
 
-        [Display(Name = "Typ: ")]
+        [Display(Name = "SubjectType", ResourceType = typeof(Labels))]
         public int IdTypuPrzedmiotu { get; set; }
 
         [ForeignKey("IdTypuPrzedmiotu")]
@@ -53,7 +52,7 @@ namespace EASY_KRK.Models
         [ForeignKey("IdKategorii")]
         public virtual Kategoria Kategoria { get; set; }
 
-        [Display(Name = "Ogólnouczelniany? ")]
+        [Display(Name = "SubjectUni", ResourceType = typeof(Labels))]
         public bool Ogolnouczelniany { get; set; }
 
         public virtual ICollection<Kurs> Kursy { get; set; }
@@ -69,32 +68,32 @@ namespace EASY_KRK.Models
 
             if (KodPrzedmiotu.Length < 3 || KodPrzedmiotu.Length > 15)
             {
-                yield return new ValidationResult("Kod przedmiotu musi zawierać od 3 do 15 znaków.", new[] { "KodPrzedmiotu" });
+                yield return new ValidationResult(Labels.CodeErrorLength, new[] { "KodPrzedmiotu" });
             }
 
             if (NazwaPrzedmiotu.Length < 3 || NazwaPrzedmiotu.Length > 100)
             {
-                yield return new ValidationResult("Nazwa przedmiotu musi zawierać od 3 do 100 znaków.", new[] { "NazwaPrzedmiotu" });
+                yield return new ValidationResult(Labels.NameErrorLength, new[] { "NazwaPrzedmiotu" });
             }
 
             if (!Regex.IsMatch(KodPrzedmiotu, KodWzor))
             {
-                yield return new ValidationResult("Kod przedmiotu może zawierać tylko znaki alfanumeryczne.", new[] { "KodPrzedmiotu" });
+                yield return new ValidationResult(Labels.CodeErrorExpression, new[] { "KodPrzedmiotu" });
             }
 
             if (!Regex.IsMatch(NazwaPrzedmiotu, NazwaWzor))
             {
-                yield return new ValidationResult("Nazwa przedmiotu może zawierać tylko cyfry lub litery alfabetu polskiego.", new[] { "NazwaPrzedmiotu" });
+                yield return new ValidationResult(Labels.NameErrorExpression, new[] { "NazwaPrzedmiotu" });
             }
 
             if (string.IsNullOrEmpty(KodPrzedmiotu))
             {
-                yield return new ValidationResult("Kod przedmiotu nie może być pusty.", new[] { "KodPrzedmiotu" });
+                yield return new ValidationResult(Labels.CodeErrorEmpty, new[] { "KodPrzedmiotu" });
             }
 
             if (string.IsNullOrEmpty(NazwaPrzedmiotu))
             {
-                yield return new ValidationResult("Nazwa przedmiotu nie może być pusta.", new[] { "NazwaPrzedmiotu" });
+                yield return new ValidationResult(Labels.NameErrorEmpty, new[] { "NazwaPrzedmiotu" });
             }
 
             if (db.Przedmioty.Any(p => p.KodPrzedmiotu == this.KodPrzedmiotu
@@ -102,14 +101,14 @@ namespace EASY_KRK.Models
                 && p.IdPrzedmiotu != this.IdPrzedmiotu))
             {
                 
-                yield return new ValidationResult("Przedmiot o podanym kodzie już istnieje.", new[] { "KodPrzedmiotu" });
+                yield return new ValidationResult(Labels.SubjectCodeExists, new[] { "KodPrzedmiotu" });
             }
 
             if (db.Przedmioty.Any(p => p.NazwaPrzedmiotu == this.NazwaPrzedmiotu
                 && Kat.IdProgramuStudiow == p.Kategoria.IdProgramuStudiow 
                 && p.IdPrzedmiotu != this.IdPrzedmiotu))
             {
-                yield return new ValidationResult("Przedmiot o podanej nazwie już istnieje.", new[] { "NazwaPrzedmiotu" });
+                yield return new ValidationResult(Labels.SubjectNameExists, new[] { "NazwaPrzedmiotu" });
             }
         }
 
