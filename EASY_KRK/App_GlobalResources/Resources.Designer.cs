@@ -106,6 +106,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Czy na pewno chcesz usunąć przedmiot i wszystkie powiązane z nim kursy/grupy kursów?.
+        /// </summary>
+        internal static string Confirm {
+            get {
+                return ResourceManager.GetString("Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Grupa kursów?*.
         /// </summary>
         internal static string CourseGroup {
@@ -156,6 +165,15 @@ namespace Resources {
         internal static string EditSubject {
             get {
                 return ResourceManager.GetString("EditSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filtruj.
+        /// </summary>
+        internal static string Filter {
+            get {
+                return ResourceManager.GetString("Filter", resourceCulture);
             }
         }
         

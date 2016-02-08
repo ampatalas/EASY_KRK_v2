@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EASY_KRK.App_GlobalResources;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,28 +16,28 @@ namespace EASY_KRK.Models
         public int IdKursu { get; set; }
 
         [MaxLength(16)]
-        [Display(Name = "Kod kursu:")]
+        [Display(Name = "CourseCode", ResourceType = typeof(Labels))]
         public string KodKursu { get; set; }
 
-        [Display(Name = "Punkty ECTS:")]
+        [Display(Name = "CourseECTS", ResourceType = typeof(Labels))]
         public int PunktyECTS { get; set; }
 
-        [Display(Name = "ZZU: ")]
+        [Display(Name = "ZZU", ResourceType = typeof(Labels))]
         public int ZZU { get; set; }
 
-        [Display(Name = "CNPS: ")]
+        [Display(Name = "CNPS", ResourceType = typeof(Labels))]
         public int CNPS { get; set; }
 
-        [Display(Name = "Punkty ECTS (P): ")]
+        [Display(Name = "ECTSP", ResourceType = typeof(Labels))]
         public double ECTS_P { get; set; }
 
-        [Display(Name = "Punkty ECTS (BK): ")]
+        [Display(Name = "ECTSBK", ResourceType = typeof(Labels))]
         public double ECTS_BK { get; set; }
 
-        [Display(Name = "Praktyczny? ")]
+        [Display(Name = "CoursePractical", ResourceType = typeof(Labels))]
         public bool Praktyczny { get; set; }
 
-        [Display(Name = "Forma zajęć: ")]
+        [Display(Name = "CourseForm", ResourceType = typeof(Labels))]
         public int IdFormyZajec { get; set; }
 
         [ForeignKey("IdFormyZajec")]
@@ -69,37 +70,37 @@ namespace EASY_KRK.Models
             {
                 if (ZZU <= 0)
                 {
-                    yield return new ValidationResult("ZZU musi być większe od 0.", new[] { "ZZU" });
+                    yield return new ValidationResult(Labels.ZZUAmountError, new[] { "ZZU" });
                 }
 
                 if (CNPS <= 0)
                 {
-                    yield return new ValidationResult("CNPS musi być większe od 0.", new[] { "CNPS" });
+                    yield return new ValidationResult(Labels.CNPSAmountError, new[] { "CNPS" });
                 }
 
                 if (PunktyECTS <= 0)
                 {
-                    yield return new ValidationResult("Liczba punktów ECTS musi być większa od 0.", new[] { "PunktyECTS" });
+                    yield return new ValidationResult(Labels.ECTSAmountError, new[] { "PunktyECTS" });
                 }
 
                 if (ECTS_P < 0)
                 {
-                    yield return new ValidationResult("Liczba punktów ECTS_P musi być większa lub równa 0.", new[] { "ECTS_P" });
+                    yield return new ValidationResult(Labels.ECTSPAmountError, new[] { "ECTS_P" });
                 }
 
                 if (ECTS_P > PunktyECTS)
                 {
-                    yield return new ValidationResult("Liczba punktów ECTS_P nie może przekraczać całkowitej liczby ECTS.", new[] { "ECTS_P" });
+                    yield return new ValidationResult(Labels.ECTSPECTSAmountError, new[] { "ECTS_P" });
                 }
 
                 if (ECTS_BK < 0)
                 {
-                    yield return new ValidationResult("Liczba punktów ECTS_BK musi być większa lub równa 0.", new[] { "ECTS_BK" });
+                    yield return new ValidationResult(Labels.ECTSBKAmountError, new[] { "ECTS_BK" });
                 }
 
                 if (ECTS_BK > PunktyECTS)
                 {
-                    yield return new ValidationResult("Liczba punktów ECTS_BK nie może przekraczać całkowitej liczby ECTS.", new[] { "ECTS_BK" });
+                    yield return new ValidationResult(Labels.ECTSBKECTSAmountError, new[] { "ECTS_BK" });
                 }
             }
         }

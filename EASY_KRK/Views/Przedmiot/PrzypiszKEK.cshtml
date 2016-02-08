@@ -2,7 +2,7 @@
 
 <h4>Przedmiot: @Model.NazwaPrzedmiotu</h4>
 
-<h3>Kierunkowe efekty kształcenia</h3>
+<h3>@Resources.Resources.KEK</h3>
 
 @using (Ajax.BeginForm("FiltrujKEK", "Przedmiot", new AjaxOptions
  {
@@ -15,7 +15,7 @@
         @Html.EditorFor(model => model.Filtr)
         @Html.HiddenFor(model => model.IdPrzedmiotu)
         @Html.HiddenFor(model => model.Edycja)
-        <input type="submit" value="Filtruj" class="btn btn-default" />
+        <input type="submit" value=@Resources.Resources.Filter class="btn btn-default" />
     </div>
 }
 

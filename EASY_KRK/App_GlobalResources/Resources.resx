@@ -132,6 +132,9 @@
   <data name="Categories" xml:space="preserve">
     <value>Kategorie</value>
   </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Czy na pewno chcesz usunąć przedmiot i wszystkie powiązane z nim kursy/grupy kursów?</value>
+  </data>
   <data name="CourseGroup" xml:space="preserve">
     <value>Grupa kursów?*</value>
   </data>
@@ -149,6 +152,9 @@
   </data>
   <data name="EditSubject" xml:space="preserve">
     <value>Edytuj przedmiot</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtruj</value>
   </data>
   <data name="Hello" xml:space="preserve">
     <value>Witaj </value>
