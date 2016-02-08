@@ -208,6 +208,6 @@
     <value>ZZU must be bigger than 0.</value>
   </data>
   <data name="PassForm" xml:space="preserve">
-    <value>Course crediting form:</value>
+    <value>Crediting form:</value>
   </data>
 </root>
