@@ -81,11 +81,18 @@ namespace EASY_KRK.Controllers
 
         }
 
-        public ActionResult DodajKategorie(int IdKategorii)
+        public ActionResult DodajKategorie(int? IdKategorii)
         {
             DodajKategorieViewModel Model = new DodajKategorieViewModel();
-            Model.KategoriaNadrzedna = db.Kategorie.Find(IdKategorii);
-            this.HttpContext.Session["IdKategorii"] = Model.KategoriaNadrzedna.IdKategorii;
+            if (IdKategorii.HasValue)
+            {
+                Model.KategoriaNadrzedna = db.Kategorie.Find(IdKategorii);
+                this.HttpContext.Session["IdKategorii"] = Model.KategoriaNadrzedna.IdKategorii;
+            }
+            else
+            {
+                this.HttpContext.Session["IdKategorii"] = null;
+            }
             return View(Model);
         }
 
@@ -100,7 +107,7 @@ namespace EASY_KRK.Controllers
             else
             {
                 if (Model.Kategoria.NazwaKategorii == null ||
-                    (Model.Kategoria.MinECTS.HasValue && Model.Kategoria.MinECTS < 0) )
+                    (Model.Kategoria.MinECTS.HasValue && Model.Kategoria.MinECTS < 0))
                 {
                     return DodajKategorie(Convert.ToInt32(this.HttpContext.Session["IdKategorii"]));
                 }
@@ -112,7 +119,9 @@ namespace EASY_KRK.Controllers
                     {
                         Model.Kategoria.MinECTS = 0;
                     }
-                    Model.Kategoria.IdKategoriiNadrzednej = Convert.ToInt32(this.HttpContext.Session["IdKategorii"]);
+
+                    int idKategorii = Convert.ToInt32(this.HttpContext.Session["IdKategorii"]);
+                    if (idKategorii != 0) Model.Kategoria.IdKategoriiNadrzednej = idKategorii;
                     Model.Kategoria.IdProgramuStudiow = Convert.ToInt32(this.HttpContext.Session["IdProgramu"]);
                     db.Kategorie.Add(Model.Kategoria);
                     db.SaveChanges();

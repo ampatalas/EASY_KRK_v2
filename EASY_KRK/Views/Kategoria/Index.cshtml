@@ -54,6 +54,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.ActionLink("Dodaj kategorię", "DodajKategorie");
 
     <ul class="treeView">
         @foreach (var k in Model.Kategorie)
