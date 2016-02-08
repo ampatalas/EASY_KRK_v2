@@ -33,9 +33,11 @@
 
 @helper PokazDrzewo(EASY_KRK.Models.Kategoria kategoria)
 {
-        if (kategoria != null  && kategoria.KategoriaNadrzedna != null)
-        {
-            @PokazDrzewo(kategoria.KategoriaNadrzedna)
-        }
-        <li>@Html.Label(kategoria.NazwaKategorii)</li>
+    if (kategoria != null) {
+            if (kategoria.KategoriaNadrzedna != null)
+            {
+                @PokazDrzewo(kategoria.KategoriaNadrzedna)
+            }
+            <li>@Html.Label(kategoria.NazwaKategorii)</li>
+    }
 }
