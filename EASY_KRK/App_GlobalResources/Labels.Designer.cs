@@ -241,6 +241,15 @@ namespace EASY_KRK.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forma zaliczenia:.
+        /// </summary>
+        public static string PassForm {
+            get {
+                return ResourceManager.GetString("PassForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kod przedmiotu: .
         /// </summary>
         public static string SubjectCode {

@@ -154,7 +154,7 @@
     <value>ECTS (BK):</value>
   </data>
   <data name="ECTSBKAmountError" xml:space="preserve">
-    <value>ECTS (P) cannot be bigger than ECTS. </value>
+    <value>ECTS (BK) must be equal to or bigger than 0.</value>
   </data>
   <data name="ECTSBKECTSAmountError" xml:space="preserve">
     <value>ECTS (BK) cannot be bigger than ECTS.</value>
@@ -163,10 +163,10 @@
     <value>ECTS (P):</value>
   </data>
   <data name="ECTSPAmountError" xml:space="preserve">
-    <value>ECTS (P) must be bigger than 0.</value>
+    <value>ECTS (P) must be equal to or bigger than 0.</value>
   </data>
   <data name="ECTSPECTSAmountError" xml:space="preserve">
-    <value>ECTS (BK) must be bigger than 0.</value>
+    <value>ECTS (P) cannot be bigger than ECTS.</value>
   </data>
   <data name="NameErrorEmpty" xml:space="preserve">
     <value>Subject name cannot be empty.</value>
@@ -206,5 +206,8 @@
   </data>
   <data name="ZZUAmountError" xml:space="preserve">
     <value>ZZU must be bigger than 0.</value>
+  </data>
+  <data name="PassForm" xml:space="preserve">
+    <value>Course crediting form:</value>
   </data>
 </root>

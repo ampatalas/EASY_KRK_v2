@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EASY_KRK.App_GlobalResources;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,7 +17,7 @@ namespace EASY_KRK.Models
 
         [MaxLength(40)]
         [Required]
-        [Display(Name = "Forma zaliczenia: ")]
+        [Display(Name = "PassForm", ResourceType = typeof(Labels))]
         public string NazwaFormyZal { get; set; }
     }
 }

@@ -207,4 +207,7 @@
   <data name="ZZUAmountError" xml:space="preserve">
     <value>ZZU musi być większe od 0.</value>
   </data>
+  <data name="PassForm" xml:space="preserve">
+    <value>Forma zaliczenia:</value>
+  </data>
 </root>
