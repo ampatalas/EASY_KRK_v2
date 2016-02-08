@@ -92,7 +92,9 @@ namespace EASY_KRK.Controllers
                 model.Filtr = "";
                 IEnumerable<MEK> MEKI = db.MEKI.Where(m => (m.IdPoziomu == k.IdPoziomu && m.IdProfilu == k.IdProfilu &&
                                         db.UdzialyProcentowe.Where(u => u.IdKierunku == k.IdKierunku &&
-                                            u.IdObszaru == m.IdObszaru).FirstOrDefault() != null)).ToList();
+                                            u.IdObszaru == m.IdObszaru).FirstOrDefault() != null)
+                                             && (!db.Sladowania.Any(slad => slad.IdKEK == model.IdKEK
+                                             && m.IdMEK == slad.IdMEK))).ToList();
                 List<object> newMEKI = new List<Object>();
                 foreach (MEK m in MEKI)
                 {
@@ -131,7 +133,9 @@ namespace EASY_KRK.Controllers
             Kierunek k = db.Kierunki.Where(kierunek => kierunek.IdKierunku == IdKierunku).FirstOrDefault();
             IEnumerable<MEK> MEKI = db.MEKI.Where(m => ((m.IdPoziomu == k.IdPoziomu && m.IdProfilu == k.IdProfilu &&
                                                 (db.UdzialyProcentowe.Where(u => u.IdKierunku == k.IdKierunku && u.IdObszaru == m.IdObszaru).FirstOrDefault() != null)) && (m.Kod.Contains(model.Filtr)
-                                                || m.Opis.Contains(model.Filtr)))).ToList(); 
+                                                || m.Opis.Contains(model.Filtr))
+                                                && (!db.Sladowania.Any(slad => slad.IdKEK == model.IdKEK
+                                                && m.IdMEK == slad.IdMEK)))).ToList(); 
             List<object> MEKILista = new List<Object>();
             foreach( MEK m in MEKI)
             {
@@ -168,7 +172,9 @@ namespace EASY_KRK.Controllers
             DodajKEKPrzedmiotuViewModel model = new DodajKEKPrzedmiotuViewModel();
             model.IdKEK = IdKEK;
             model.Filtr = "";
-            IEnumerable<Przedmiot> Przedmioty = db.Przedmioty.Where(p => (p.Kategoria.ProgramStudiow.ProgramKsztalcenia.Kierunek.IdKierunku == k.IdKierunku));
+            IEnumerable<Przedmiot> Przedmioty = db.Przedmioty.Where(p => (p.Kategoria.ProgramStudiow.ProgramKsztalcenia.Kierunek.IdKierunku == k.IdKierunku)
+                && (!db.KEKIPrzedmiotow.Any(kekp => kekp.IdKEK == IdKEK
+                && kekp.IdPrzedmiotu == p.IdPrzedmiotu)));
             List<object> PrzedmiotyLista = new List<Object>();
             foreach (Przedmiot p in Przedmioty)
             {
@@ -206,7 +212,9 @@ namespace EASY_KRK.Controllers
             var IdKierunku = Convert.ToInt32(this.HttpContext.Session["IdKierunku"]);
             Kierunek k = db.Kierunki.Where(kierunek => kierunek.IdKierunku == IdKierunku).FirstOrDefault();
             IEnumerable<Przedmiot> Przedmioty = db.Przedmioty.Where(p => (p.Kategoria.ProgramStudiow.ProgramKsztalcenia.Kierunek.IdKierunku == k.IdKierunku
-                                                                                     && (p.KodPrzedmiotu.Contains(model.Filtr) || p.NazwaPrzedmiotu.Contains(model.Filtr))));
+                                                                                     && ((p.KodPrzedmiotu.Contains(model.Filtr) || p.NazwaPrzedmiotu.Contains(model.Filtr))
+                                                                                     && (!db.KEKIPrzedmiotow.Any(kekp => kekp.IdKEK == model.IdKEK
+                                                                                     && kekp.IdPrzedmiotu == p.IdPrzedmiotu)))));
             List<object> PrzedmiotyLista = new List<Object>();
             foreach (Przedmiot p in Przedmioty)
             {

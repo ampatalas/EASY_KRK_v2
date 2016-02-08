@@ -16,35 +16,6 @@
 @Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/bundles/jqueryui")
 
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        var checkboxes = document.getElementsByClassName('czy-nalezy');
-        var i;
-        for (i = 0; i < checkboxes.length; i++) {
-            var id = checkboxes[i].attributes.getNamedItem('name').value;
-            id = id.substring(id.length - 2, id.length - 1);
-            if (checkboxes[i].checked) {
-                $("#kurs-".concat(id)).show();
-            }
-            else {
-                $("#kurs-".concat(id)).hide();
-            }
-        }
-
-        var url = "";
-        $(".czy-nalezy").change(function (e) {
-            var id = $(this).attr('name');
-            id = id.substring(id.length - 2, id.length - 1);
-            if (this.checked) {
-                $("#kurs-".concat(id)).show();
-            }
-            else {
-                $("#kurs-".concat(id)).hide();
-            }
-        });
-    });
-</script>
 
 
 <link href="content/themes/base/all.css" rel="stylesheet" />
@@ -73,6 +44,32 @@
             }
             else {
                 $("#kurs-".concat(id)).hide();
+            }
+        });
+
+        $("#linkDodajKEK").click(function (e) {
+            e.preventDefault();
+            url = $(this).attr("href");
+            $("#dialog-dodaj-kek").dialog('open');
+        });
+
+        $("#dialog-dodaj-kek").dialog({
+            autoOpen: false,
+            resizable: false,
+            height: 400,
+            width: 450,
+            title: 'Przypisz KEK',
+            modal: true,
+            show: { effect: 'drop', direction: "up" },
+            draggable: true,
+            open: function (event, ui) {
+                $(".ui-dialog-titlebar-close").hide();
+                $(this).load(url);
+            },
+            buttons: {
+                "Anuluj": function () {
+                    $(this).dialog("close");
+                }
             }
         });
     });

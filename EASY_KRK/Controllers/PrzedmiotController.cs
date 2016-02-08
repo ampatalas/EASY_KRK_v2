@@ -54,7 +54,9 @@ namespace EASY_KRK.Controllers
             model.NazwaPrzedmiotu = db.Przedmioty.Find(IdPrzedmiotu).NazwaPrzedmiotu;
             model.Filtr = "";
             model.Edycja = Edycja;
-            IEnumerable<KEK> KEKI = db.KEKI.Where(kierunek => (kierunek.IdKierunku == k.IdKierunku));
+            IEnumerable<KEK> KEKI = db.KEKI.Where(kek => (kek.IdKierunku == k.IdKierunku)
+                && (!db.KEKIPrzedmiotow.Any(kekp => kekp.IdKEK == kek.IdKEK
+                     && kekp.IdPrzedmiotu == IdPrzedmiotu)));
             List<object> newKEKI = new List<Object>();
             foreach (KEK m in KEKI)
             {
@@ -74,8 +76,10 @@ namespace EASY_KRK.Controllers
         {
             var IdKierunku = Convert.ToInt32(this.HttpContext.Session["IdKierunku"]);
             Kierunek k = db.Kierunki.Where(kierunek => kierunek.IdKierunku == IdKierunku).First();
-            IEnumerable<KEK> KEKI = db.KEKI.Where(kek => (kek.IdKierunku == k.IdKierunku) && (kek.Kod.Contains(model.Filtr)
-                                                || kek.Opis.Contains(model.Filtr)));
+            IEnumerable<KEK> KEKI = db.KEKI.Where(kek => (kek.IdKierunku == k.IdKierunku) && ((kek.Kod.Contains(model.Filtr)
+                                                || kek.Opis.Contains(model.Filtr))
+                                                 && (!db.KEKIPrzedmiotow.Any(kekp => kekp.IdKEK == kek.IdKEK
+                                                     && kekp.IdPrzedmiotu == model.IdPrzedmiotu))));
             List<object> KEKILista = new List<Object>();
             foreach (KEK m in KEKI)
             {

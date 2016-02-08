@@ -129,7 +129,7 @@ else
                             @foreach (var kekp in Model.KEKIPrzedmiotow.ToList().FindAll(k => k.KEK == kek))
                             {
                                 @Html.Label(kekp.Przedmiot.KodPrzedmiotu + " | ", new { title = kekp.Przedmiot.NazwaPrzedmiotu });
-                                @Html.ActionLink("Usuń", "UsunPrzedmiot", new { IdKEK = kek.IdKEK, IdPrzedm = kekp.Przedmiot.IdPrzedmiotu }, new { @class = "link" });
+                                @Html.ActionLink("Usuń", "UsunPrzedmiot", new { IdKEK = kek.IdKEK, IdPrzedmiotu = kekp.Przedmiot.IdPrzedmiotu }, new { @class = "link" });
                                 @Html.Raw("<br />");
                             }
                             @Html.ActionLink("Dodaj", "DodajKEKPrzedmiotu", new { IdKEK = kek.IdKEK }, new { @class = "linkDodajPrzedmiot link" })
