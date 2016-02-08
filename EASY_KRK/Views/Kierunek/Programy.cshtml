@@ -16,11 +16,20 @@
             {
                 if (Model.IdProgramu == program.IdProgramuKsztalcenia)
                 { 
-                    <li>@Html.ActionLink("Studia " + program.Kierunek.Poziom.NazwaPoziomu + " " + program.Kierunek.RodzajStudiow.NazwaRodzajuStudiow + " " + program.FormaStudiow.NazwaFormyStudiow, "WybierzProgram", new { id = program.IdProgramuKsztalcenia }, new { @class = "program-li-selected" })</li>
+                    <li>@Html.ActionLink("Studia " + program.Kierunek.Poziom.NazwaPoziomu + " " 
+                    + program.Kierunek.RodzajStudiow.NazwaRodzajuStudiow + " " + program.FormaStudiow.NazwaFormyStudiow 
+                    + " (język "+ program.JezykStudiow.NazwaJezyka+")"
+                    , "WybierzProgram"
+                    , new { id = program.IdProgramuKsztalcenia }
+                    , new { @class = "program-li-selected" })</li>
                 }
                 else
                 { 
-                    <li>@Html.ActionLink("Studia " + program.Kierunek.Poziom.NazwaPoziomu + " " + program.Kierunek.RodzajStudiow.NazwaRodzajuStudiow + " " + program.FormaStudiow.NazwaFormyStudiow, "WybierzProgram", new { id = program.IdProgramuKsztalcenia }, new { @class = "program-li" })</li>
+                    <li>@Html.ActionLink("Studia " + program.Kierunek.Poziom.NazwaPoziomu + " " 
+                    + program.Kierunek.RodzajStudiow.NazwaRodzajuStudiow + " " + program.FormaStudiow.NazwaFormyStudiow
+                    + " (język " + program.JezykStudiow.NazwaJezyka + ")"
+                    , "WybierzProgram", new { id = program.IdProgramuKsztalcenia }
+                    , new { @class = "program-li" })</li>
                 }
             }
         }

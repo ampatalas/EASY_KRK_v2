@@ -65,7 +65,7 @@ namespace EASY_KRK.Controllers
 
                 ProgramyViewModel model = new ProgramyViewModel();
                 model.Kierunki = db.Kierunki.Select(k => k.NazwaKierunku).Distinct().ToList();
-                model.Programy = db.ProgramyKsztalcenia.Where(p => p.JezykStudiow.NazwaJezyka == "polski");
+                model.Programy = db.ProgramyKsztalcenia.OrderByDescending(p => p.JezykStudiow.NazwaJezyka);
                 model.IdProgramu = Convert.ToInt32(this.HttpContext.Session["IdProgramu"]);
                 
                 return PartialView(model);
