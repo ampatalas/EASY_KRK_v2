@@ -154,7 +154,7 @@
     <value>Punkty ECTS (BK):</value>
   </data>
   <data name="ECTSBKAmountError" xml:space="preserve">
-    <value>Liczba punktów ECTS_P nie może przekraczać całkowitej liczby ECTS.</value>
+    <value>Liczba punktów ECTS_BK musi być większa lub równa 0.</value>
   </data>
   <data name="ECTSBKECTSAmountError" xml:space="preserve">
     <value>Liczba punktów ECTS_BK nie może przekraczać całkowitej liczby ECTS.</value>
@@ -166,7 +166,7 @@
     <value>Liczba punktów ECTS_P musi być większa lub równa 0.</value>
   </data>
   <data name="ECTSPECTSAmountError" xml:space="preserve">
-    <value>Liczba punktów ECTS_BK musi być większa lub równa 0.</value>
+    <value>Liczba punktów ECTS_P nie może przekraczać całkowitej liczby ECTS.</value>
   </data>
   <data name="NameErrorEmpty" xml:space="preserve">
     <value>Nazwa przedmiotu nie może być pusta.</value>
